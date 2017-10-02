@@ -1,0 +1,182 @@
+<%@ page language="java" pageEncoding="UTF-8" %>
+<%@include file="../common/pageheader.jsp" %>
+<div id="vueapp" v-cloak>
+	<div v-show="showList">
+        <Row :gutter="16">
+            <i-col span="4">
+                <i-input v-model="q.name" @on-enter="query" placeholder="名称"/>
+            </i-col>
+            <i-button @click="query">查询</i-button>
+			<shiro:hasPermission name="${pathName}:save"))'>
+            	<i-button type="info" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</i-button>
+        	</shiro:hasPermission>
+			<shiro:hasPermission name="${pathName}:save"))'>
+            	<i-button type="warning" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</i-button>
+        	</shiro:hasPermission>
+			<shiro:hasPermission name="${pathName}:save"))'>
+            	<i-button type="error" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</i-button>
+        	</shiro:hasPermission>
+        </Row>
+	    <table id="jqGrid"></table>
+	    <div id="jqGridPager"></div>
+    </div>
+
+    <Card v-show="!showList">
+        <p slot="title">{{title}}</p>
+		<i-form ref="formValidate" :model="${classname}" :rules="ruleValidate" :label-width="80">
+#foreach($column in $columns)
+#if($column.columnName != $pk.columnName)
+            <Form-item label="${column.comments}" prop="${column.attrname}">
+                <i-input v-model="${classname}.${column.attrname}" placeholder="${column.comments}"/>
+            </Form-item>
+#end
+#end
+            <Form-item>
+                <i-button type="primary" @click="handleSubmit('formValidate')">提交</i-button>
+                <i-button type="warning" @click="reload" style="margin-left: 8px"/>返回</i-button>
+                <i-button type="ghost" @click="handleReset('formValidate')" style="margin-left: 8px">重置</i-button>
+            </Form-item>
+        </i-form>
+	</Card>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+    $("#jqGrid").jqGrid({
+        url: 'list',
+        datatype: "json",
+        colModel: [
+#foreach($column in $columns)
+	#if($column.columnName == $pk.columnName)
+			{label: '${column.attrname}', name: '${column.attrname}', index: '${column.columnName}', key: true, hidden: true},
+#else
+			{label: '${column.comments}', name: '${column.attrname}', index: '${column.columnName}', width: 80}#if($velocityCount != $columns.size()),
+#end#end#end
+],
+		viewrecords: true,
+        height: 385,
+        rowNum: 10,
+        rowList: [10, 30, 50],
+        rownumbers: true,
+        rownumWidth: 25,
+        autowidth: true,
+        multiselect: true,
+        pager: "#jqGridPager",
+        jsonReader: {
+            root: "page.list",
+            page: "page.currPage",
+            total: "page.totalPage",
+            records: "page.totalCount"
+        },
+        prmNames: {
+            page: "page",
+            rows: "limit",
+            order: "order"
+        },
+        gridComplete: function () {
+            $("#jqGrid").closest(".ui-jqgrid-bdiv").css({"overflow-x": "hidden"});
+        }
+    });
+});
+
+let vm = new Vue({
+	el: '#vueapp',
+	data: {
+        showList: true,
+        title: null,
+		${classname}: {},
+		ruleValidate: {
+			name: [
+				{required: true, message: '名称不能为空', trigger: 'blur'}
+			]
+		},
+		q: {
+		    name: ''
+		}
+	},
+	methods: {
+		query: function () {
+			vm.reload();
+		},
+		add: function () {
+			vm.showList = false;
+			vm.title = "新增";
+			vm.${classname} = {};
+		},
+		update: function (event) {
+            let $pk.attrname = getSelectedRow();
+			if ($pk.attrname == null) {
+				return;
+			}
+			vm.showList = false;
+            vm.title = "修改";
+
+            vm.getInfo(${pk.attrname})
+		},
+		saveOrUpdate: function (event) {
+            let url = vm.${classname}.${pk.attrname} == null ? "save" : "update";
+			$.ajax({
+				type: "POST",
+			    url: url,
+			    contentType: "application/json",
+			    data: JSON.stringify(vm.${classname}),
+                success: function (r) {
+                    if (r.code === 0) {
+                        alert('操作成功', function (index) {
+                            vm.reload();
+                        });
+                    } else {
+                        alert(r.msg);
+                    }
+                }
+			});
+		},
+		del: function (event) {
+            let ${pk.attrname}s = getSelectedRows();
+			if (${pk.attrname}s == null){
+				return;
+			}
+
+			confirm('确定要删除选中的记录？', function () {
+				$.ajax({
+					type: "POST",
+				    url: "delete",
+				    contentType: "application/json",
+				    data: JSON.stringify(${pk.attrname}s),
+				    success: function (r) {
+						if (r.code == 0) {
+							alert('操作成功', function (index) {
+								$("#jqGrid").trigger("reloadGrid");
+							});
+						} else {
+							alert(r.msg);
+						}
+					}
+				});
+			});
+		},
+		getInfo: function(${pk.attrname}){
+			$.get("info/"+${pk.attrname}, function (r) {
+                vm.${classname} = r.${classname};
+            });
+		},
+		reload: function (event) {
+			vm.showList = true;
+            let page = $("#jqGrid").jqGrid('getGridParam', 'page');
+			$("#jqGrid").jqGrid('setGridParam', {
+                postData: {'name': vm.q.name},
+                page: page
+            }).trigger("reloadGrid");
+            vm.handleReset('formValidate');
+		},
+        handleSubmit: function (name) {
+            handleSubmitValidate(this, name, function () {
+                vm.saveOrUpdate()
+            });
+        },
+        handleReset: function (name) {
+            handleResetForm(this, name);
+        }
+	}
+});
+</script>

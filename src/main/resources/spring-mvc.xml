@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans-4.2.xsd        
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-4.2.xsd
+     	http://www.springframework.org/schema/aop 
+     	http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+		http://www.springframework.org/schema/mvc 
+     	http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd">
+
+    <context:component-scan base-package="com.platform"/>
+    <context:annotation-config/>
+    <mvc:default-servlet-handler/>
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+
+    <!-- 为了加载拦截器 需要 日志拦截器 （登录拦截和权限拦截已在shiro实现，看实现情况处理） -->
+    <mvc:interceptors>
+        <!-- 使用bean定义一个Interceptor，直接定义在mvc:interceptors根下面的Interceptor将拦截所有的请求 -->
+        <bean class="com.platform.common.interceptor.LogInterceptor"/>
+        <!--<mvc:interceptor>-->
+        <!--<mvc:mapping path="/**"/>-->
+        <!--<bean class="com.platform.interceptor.LogInterceptor"/>-->
+        <!--</mvc:interceptor>-->
+    </mvc:interceptors>
+
+    <!-- JSP视图解析器  -->
+    <bean id="viewResolverJsp" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/>
+    <!-- 映射处理器 -->
+    <bean id="simpleUrlMapping"
+          class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>
+                <prop key="/file/fileUploadController">fileUploadController</prop>
+            </props>
+        </property>
+    </bean>
+    <!-- ParameterMethodNameResolver 解析请求参数，并将它匹配Controller中的方法名 -->
+    <bean id="parameterMethodNameResolver"
+          class="org.springframework.web.servlet.mvc.multiaction.ParameterMethodNameResolver">
+        <property name="paramName" value="action"/>
+    </bean>
+    <bean id="fileUploadController"
+          class="com.platform.controller.FileUploadController">
+        <property name="methodNameResolver"
+                  ref="parameterMethodNameResolver">
+        </property>
+    </bean>
+    <!-- 文件上传表单的视图解析器 -->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="1000000000"/>
+    </bean>
+
+</beans>
