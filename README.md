@@ -1,5 +1,19 @@
-# platform
+# platform 
 
+##platform-admin 
+    后台管理
+##platform-api 
+    微信小程序商城api接口
+##platform-common 
+    公共模块
+##platform-gen 
+    代码生成
+##platform-schedule 
+    定时任务
+##platform-shiro 
+    登陆权限相关
+##wx-mail 
+    微信小程序商城
 ##实现功能
 ####一：会员管理
 ######
@@ -64,3 +78,11 @@
 ####三：CMS模块开发
 ####四：统计报表
 ####五：接入工作流activiti
+
+##项目演示
+    演示地址：http://fly2you.cn
+    账号密码：admin/admin
+    
+##如何交流、反馈、参与贡献？
+    官方QQ群：66502035
+    如需关注项目最新动态，请Watch、Star项目，同时也是对项目最好的支持
