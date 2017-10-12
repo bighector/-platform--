@@ -1,16 +1,23 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.platform</groupId>
     <artifactId>platform</artifactId>
-    <packaging>war</packaging>
-    <version>1.0-SNAPSHOT</version>
-    <name>platform Maven Webapp</name>
-    <url>http://maven.apache.org</url>
+    <version>${platform-version}</version>
+    <packaging>pom</packaging>
+    <description>platform</description>
+
+    <modules>
+        <module>platform-common</module> <!-- 公共模块 -->
+        <module>platform-shiro</module> <!-- 权限系统模块 -->
+        <module>platform-schedule</module> <!-- 定时任务模块 -->
+        <module>platform-gen</module> <!-- 代码生成器模块 -->
+        <module>platform-api</module> <!-- API模块 -->
+        <module>platform-admin</module>
+    </modules>
 
     <properties>
-        <jackson.version>2.5.0</jackson.version>
-        <java-version>1.8</java-version>
+        <platform-version>2.1.0</platform-version>
+        <java-version>1.7</java-version>
         <servlet-version>3.1.0</servlet-version>
         <junit-version>4.12</junit-version>
         <springframework-version>4.3.7.RELEASE</springframework-version>
@@ -47,6 +54,19 @@
             </releases>
         </repository>
     </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>public</id>
+            <name>aliyun nexus</name>
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
 
     <dependencies>
         <dependency>
@@ -54,45 +74,6 @@
             <artifactId>junit</artifactId>
             <version>${junit-version}</version>
             <scope>test</scope>
-        </dependency>
-        <!-- httpclient -->
-        <dependency>
-            <groupId>commons-httpclient</groupId>
-            <artifactId>commons-httpclient</artifactId>
-            <version>3.1</version>
-        </dependency>
-        <!-- json -->
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-annotations</artifactId>
-            <version>${jackson.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
-            <version>20140107</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-core</artifactId>
-            <version>${jackson.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>${jackson.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>dom4j</groupId>
-            <artifactId>dom4j</artifactId>
-            <version>1.6.1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>jstl</groupId>
-            <artifactId>jstl</artifactId>
-            <version>1.2</version>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -109,6 +90,11 @@
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis-spring</artifactId>
             <version>${mybatis-spring-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>${hibernate-validator-version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -283,7 +269,6 @@
         </dependency>
     </dependencies>
     <build>
-        <finalName>platform</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
