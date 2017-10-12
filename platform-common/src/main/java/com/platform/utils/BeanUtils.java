@@ -159,6 +159,11 @@ public class BeanUtils extends org.springframework.beans.BeanUtils {
      * @param obj       对象
      */
     public static void map2Bean(Map<String, Object> targetMap, Object obj) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        for (String key : targetMap.keySet()) {
+            Object value = targetMap.get(key);
+            map.put(StringUtils.lineToHump(key), value);
+        }
         try {
             BeanInfo beanInfo = Introspector.getBeanInfo(obj.getClass());
             PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors();
@@ -166,9 +171,9 @@ public class BeanUtils extends org.springframework.beans.BeanUtils {
             for (PropertyDescriptor property : propertyDescriptors) {
                 String key = property.getName();
 
-                if (targetMap.containsKey(key)) {
+                if (map.containsKey(key)) {
                     try {
-                        Object value = targetMap.get(key);
+                        Object value = map.get(key);
                         // 得到property对应的setter方法
                         Method setter = property.getWriteMethod();
                         setter.invoke(obj, value);
@@ -182,7 +187,5 @@ public class BeanUtils extends org.springframework.beans.BeanUtils {
             e.getStackTrace();
             throw new RRException("数据转换异常！");
         }
-
-        return;
     }
 }

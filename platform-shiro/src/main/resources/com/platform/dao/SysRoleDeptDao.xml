@@ -26,4 +26,7 @@
 		select dept_id from sys_role_dept where role_id = #{value}
 	</select>
 
+	<select id="queryDeptIdListByUserId" resultType="long">
+		select dept_id from sys_role_dept where role_id IN (SELECT role_id FROM SYS_USER_ROLE WHERE user_id =  #{value})
+	</select>
 </mapper>

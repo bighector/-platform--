@@ -17,6 +17,19 @@ public class StringUtils {
     private static Pattern linePattern = Pattern.compile("_(\\w)");
 
     /**
+     * 判断字符串是否不为空，不为空则返回true
+     *
+     * @param str 源数据
+     * @return Boolean
+     */
+    public static boolean isNotEmpty(String str) {
+        if (str != null && !"".equals(str.trim())) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * 判断对象或对象数组中每一个对象是否为空: 对象为null，字符序列长度为0，集合类、Map为empty
      *
      * @param obj
@@ -51,6 +64,7 @@ public class StringUtils {
         }
         return false;
     }
+
     /**
      * 下划线转驼峰
      */
