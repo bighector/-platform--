@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.platform.dao.ApiFeedbackMapper">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.platform.entity.FeedbackVo" id="feedbackMap">
+		<result property="msg_id" column="msg_id"/>
+		<result property="parent_id" column="parent_id"/>
+		<result property="user_id" column="user_id"/>
+		<result property="user_name" column="user_name"/>
+		<result property="user_email" column="user_email"/>
+		<result property="msg_title" column="msg_title"/>
+		<result property="msg_type" column="msg_type"/>
+		<result property="msg_status" column="msg_status"/>
+		<result property="msg_content" column="msg_content"/>
+		<result property="msg_time" column="msg_time"/>
+		<result property="message_img" column="message_img"/>
+		<result property="order_id" column="order_id"/>
+		<result property="msg_area" column="msg_area"/>
+    </resultMap>
+
+	<select id="queryObject" resultMap="feedbackMap">
+		select * from nideshop_feedback where msg_id = #{value}
+	</select>
+
+	<select id="queryList" resultMap="feedbackMap">
+		select * from nideshop_feedback
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by msg_id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from nideshop_feedback 
+	</select>
+	 
+	<insert id="save" parameterType="com.platform.entity.FeedbackVo" useGeneratedKeys="true" keyProperty="msgId">
+		insert into nideshop_feedback
+		(
+			`parent_id`, 
+			`user_id`, 
+			`user_name`, 
+			`user_email`, 
+			`msg_title`, 
+			`msg_type`, 
+			`msg_status`, 
+			`msg_content`, 
+			`msg_time`, 
+			`message_img`, 
+			`order_id`, 
+			`msg_area`
+		)
+		values
+		(
+			#{parent_id},
+			#{user_id},
+			#{user_name},
+			#{user_email},
+			#{msg_title},
+			#{msg_type},
+			#{msg_status},
+			#{msg_content},
+			#{msg_time},
+			#{message_img},
+			#{order_id},
+			#{msg_area}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.platform.entity.FeedbackVo">
+		update nideshop_feedback 
+		<set>
+			<if test="parent_id != null">`parent_id` = #{parent_id}, </if>
+			<if test="user_id != null">`user_id` = #{user_id}, </if>
+			<if test="user_name != null">`user_name` = #{user_name}, </if>
+			<if test="user_email != null">`user_email` = #{user_email}, </if>
+			<if test="msg_title != null">`msg_title` = #{msg_title}, </if>
+			<if test="msg_type != null">`msg_type` = #{msg_type}, </if>
+			<if test="msg_status != null">`msg_status` = #{msg_status}, </if>
+			<if test="msg_content != null">`msg_content` = #{msg_content}, </if>
+			<if test="msg_time != null">`msg_time` = #{msg_time}, </if>
+			<if test="message_img != null">`message_img` = #{message_img}, </if>
+			<if test="order_id != null">`order_id` = #{order_id}, </if>
+			<if test="msg_area != null">`msg_area` = #{msg_area}</if>
+		</set>
+		where msg_id = #{msgId}
+	</update>
+	
+	<delete id="delete">
+		delete from nideshop_feedback where msg_id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from nideshop_feedback where msg_id in 
+		<foreach item="msgId" collection="array" open="(" separator="," close=")">
+			#{msgId}
+		</foreach>
+	</delete>
+
+</mapper>

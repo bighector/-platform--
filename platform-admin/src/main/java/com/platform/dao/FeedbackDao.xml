@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.platform.dao.FeedbackDao">
+
+    <resultMap type="com.platform.entity.FeedbackEntity" id="feedbackMap">
+        <result property="msgId" column="msg_id"/>
+        <result property="parentId" column="parent_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="userName" column="user_name"/>
+        <result property="userEmail" column="user_email"/>
+        <result property="msgTitle" column="msg_title"/>
+        <result property="msgType" column="msg_type"/>
+        <result property="msgStatus" column="msg_status"/>
+        <result property="msgContent" column="msg_content"/>
+        <result property="msgTime" column="msg_time"/>
+        <result property="messageImg" column="message_img"/>
+        <result property="orderId" column="order_id"/>
+        <result property="msgArea" column="msg_area"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="com.platform.entity.FeedbackEntity">
+		select
+			`msg_id`,
+			`parent_id`,
+			`user_id`,
+			`user_name`,
+			`user_email`,
+			`msg_title`,
+			`msg_type`,
+			`msg_status`,
+			`msg_content`,
+			`msg_time`,
+			`message_img`,
+			`order_id`,
+			`msg_area`
+		from nideshop_feedback
+		where msg_id = #{id}
+	</select>
+
+	<select id="queryList" resultType="com.platform.entity.FeedbackEntity">
+		select
+    		`msg_id`,
+    		`parent_id`,
+    		`user_id`,
+    		`user_name`,
+    		`user_email`,
+    		`msg_title`,
+    		`msg_type`,
+    		`msg_status`,
+    		`msg_content`,
+    		`msg_time`,
+    		`message_img`,
+    		`order_id`,
+    		`msg_area`
+		from nideshop_feedback
+		WHERE 1=1
+		<if test="userName != null and userName.trim() != ''">
+			AND user_name LIKE concat('%',#{userName},'%')
+		</if>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by msg_id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from nideshop_feedback
+		WHERE 1=1
+        <if test="userName != null and userName.trim() != ''">
+            AND user_name LIKE concat('%',#{userName},'%')
+        </if>
+	</select>
+	 
+	<insert id="save" parameterType="com.platform.entity.FeedbackEntity" useGeneratedKeys="true" keyProperty="msgId">
+		insert into nideshop_feedback(
+			`parent_id`,
+			`user_id`,
+			`user_name`,
+			`user_email`,
+			`msg_title`,
+			`msg_type`,
+			`msg_status`,
+			`msg_content`,
+			`msg_time`,
+			`message_img`,
+			`order_id`,
+			`msg_area`)
+		values(
+			#{parentId},
+			#{userId},
+			#{userName},
+			#{userEmail},
+			#{msgTitle},
+			#{msgType},
+			#{msgStatus},
+			#{msgContent},
+			#{msgTime},
+			#{messageImg},
+			#{orderId},
+			#{msgArea})
+	</insert>
+	 
+	<update id="update" parameterType="com.platform.entity.FeedbackEntity">
+		update nideshop_feedback 
+		<set>
+			<if test="parentId != null">`parent_id` = #{parentId}, </if>
+			<if test="userId != null">`user_id` = #{userId}, </if>
+			<if test="userName != null">`user_name` = #{userName}, </if>
+			<if test="userEmail != null">`user_email` = #{userEmail}, </if>
+			<if test="msgTitle != null">`msg_title` = #{msgTitle}, </if>
+			<if test="msgType != null">`msg_type` = #{msgType}, </if>
+			<if test="msgStatus != null">`msg_status` = #{msgStatus}, </if>
+			<if test="msgContent != null">`msg_content` = #{msgContent}, </if>
+			<if test="msgTime != null">`msg_time` = #{msgTime}, </if>
+			<if test="messageImg != null">`message_img` = #{messageImg}, </if>
+			<if test="orderId != null">`order_id` = #{orderId}, </if>
+			<if test="msgArea != null">`msg_area` = #{msgArea}</if>
+		</set>
+		where msg_id = #{msgId}
+	</update>
+	
+	<delete id="delete">
+		delete from nideshop_feedback where msg_id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from nideshop_feedback where msg_id in 
+		<foreach item="msgId" collection="array" open="(" separator="," close=")">
+			#{msgId}
+		</foreach>
+	</delete>
+
+</mapper>
