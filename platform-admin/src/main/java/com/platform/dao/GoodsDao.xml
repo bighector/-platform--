@@ -37,6 +37,7 @@
         <result property="isHot" column="is_hot"/>
         <result property="marketPrice" column="market_price"/>
         <result property="createUserId" column="create_user_id"/>
+        <result property="createUserDeptId" column="create_user_dept_id"/>
         <result property="updateUserId" column="update_user_id"/>
     </resultMap>
 
@@ -79,6 +80,7 @@
         nideshop_goods.is_hot,
         nideshop_goods.market_price,
         nideshop_goods.create_user_id,
+        nideshop_goods.create_user_dept_id,
         nideshop_goods.update_user_id,
         nideshop_category.name category_name,
         nideshop_attribute_category.name attribute_category_name,
@@ -150,6 +152,7 @@
         `is_hot`,
         `market_price`,
         `create_user_id`,
+        `create_user_dept_id`,
         `update_user_id`
         )
         values
@@ -187,6 +190,7 @@
         #{isHot},
         #{marketPrice},
         #{createUserId},
+        #{createUserDeptId},
         #{updateUserId}
         )
     </insert>
@@ -226,6 +230,7 @@
             <if test="isHot != null">`is_hot` = #{isHot},</if>
             <if test="marketPrice != null">`market_price` = #{marketPrice},</if>
             <if test="createUserId != null">`create_user_id` = #{createUserId},</if>
+            <if test="createUserId != null">`create_user_dept_id` = #{createUserDeptId},</if>
             <if test="updateUserId != null">`update_user_id` = #{updateUserId},</if>
         </set>
         where id = #{id}

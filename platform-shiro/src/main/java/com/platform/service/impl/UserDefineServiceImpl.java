@@ -3,6 +3,7 @@ package com.platform.service.impl;
 import com.platform.dao.SysRoleDeptDao;
 import com.platform.service.UserDefineService;
 import com.platform.utils.BeanUtils;
+import com.platform.utils.MyBeanUtils;
 import com.platform.utils.RRException;
 import com.platform.utils.ShiroUtils;
 import org.apache.commons.lang.StringUtils;
@@ -35,6 +36,18 @@ public class UserDefineServiceImpl implements UserDefineService {
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
     @Autowired
     private SysRoleDeptDao sysRoleDeptDao;
+
+    /**
+     * 主要功能:【long】返回查询结果[数据量较小的情况使用] 注意事项:自动添加select count(1) from ( yourSql )
+     *
+     * @param sql      sql
+     * @param paramMap 参数对象
+     * @return long型查询结果
+     */
+    @Override
+    public int getCountForJdbcParam(String sql, Map<String, Object> paramMap) {
+        return this.namedParameterJdbcTemplate.queryForObject(sql, paramMap, int.class);
+    }
 
     /**
      * 主要功能:根据sql查询数据，返回指定类型集合 注意事项:无
@@ -188,7 +201,7 @@ public class UserDefineServiceImpl implements UserDefineService {
         for (Map<String, Object> m : mapList) {
             try {
                 po = clazz.newInstance();
-                BeanUtils.map2Bean(m, po);
+                MyBeanUtils.copyMap2Bean(po, m);
                 tList.add(po);
             } catch (Exception e) {
                 e.printStackTrace();

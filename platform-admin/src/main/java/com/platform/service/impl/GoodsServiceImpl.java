@@ -8,8 +8,10 @@ import com.platform.entity.GoodsEntity;
 import com.platform.entity.ProductEntity;
 import com.platform.entity.SysUserEntity;
 import com.platform.service.GoodsService;
+import com.platform.service.UserDefineService;
 import com.platform.utils.RRException;
 import com.platform.utils.ShiroUtils;
+import com.platform.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,6 +36,8 @@ public class GoodsServiceImpl implements GoodsService {
     private GoodsAttributeDao goodsAttributeDao;
     @Autowired
     private ProductDao productDao;
+    @Autowired
+    private UserDefineService userDefineService;
 
     @Override
     public GoodsEntity queryObject(Integer id) {
@@ -42,12 +46,30 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Override
     public List<GoodsEntity> queryList(Map<String, Object> map) {
-        return goodsDao.queryList(map);
+        String sql = builderSql().toString();
+        if (!StringUtils.isNullOrEmpty(map.get("name"))) {
+            sql += " AND nideshop_goods.name LIKE %:name%";
+        }
+        sql = userDefineService.appOrgAndCreateUserDataPermission("nideshop_goods.create_user_dept_id", "nideshop_goods.create_user_id", sql, map);
+        if (!StringUtils.isNullOrEmpty(map.get("offset")) && !StringUtils.isNullOrEmpty(map.get("limit"))) {
+            sql += " limit :offset, :limit";
+        }
+        return userDefineService.findObjForJdbc(sql, map, GoodsEntity.class);
     }
 
     @Override
     public int queryTotal(Map<String, Object> map) {
-        return goodsDao.queryTotal(map);
+        String sql = "SELECT COUNT(1) FROM nideshop_goods\n" +
+                "        LEFT JOIN nideshop_category\n" +
+                "          ON nideshop_goods.category_id = nideshop_category.id\n" +
+                "        LEFT JOIN nideshop_attribute_category ON nideshop_goods.attribute_category = nideshop_attribute_category.id\n" +
+                "        LEFT JOIN nideshop_brand ON nideshop_brand.id = nideshop_goods.brand_id\n" +
+                "      WHERE 1 = 1";
+        if (!StringUtils.isNullOrEmpty(map.get("name"))) {
+            sql += " AND nideshop_goods.name LIKE %:name%";
+        }
+        sql = userDefineService.appOrgAndCreateUserDataPermission("nideshop_goods.create_user_dept_id", "nideshop_goods.create_user_id", sql, map);
+        return userDefineService.getCountForJdbcParam(sql, map);
     }
 
     @Override
@@ -168,5 +190,56 @@ public class GoodsServiceImpl implements GoodsService {
         goodsEntity.setUpdateUserId(user.getUserId());
         goodsEntity.setUpdateTime(new Date());
         return goodsDao.update(goodsEntity);
+    }
+
+    private StringBuffer builderSql() {
+
+        StringBuffer sb = new StringBuffer();
+        sb.append("select\n");
+        sb.append("        nideshop_goods.id,\n");
+        sb.append("        nideshop_goods.category_id,\n");
+        sb.append("        nideshop_goods.goods_sn,\n");
+        sb.append("        nideshop_goods.name,\n");
+        sb.append("        nideshop_goods.brand_id,\n");
+        sb.append("        nideshop_goods.goods_number,\n");
+        sb.append("        nideshop_goods.keywords,\n");
+        sb.append("        nideshop_goods.goods_brief,\n");
+        sb.append("        nideshop_goods.goods_desc,\n");
+        sb.append("        nideshop_goods.is_on_sale,\n");
+        sb.append("        nideshop_goods.add_time,\n");
+        sb.append("        nideshop_goods.update_time,\n");
+        sb.append("        nideshop_goods.sort_order,\n");
+        sb.append("        nideshop_goods.is_delete,\n");
+        sb.append("        nideshop_goods.attribute_category,\n");
+        sb.append("        nideshop_goods.counter_price,\n");
+        sb.append("        nideshop_goods.extra_price,\n");
+        sb.append("        nideshop_goods.is_new,\n");
+        sb.append("        nideshop_goods.goods_unit,\n");
+        sb.append("        nideshop_goods.primary_pic_url,\n");
+        sb.append("        nideshop_goods.list_pic_url,\n");
+        sb.append("        nideshop_goods.retail_price,\n");
+        sb.append("        nideshop_goods.sell_volume,\n");
+        sb.append("        nideshop_goods.primary_product_id,\n");
+        sb.append("        nideshop_goods.unit_price,\n");
+        sb.append("        nideshop_goods.promotion_desc,\n");
+        sb.append("        nideshop_goods.promotion_tag,\n");
+        sb.append("        nideshop_goods.app_exclusive_price,\n");
+        sb.append("        nideshop_goods.is_app_exclusive,\n");
+        sb.append("        nideshop_goods.is_limited,\n");
+        sb.append("        nideshop_goods.is_hot,\n");
+        sb.append("        nideshop_goods.market_price,\n");
+        sb.append("        nideshop_goods.create_user_id,\n");
+        sb.append("        nideshop_goods.create_user_dept_id,\n");
+        sb.append("        nideshop_goods.update_user_id,\n");
+        sb.append("        nideshop_category.name category_name,\n");
+        sb.append("        nideshop_attribute_category.name attribute_category_name,\n");
+        sb.append("        nideshop_brand.name brand_name\n");
+        sb.append("        from nideshop_goods\n");
+        sb.append("        LEFT JOIN nideshop_category\n");
+        sb.append("        ON nideshop_goods.category_id = nideshop_category.id\n");
+        sb.append("        LEFT JOIN nideshop_attribute_category ON nideshop_goods.attribute_category = nideshop_attribute_category.id\n");
+        sb.append("        LEFT JOIN nideshop_brand ON nideshop_brand.id = nideshop_goods.brand_id\n");
+        sb.append("        WHERE 1=1");
+        return sb;
     }
 }

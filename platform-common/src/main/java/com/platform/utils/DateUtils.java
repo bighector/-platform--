@@ -3,6 +3,7 @@ package com.platform.utils;
 import org.apache.log4j.Logger;
 import org.springframework.util.StringUtils;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -111,6 +112,27 @@ public class DateUtils {
             logger.info("日期格式获取出错，未识别的日期格式");
         }
         return style;
+    }
+
+    /**
+     * 将字符串类型的转换成Date类型
+     *
+     * @param dateStr
+     *            字符串类型的日期 yyyy-MM-dd
+     * @return Date类型的日期
+     * @throws ParseException
+     */
+    public static Date convertStringToDate(String dateStr) {
+        // 返回的日期
+        Date resultDate = null;
+        try {
+            // 日期格式转换
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            resultDate = sdf.parse(dateStr);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return resultDate;
     }
 
 

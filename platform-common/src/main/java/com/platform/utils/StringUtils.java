@@ -14,6 +14,7 @@ import java.util.regex.Pattern;
  * @since 1.0.0
  */
 public class StringUtils {
+    public static final String EMPTY = "";
     private static Pattern linePattern = Pattern.compile("_(\\w)");
 
     /**

@@ -86,6 +86,10 @@ public class GoodsEntity implements Serializable {
     /**
      * 用户ID
      */
+    private Long createUserDeptId;
+    /**
+     * 用户ID
+     */
     private Long updateUserId;
 
     List<GoodsAttributeEntity> attributeEntityList = new ArrayList<>();
@@ -573,6 +577,14 @@ public class GoodsEntity implements Serializable {
 
     public void setUpdateUserId(Long updateUserId) {
         this.updateUserId = updateUserId;
+    }
+
+    public Long getCreateUserDeptId() {
+        return createUserDeptId;
+    }
+
+    public void setCreateUserDeptId(Long createUserDeptId) {
+        this.createUserDeptId = createUserDeptId;
     }
 
     public Date getUpdateTime() {

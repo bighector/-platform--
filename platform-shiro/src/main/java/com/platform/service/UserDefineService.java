@@ -11,6 +11,14 @@ import java.util.Map;
  * @date 2017年10月11日 下午9:20:48
  */
 public interface UserDefineService {
+    /**
+     * 主要功能:【long】返回查询结果[数据量较小的情况使用] 注意事项:自动添加select count(1) from ( yourSql )
+     *
+     * @param sql      sql
+     * @param paramMap 参数对象
+     * @return long型查询结果
+     */
+    int getCountForJdbcParam(String sql, Map<String, Object> paramMap);
 
     /**
      * 主要功能:根据sql查询数据，返回指定类型集合 注意事项:无
