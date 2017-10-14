@@ -41,6 +41,7 @@
         <jstl-version>1.2</jstl-version>
         <taglibs-version>1.1.2</taglibs-version>
         <freemarker-version>2.3.23</freemarker-version>
+        <kaptcha.version>0.0.9</kaptcha.version>
     </properties>
 
     <!-- 阿里云maven仓库 -->
@@ -266,6 +267,12 @@
             <groupId>org.freemarker</groupId>
             <artifactId>freemarker</artifactId>
             <version>${freemarker-version}</version>
+        </dependency>
+        <!--验证码生成工具-->
+        <dependency>
+            <groupId>com.github.axet</groupId>
+            <artifactId>kaptcha</artifactId>
+            <version>${kaptcha.version}</version>
         </dependency>
     </dependencies>
     <build>

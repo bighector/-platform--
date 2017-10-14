@@ -41,7 +41,9 @@
                     <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 日志分级输出，便于分析日志</li>
                     <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 前端使用Vue+iView，上手容易</li>
                     <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 官方QQ群：66502035(大平台系统开发)</li>
-                    <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> <a href="https://gitee.com/fuyang_lipengjun/platform" target="_blank" style="color: white;">Git：https://gitee.com/fuyang_lipengjun/platform</a></li>
+                    <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> <a
+                            href="https://gitee.com/fuyang_lipengjun/platform" target="_blank" style="color: white;">Git：https://gitee.com/fuyang_lipengjun/platform</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -54,6 +56,16 @@
                 <div class="form-group has-feedback">
                     <i-input type="password" v-model="password" @on-enter="login" style="width: 200px;"
                              placeholder="密码"/>
+                </div>
+                <div class="form-group has-feedback">
+                    <div style="display: inline-block;width: 100px;" >
+                        <i-input v-model="captcha" @on-enter="login"
+                                 placeholder="验证码"/>
+                    </div>
+                    <div style="display: inline-block;width: 100px;" >
+                        <img style="height: 32px;width: 100px;" alt="如果看不清楚，请单击图片刷新！" title="点击刷新" class="pointer"
+                             :src="src" @click="refreshCode">
+                    </div>
                 </div>
                 <div>
                     <i-button type="primary" @click="login" style="width: 200px;">登录</i-button>
@@ -80,7 +92,9 @@
         el: '#loginBox',
         data: {
             username: '',
-            password: ''
+            password: '',
+            captcha: '',
+            src: 'captcha.jpg'
         },
         beforeCreate: function () {
             if (self != top) {
@@ -88,8 +102,23 @@
             }
         },
         methods: {
+            refreshCode: function () {
+                this.src = "captcha.jpg?t=" + $.now();
+            },
             login: function (event) {
-                var data = "username=" + vm.username + "&password=" + vm.password;
+                if (vm.username == '') {
+                    iview.Message.warning("用户名为空");
+                    return false;
+                }
+                if (vm.password == '') {
+                    iview.Message.warning("密码为空");
+                    return false;
+                }
+                if (vm.captcha == '') {
+                    iview.Message.warning("验证码为空");
+                    return false;
+                }
+                var data = "username=" + vm.username + "&password=" + vm.password + "&captcha=" + vm.captcha;
                 $.ajax({
                     type: "POST",
                     url: "sys/login",
@@ -99,6 +128,7 @@
                         if (result.code == 0) {//登录成功
                             parent.location.href = 'index.html';
                         } else {
+                            vm.refreshCode();
                             iview.Message.error(result.msg);
                         }
                     }
