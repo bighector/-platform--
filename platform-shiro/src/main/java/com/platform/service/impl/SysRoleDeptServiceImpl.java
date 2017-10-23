@@ -45,4 +45,8 @@ public class SysRoleDeptServiceImpl implements SysRoleDeptService {
         return sysRoleDeptDao.queryDeptIdList(roleId);
     }
 
+    @Override
+    public List<Long> queryDeptIdListByUserId(Long userId) {
+        return sysRoleDeptDao.queryDeptIdListByUserId(userId);
+    }
 }

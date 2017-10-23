@@ -19,4 +19,11 @@ public interface SysRoleDeptService {
      */
     List<Long> queryDeptIdList(Long roleId);
 
+    /**
+     * 根据用户ID获取权限部门列表
+     *
+     * @param userId
+     * @return
+     */
+    List<Long> queryDeptIdListByUserId(Long userId);
 }

@@ -91,6 +91,8 @@
         LEFT JOIN nideshop_attribute_category ON nideshop_goods.attribute_category = nideshop_attribute_category.id
         LEFT JOIN nideshop_brand ON nideshop_brand.id = nideshop_goods.brand_id
         WHERE 1=1
+        <!--  数据过滤  -->
+        ${filterSql}
         <if test="name != null and name != ''">
             AND nideshop_goods.name LIKE concat('%',#{name},'%')
         </if>
@@ -110,6 +112,8 @@
 
     <select id="queryTotal" resultType="int">
         select count(*) from nideshop_goods WHERE 1=1
+        <!--  数据过滤  -->
+        ${filterSql}
         <if test="name != null and name != ''">
             AND name LIKE concat('%',#{name},'%')
         </if>
