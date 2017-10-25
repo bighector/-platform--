@@ -36,6 +36,9 @@
         <if test="goodsName != null and goodsName.trim() != ''">
             AND nideshop_goods.name LIKE concat('%',#{goodsName},'%')
         </if>
+        <if test="goodsId != null">
+            AND nideshop_goods_gallery.goods_id = #{goodsId}
+        </if>
         <choose>
             <when test="sidx != null and sidx.trim() != ''">
                 order by ${sidx} ${order}

@@ -3,6 +3,66 @@
 <head>
     <title></title>
     #parse("sys/header.html")
+    <style>
+        .upload_warp_img_div_del {
+            position: absolute;
+            top: 6px;
+            width: 16px;
+            right: 4px;
+        }
+
+        .upload_warp_img_div_top {
+            position: absolute;
+            top: 0;
+            width: 20%;
+            height: 30px;
+            background-color: rgba(0, 0, 0, 0.4);
+            line-height: 30px;
+            text-align: left;
+            color: #fff;
+            font-size: 12px;
+            text-indent: 4px;
+        }
+
+        .upload_warp_img_div img {
+            max-width: 100%;
+            max-height: 100%;
+            vertical-align: middle;
+        }
+
+        .upload_warp_img_div {
+            position: relative;
+            height: 100px;
+            width: 120px;
+            border: 1px solid #ccc;
+            margin: 0px 30px 10px 0px;
+            float: left;
+            line-height: 100px;
+            display: table-cell;
+            text-align: center;
+            background-color: #eee;
+            cursor: pointer;
+        }
+
+        .upload_warp_img {
+            border-top: 1px solid #D2D2D2;
+            padding: 14px 0 0 14px;
+            overflow: hidden
+        }
+
+        .upload_warp {
+            margin: 14px;
+            height: 30px;
+        }
+
+        .upload {
+            margin: 5px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            box-shadow: 0px 1px 0px #ccc;
+            border-radius: 4px;
+        }
+    </style>
 </head>
 <body>
 <div id="rrapp" v-cloak>
@@ -137,6 +197,25 @@
                 </i-form>
             </Tab-Pane>
             <Tab-Pane label="详细描述" name="name2">
+                <div class="upload">
+                    <div class="upload_warp">
+                        首页轮播图：
+                        <button type="button" class="ivu-btn" @click="fileClick">
+                            <i class="ivu-icon ivu-icon-ios-cloud-upload-outline"></i>
+                            <span>上传图片</span>
+                        </button>
+                    </div>
+                    <input @change="fileChange($event)" type="file" id="upload_file" multiple style="display: none"/>
+                    <div class="upload_warp_img" v-show="goodsImgList.length!=0">
+                        <div class="upload_warp_img_div" v-for="(item,index) of goodsImgList">
+                            <div class="upload_warp_img_div_top">
+                                <img src="/statics/img/del.png" class="upload_warp_img_div_del"
+                                     @click="fileDel(index)">
+                            </div>
+                            <img :src="item.imgUrl" @click="eyeImage"/>
+                        </div>
+                    </div>
+                </div>
                 <div id="goodsDesc"></div>
             </Tab-Pane>
             <Tab-Pane label="其他信息" name="name3">

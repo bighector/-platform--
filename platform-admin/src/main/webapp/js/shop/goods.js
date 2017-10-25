@@ -121,6 +121,7 @@ var vm = new Vue({
     data: {
         showList: true,
         title: null,
+        goodsImgList: [],
         goods: {
             primaryPicUrl: '',
             listPicUrl: '',
@@ -147,12 +148,49 @@ var vm = new Vue({
         attributeCategories: []//属性类别
     },
     methods: {
+        fileClick() {
+            document.getElementById('upload_file').click()
+        },
+        fileChange(el) {
+            if (!el.target.files[0].size) return;
+            this.fileList(el.target);
+            el.target.value = ''
+        },
+        fileList(fileList) {
+            let files = fileList.files;
+            for (let i = 0; i < files.length; i++) {
+                //判断是否为文件夹
+                if (files[i].type != '') {
+                    this.fileAdd(files[i]);
+                }
+            }
+        },
+        fileAdd(file) {
+            //判断是否为图片文件
+            if (file.type.indexOf('image') == -1) {
+                iview.Message.error('请选择图片文件');
+            } else {
+                let reader = new FileReader();
+                reader.vue = this;
+                reader.readAsDataURL(file);
+                reader.onload = function () {
+                    let imgUrl = this.result;
+                    vm.goodsImgList.push({
+                        imgUrl: imgUrl
+                    });
+                }
+            }
+        },
+        fileDel(index) {
+            vm.goodsImgList.splice(index, 1);
+        },
         query: function () {
             vm.reload();
         },
         add: function () {
             vm.showList = false;
             vm.title = "新增";
+            vm.goodsImgList = [];
             vm.goods = {
                 primaryPicUrl: '',
                 listPicUrl: '',
@@ -195,6 +233,7 @@ var vm = new Vue({
             vm.getBrands();
             vm.getMacro();
             vm.getAttributeCategories();
+            vm.getGoodsGallery(id);
         },
         /**
          * 获取品牌
@@ -212,6 +251,11 @@ var vm = new Vue({
                 vm.macros = r.list;
             });
         },
+        getGoodsGallery: function (id) {//获取商品顶部轮播图
+            $.get("../goodsgallery/queryAll?goodsId=" + id, function (r) {
+                vm.goodsImgList = r.list;
+            });
+        },
         getAttributeCategories: function () {
             $.get("../attributecategory/queryAll", function (r) {
                 vm.attributeCategories = r.list;
@@ -220,7 +264,7 @@ var vm = new Vue({
         saveOrUpdate: function (event) {
             var url = vm.goods.id == null ? "../goods/save" : "../goods/update";
             vm.goods.goodsDesc = $('#goodsDesc').editable('getHTML');
-
+            vm.goods.goodsImgList = vm.goodsImgList;
             // var arr = $('[name="attributeValue"]');
             // var goodsAttribute = [];
             // for (var i = 0; i < arr.length; i++) {
@@ -403,6 +447,9 @@ var vm = new Vue({
         eyeImageListPicUrl: function () {
             var url = vm.goods.listPicUrl;
             eyeImage(url);
+        },
+        eyeImage: function (e) {
+            eyeImage($(e.target).attr('src'));
         }
     }
 });
