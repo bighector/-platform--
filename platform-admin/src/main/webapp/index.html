@@ -54,13 +54,16 @@
                         class="fa fa-bars"></i> </a>
                     <form role="search" class="navbar-form-custom" method="post" action="#">
                         <div class="form-group">
-                            <input type="text" placeholder="请输入您需要查找的内容 …(暂未实现)" class="form-control" name="top-search"
+                            <input type="text" placeholder="请输入您需要查找的内容 …" class="form-control" name="top-search"
                                    id="top-search">
                         </div>
                     </form>
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
 
+                    <li class="dropdown">
+                        <a href="javascript:;" @click="love"><i class="fa fa-rmb"></i> &nbsp;捐赠</a>
+                    </li>
                     <li class="dropdown">
                         <a href="javascript:;" @click="toggleFullScreen"><i class="fa fa-arrows-alt"></i> &nbsp;全屏</a>
                     </li>
@@ -404,10 +407,21 @@
                         toUrl('logout?_' + $.now());
                     }, 500);
                 });
+            },
+            love: function () {
+                layer.open({
+                    type: 2,
+                    title: '支持开源',
+                    area: ['806px', '467px'],
+                    closeBtn: 2,
+                    shadeClose: false,
+                    content: ['statics/img/love.jpg', 'no']
+                });
             }
         },
         created: function () {
             this.getMenuList();
+            this.love();
         },
         updated: function () {
             // MetsiMenu
