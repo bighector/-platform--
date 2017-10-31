@@ -22,38 +22,18 @@ $(function () {
                 return transDate(value, 'yyyy-MM-dd');
             }
             },
-            // {label: '排序', name: 'sortOrder', index: 'sort_order', width: 80},
             {label: '删除状态', name: 'isDelete', index: 'is_delete', width: 80, hidden: true},
             {label: '属性类别', name: 'attributeCategoryName', index: 'attribute_category', width: 80},
-            // {label: '专柜价格', name: 'counterPrice', index: 'counter_price', width: 80},
-            // {label: '附加价格', name: 'extraPrice', index: 'extra_price', width: 80},
             {label: '是否新商品', name: 'isNew', index: 'is_new', width: 80, hidden: true},
-            {label: '商品单位', name: 'goodsUnit', index: 'goods_unit', width: 80},
             {label: '商品主图', name: 'primaryPicUrl', index: 'primary_pic_url', width: 80, hidden: true},
             {label: '商品列表图', name: 'listPicUrl', index: 'list_pic_url', width: 80, hidden: true},
             {label: '零售价格', name: 'retailPrice', index: 'retail_price', width: 80},
             {label: '商品库存', name: 'goodsNumber', index: 'goods_number', width: 80},
             {label: '销售量', name: 'sellVolume', index: 'sell_volume', width: 80},
             {label: '主product_id', name: 'primaryProductId', index: 'primary_product_id', width: 80, hidden: true},
-            // {label: '单价', name: 'unitPrice', index: 'unit_price', width: 80},
             {label: '市场价', name: 'marketPrice', index: 'market_price', width: 80},
             {label: '推广描述', name: 'promotionDesc', index: 'promotion_desc', width: 80, hidden: true},
             {label: '推广标签', name: 'promotionTag', index: 'promotion_tag', width: 80, hidden: true},
-            // {label: 'APP专享价', name: 'appExclusivePrice', index: 'app_exclusive_price', width: 80, hidden: true},
-            // {
-            //     label: '是否是APP专属',
-            //     name: 'isAppExclusive',
-            //     index: 'is_app_exclusive',
-            //     width: 80,
-            //     formatter: function (value) {
-            //         return transIsNot(value);
-            //     }
-            // },
-            // {
-            //     label: '限购', name: 'isLimited', index: 'is_limited', width: 80, formatter: function (value) {
-            //     return transIsNot(value);
-            //     }
-            // },
             {
                 label: '热销', name: 'isHot', index: 'is_hot', width: 80, formatter: function (value) {
                 return transIsNot(value);
@@ -94,10 +74,9 @@ $(function () {
         enableScript: false,
         imageButtons: ["floatImageLeft", "floatImageNone", "floatImageRight", "linkImage", "replaceImage", "removeImage"],
         allowedImageTypes: ["jpeg", "jpg", "png", "gif"],
-        imageUploadURL: '../sys/oss/upload',//上传到本地服务器
+        imageUploadURL: '../sys/oss/upload',
         imageUploadParams: {id: "edit"},
-        // imageManagerDeleteURL: '../sys/oss/delete',//删除图片(有问题)
-        imagesLoadURL: '../sys/oss/queryAll'//管理图片
+        imagesLoadURL: '../sys/oss/queryAll'
     })
 });
 
@@ -121,7 +100,9 @@ var vm = new Vue({
     data: {
         showList: true,
         title: null,
-        goodsImgList: [],
+        uploadList: [],
+        imgName: '',
+        visible: false,
         goods: {
             primaryPicUrl: '',
             listPicUrl: '',
@@ -141,56 +122,18 @@ var vm = new Vue({
         q: {
             name: ''
         },
-        // attribute: [],
-        // attributes: [],
         brands: [],//品牌
         macros: [],//商品单位
         attributeCategories: []//属性类别
     },
     methods: {
-        fileClick() {
-            document.getElementById('upload_file').click()
-        },
-        fileChange(el) {
-            if (!el.target.files[0].size) return;
-            this.fileList(el.target);
-            el.target.value = ''
-        },
-        fileList(fileList) {
-            let files = fileList.files;
-            for (let i = 0; i < files.length; i++) {
-                //判断是否为文件夹
-                if (files[i].type != '') {
-                    this.fileAdd(files[i]);
-                }
-            }
-        },
-        fileAdd(file) {
-            //判断是否为图片文件
-            if (file.type.indexOf('image') == -1) {
-                iview.Message.error('请选择图片文件');
-            } else {
-                let reader = new FileReader();
-                reader.vue = this;
-                reader.readAsDataURL(file);
-                reader.onload = function () {
-                    let imgUrl = this.result;
-                    vm.goodsImgList.push({
-                        imgUrl: imgUrl
-                    });
-                }
-            }
-        },
-        fileDel(index) {
-            vm.goodsImgList.splice(index, 1);
-        },
         query: function () {
             vm.reload();
         },
         add: function () {
             vm.showList = false;
             vm.title = "新增";
-            vm.goodsImgList = [];
+            vm.uploadList = [];
             vm.goods = {
                 primaryPicUrl: '',
                 listPicUrl: '',
@@ -213,14 +156,6 @@ var vm = new Vue({
             vm.getAttributeCategories();
             // vm.getAttributes('');
         },
-        changeCategory: function (opt) {
-            // vm.getAttributes(opt.value);
-        },
-        // getAttributes: function (attributeCategoryId) {
-        //     $.get("../attribute/queryAll?attributeCategoryId=" + attributeCategoryId, function (r) {
-        //         vm.attributes = r.list;
-        //     });
-        // },
         update: function (event) {
             var id = getSelectedRow();
             if (id == null) {
@@ -228,7 +163,7 @@ var vm = new Vue({
             }
             vm.showList = false;
             vm.title = "修改";
-
+            vm.uploadList = [];
             vm.getInfo(id);
             vm.getBrands();
             vm.getMacro();
@@ -253,7 +188,7 @@ var vm = new Vue({
         },
         getGoodsGallery: function (id) {//获取商品顶部轮播图
             $.get("../goodsgallery/queryAll?goodsId=" + id, function (r) {
-                vm.goodsImgList = r.list;
+                vm.uploadList = r.list;
             });
         },
         getAttributeCategories: function () {
@@ -264,19 +199,7 @@ var vm = new Vue({
         saveOrUpdate: function (event) {
             var url = vm.goods.id == null ? "../goods/save" : "../goods/update";
             vm.goods.goodsDesc = $('#goodsDesc').editable('getHTML');
-            vm.goods.goodsImgList = vm.goodsImgList;
-            // var arr = $('[name="attributeValue"]');
-            // var goodsAttribute = [];
-            // for (var i = 0; i < arr.length; i++) {
-            //     if (vm.attribute.contains($(arr[i]).parent().attr('data'))) {
-            //         goodsAttribute.push({
-            //             goodsId: vm.goods.id || '',
-            //             attributeId: $(arr[i]).parent().attr('data'),
-            //             value: arr[i].value
-            //         })
-            //     }
-            // }
-            // vm.goods.attributeEntityList = goodsAttribute;
+            vm.goods.goodsImgList = vm.uploadList;
             $.ajax({
                 type: "POST",
                 url: url,
@@ -368,7 +291,6 @@ var vm = new Vue({
                 vm.goods = r.goods;
                 $('#goodsDesc').editable('setHTML', vm.goods.goodsDesc);
                 vm.getCategory();
-                // vm.getAttributes(vm.goods.attributeCategory);
             });
         },
         reload: function (event) {
@@ -414,6 +336,30 @@ var vm = new Vue({
                 }
             });
         },
+        handleView (name) {
+            this.imgName = name;
+            this.visible = true;
+        },
+        handleRemove (file) {
+            // 从 upload 实例删除数据
+            const fileList = this.uploadList;
+            this.uploadList.splice(fileList.indexOf(file), 1);
+        },
+        handleSuccess (res, file) {
+            // 因为上传过程为实例，这里模拟添加 url
+            file.imgUrl = res.url;
+            file.name = res.url;
+            vm.uploadList.add(file);
+        },
+        handleBeforeUpload () {
+            const check = this.uploadList.length < 5;
+            if (!check) {
+                this.$Notice.warning({
+                    title: '最多只能上传 5 张图片。'
+                });
+            }
+            return check;
+        },
         handleSubmit: function (name) {
             handleSubmitValidate(this, name, function () {
                 vm.saveOrUpdate()
@@ -451,5 +397,8 @@ var vm = new Vue({
         eyeImage: function (e) {
             eyeImage($(e.target).attr('src'));
         }
+    },
+    mounted () {
+        this.uploadList = this.$refs.upload.fileList;
     }
 });

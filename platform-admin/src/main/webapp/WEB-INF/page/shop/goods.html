@@ -4,63 +4,41 @@
     <title></title>
     #parse("sys/header.html")
     <style>
-        .upload_warp_img_div_del {
-            position: absolute;
-            top: 6px;
-            width: 16px;
-            right: 4px;
+        .upload-list{
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            text-align: center;
+            line-height: 60px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            overflow: hidden;
+            background: #fff;
+            position: relative;
+            box-shadow: 0 1px 1px rgba(0,0,0,.2);
+            margin-right: 4px;
         }
-
-        .upload_warp_img_div_top {
+        .upload-list img{
+            width: 100%;
+            height: 100%;
+        }
+        .upload-list-cover{
+            display: none;
             position: absolute;
             top: 0;
-            width: 20%;
-            height: 30px;
-            background-color: rgba(0, 0, 0, 0.4);
-            line-height: 30px;
-            text-align: left;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,.6);
+        }
+        .upload-list:hover .upload-list-cover{
+            display: block;
+        }
+        .upload-list-cover i{
             color: #fff;
-            font-size: 12px;
-            text-indent: 4px;
-        }
-
-        .upload_warp_img_div img {
-            max-width: 100%;
-            max-height: 100%;
-            vertical-align: middle;
-        }
-
-        .upload_warp_img_div {
-            position: relative;
-            height: 100px;
-            width: 120px;
-            border: 1px solid #ccc;
-            margin: 0px 30px 10px 0px;
-            float: left;
-            line-height: 100px;
-            display: table-cell;
-            text-align: center;
-            background-color: #eee;
+            font-size: 20px;
             cursor: pointer;
-        }
-
-        .upload_warp_img {
-            border-top: 1px solid #D2D2D2;
-            padding: 14px 0 0 14px;
-            overflow: hidden
-        }
-
-        .upload_warp {
-            margin: 14px;
-            height: 30px;
-        }
-
-        .upload {
-            margin: 5px;
-            border: 1px solid #ccc;
-            background-color: #fff;
-            box-shadow: 0px 1px 0px #ccc;
-            border-radius: 4px;
+            margin: 0 2px;
         }
     </style>
 </head>
@@ -122,15 +100,15 @@
                         <Input-number :min="0" :step="1" v-model="goods.goodsNumber" placeholder="商品库存"
                                       style="width: 188px;"/>
                     </Form-item>
-                    <Form-item label="商品单位" prop="goodsUnit" style="width: 268px;">
-                        <i-select v-model="goods.goodsUnit" filterable>
-                            <i-option v-for="macro in macros" :value="macro.value" :key="macro.value">{{macro.name}}
-                            </i-option>
-                        </i-select>
-                    </Form-item>
+                    <!--<Form-item label="商品单位" prop="goodsUnit" style="width: 268px;">-->
+                    <!--<i-select v-model="goods.goodsUnit" filterable>-->
+                    <!--<i-option v-for="macro in macros" :value="macro.value" :key="macro.value">{{macro.name}}-->
+                    <!--</i-option>-->
+                    <!--</i-select>-->
+                    <!--</Form-item>-->
                     <!--<Form-item label="单价" prop="unitPrice">-->
-                        <!--<Input-number :min="0" :step="1" v-model="goods.unitPrice" placeholder="单价"-->
-                                      <!--style="width: 188px;"/>-->
+                    <!--<Input-number :min="0" :step="1" v-model="goods.unitPrice" placeholder="单价"-->
+                    <!--style="width: 188px;"/>-->
                     <!--</Form-item>-->
                     <Form-item label="零售价格" prop="retailPrice">
                         <Input-number :min="0" :step="1" v-model="goods.retailPrice" placeholder="零售价格"
@@ -197,25 +175,42 @@
                 </i-form>
             </Tab-Pane>
             <Tab-Pane label="详细描述" name="name2">
-                <div class="upload">
-                    <div class="upload_warp">
-                        首页轮播图：
-                        <button type="button" class="ivu-btn" @click="fileClick">
-                            <i class="ivu-icon ivu-icon-ios-cloud-upload-outline"></i>
-                            <span>上传图片</span>
-                        </button>
-                    </div>
-                    <input @change="fileChange($event)" type="file" id="upload_file" multiple style="display: none"/>
-                    <div class="upload_warp_img" v-show="goodsImgList.length!=0">
-                        <div class="upload_warp_img_div" v-for="(item,index) of goodsImgList">
-                            <div class="upload_warp_img_div_top">
-                                <img src="/statics/img/del.png" class="upload_warp_img_div_del"
-                                     @click="fileDel(index)">
+
+                <template>
+                    <div class="upload-list" v-for="item in uploadList">
+                        <template v-if="item.status === 'finished'">
+                            <img :src="item.imgUrl"/>
+                            <div class="upload-list-cover">
+                                <Icon type="ios-eye-outline" @click.native="handleView(item.imgUrl)"></Icon>
+                                <Icon type="ios-trash-outline" @click.native="handleRemove(item)"></Icon>
                             </div>
-                            <img :src="item.imgUrl" @click="eyeImage"/>
-                        </div>
+                        </template>
+                        <template v-else>
+                            <Progress v-if="item.showProgress" :percent="item.percentage" hide-info></Progress>
+                        </template>
                     </div>
-                </div>
+                    <Upload
+                            ref="upload"
+                            :show-upload-list="false"
+                            :default-file-list="uploadList"
+                            :on-success="handleSuccess"
+                            :format="['jpg','jpeg','png']"
+                            :max-size="2048"
+                            :on-format-error="handleFormatError"
+                            :on-exceeded-size="handleMaxSize"
+                            :before-upload="handleBeforeUpload"
+                            multiple
+                            type="drag"
+                            action="../sys/oss/upload"
+                            style="display: inline-block;width:58px;">
+                        <div style="width: 58px;height:58px;line-height: 58px;">
+                            <Icon type="camera" size="20"></Icon>
+                        </div>
+                    </Upload>
+                    <Modal title="查看图片" v-model="visible">
+                        <img :src="imgName" v-if="visible" style="width: 100%"/>
+                    </Modal>
+                </template>
                 <div id="goodsDesc"></div>
             </Tab-Pane>
             <Tab-Pane label="其他信息" name="name3">
@@ -244,16 +239,6 @@
                             </Radio>
                         </Radio-group>
                     </Form-item>
-                    <!--<Form-item label="限购" prop="isLimited">-->
-                        <!--<Radio-group v-model="goods.isLimited">-->
-                            <!--<Radio label="1">-->
-                                <!--<span>是</span>-->
-                            <!--</Radio>-->
-                            <!--<Radio label="0">-->
-                                <!--<span>否</span>-->
-                            <!--</Radio>-->
-                        <!--</Radio-group>-->
-                    <!--</Form-item>-->
                     <Form-item label="热销" prop="isHot">
                         <Radio-group v-model="goods.isHot">
                             <Radio label="1">
@@ -264,26 +249,9 @@
                             </Radio>
                         </Radio-group>
                     </Form-item>
-                    <!--<Form-item label="APP专属" prop="isAppExclusive">-->
-                    <!--<Radio-group v-model="goods.isAppExclusive">-->
-                    <!--<Radio label="1">-->
-                    <!--<span>是</span>-->
-                    <!--</Radio>-->
-                    <!--<Radio label="0">-->
-                    <!--<span>否</span>-->
-                    <!--</Radio>-->
-                    <!--</Radio-group>-->
-                    <!--</Form-item>-->
-                    <!--<Form-item v-if="goods.isAppExclusive==1" label="APP专享价" prop="appExclusivePrice">-->
-                    <!--<Input-number :min="0" :step="1" v-model="goods.appExclusivePrice" placeholder="APP专享价"-->
-                    <!--style="width: 188px;"/>-->
-                    <!--</Form-item>-->
                     <Form-item label="推广描述" prop="promotionDesc">
                         <i-input v-model="goods.promotionDesc" placeholder="推广描述"/>
                     </Form-item>
-                    <!--<Form-item label="推广标签" prop="promotionTag">-->
-                        <!--<i-input v-model="goods.promotionTag" placeholder="推广标签"/>-->
-                    <!--</Form-item>-->
                     <Form-item label="关键字" prop="keywords">
                         <i-input v-model="goods.keywords" placeholder="关键字"/>
                     </Form-item>
@@ -292,17 +260,6 @@
                     </Form-item>
                 </i-form>
             </Tab-Pane>
-            <!--<Tab-Pane label="商品属性" name="name4">-->
-                <!--<i-form ref="formValidate" :model="goods" :rules="ruleValidate" :label-width="80">-->
-                    <!--<Form-item label="属性" prop="attribute" style="width: 268px;">-->
-                        <!--<Checkbox-group v-model="attribute">-->
-                            <!--<Checkbox :label="attribute.id" v-for="attribute in attributes">{{attribute.name}}-->
-                                <!--<i-input name="attributeValue" :data="attribute.id"/>-->
-                            <!--</Checkbox>-->
-                        <!--</Checkbox-group>-->
-                    <!--</Form-item>-->
-                <!--</i-form>-->
-            <!--</Tab-Pane>-->
         </Tabs>
         <div style="padding-left: 20px">
             <i-button type="primary" @click="handleSubmit('formValidate')">提交</i-button>
