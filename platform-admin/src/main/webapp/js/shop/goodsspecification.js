@@ -1,6 +1,11 @@
 $(function () {
+    let goodsId = getQueryString("goodsId");
+    let url = '../goodsspecification/list';
+    if (goodsId) {
+        url += '?goodsId=' + goodsId;
+    }
     $("#jqGrid").jqGrid({
-        url: '../goodsspecification/list',
+        url: url,
         datatype: "json",
         colModel: [
             {label: 'id', name: 'id', index: 'id', key: true, hidden: true},

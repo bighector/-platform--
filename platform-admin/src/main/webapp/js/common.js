@@ -13,7 +13,7 @@ $(window).on('resize', function () {
     var $content = $('#mainApp');
     $content.height($(this).height());
     $content.find('iframe').each(function () {
-        $(this).height($content.height()-150);
+        $(this).height($content.height() - 150);
     });
     var $rrapp = $('#rrapp').parent();
     $rrapp.height($(this).height());
@@ -40,8 +40,9 @@ $.ajaxSetup({
 
 //重写alert
 window.alert = function (msg, callback) {
-    parent.layer.alert(msg, function (index) {
-        parent.layer.close(index);
+    // parent.layer.alert 弹出在iframe外的页面。
+    layer.alert(msg, function (index) {
+        layer.close(index);
         if (typeof(callback) === "function") {
             callback("ok");
         }
@@ -50,7 +51,7 @@ window.alert = function (msg, callback) {
 
 //重写confirm式样框
 window.confirm = function (msg, callback) {
-    parent.layer.confirm(msg, {
+    layer.confirm(msg, {
             skin: 'layui-layer-molv', btn: ['确定', '取消']
         },
         function () {//确定事件
@@ -58,6 +59,28 @@ window.confirm = function (msg, callback) {
                 callback("ok");
             }
         });
+};
+
+/**
+ *
+ * @param type 1：html里的div内容 2：iframe方式，页面的路径
+ * @param title 标题
+ * @param content 内容
+ */
+window.openWindow = function (type, title, content) {
+    layer.open({
+        skin: 'layui-layer-molv',
+        title: title,
+        type: type,
+        closeBtn: 1,
+        anim: -1,
+        isOutAnim: false,
+        shadeClose: false,
+        shade: 0.3,
+        area: ['90%', '90%'],
+        content: content,
+        btn: false
+    });
 };
 
 //获取选中的数据

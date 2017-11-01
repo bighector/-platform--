@@ -239,6 +239,20 @@ var vm = new Vue({
                 });
             });
         },
+        openSpe: function () {
+            var id = getSelectedRow();
+            if (id == null) {
+                return;
+            }
+            openWindow(2, '商品规格', '../shop/goodsspecification.html?goodsId=' + id);
+        },
+        openPro: function () {
+            var id = getSelectedRow();
+            if (id == null) {
+                return;
+            }
+            openWindow(2, '产品设置', '../shop/product.html?goodsId=' + id);
+        },
         unSale: function () {
             var id = getSelectedRow();
             if (id == null) {
@@ -336,22 +350,22 @@ var vm = new Vue({
                 }
             });
         },
-        handleView (name) {
+        handleView(name) {
             this.imgName = name;
             this.visible = true;
         },
-        handleRemove (file) {
+        handleRemove(file) {
             // 从 upload 实例删除数据
             const fileList = this.uploadList;
             this.uploadList.splice(fileList.indexOf(file), 1);
         },
-        handleSuccess (res, file) {
+        handleSuccess(res, file) {
             // 因为上传过程为实例，这里模拟添加 url
             file.imgUrl = res.url;
             file.name = res.url;
             vm.uploadList.add(file);
         },
-        handleBeforeUpload () {
+        handleBeforeUpload() {
             const check = this.uploadList.length < 5;
             if (!check) {
                 this.$Notice.warning({
@@ -398,7 +412,7 @@ var vm = new Vue({
             eyeImage($(e.target).attr('src'));
         }
     },
-    mounted () {
+    mounted() {
         this.uploadList = this.$refs.upload.fileList;
     }
 });
