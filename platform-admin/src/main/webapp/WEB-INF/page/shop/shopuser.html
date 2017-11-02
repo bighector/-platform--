@@ -21,6 +21,9 @@
             #if($shiro.hasPermission("user:delete"))
             <i-button type="error" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</i-button>
             #end
+            #if($shiro.hasPermission("user:export"))
+            <i-button type="info" @click="exportUser"><i class="fa fa-cloud-download"></i>&nbsp;导出</i-button>
+            #end
         </Row>
         <table id="jqGrid"></table>
         <div id="jqGridPager"></div>

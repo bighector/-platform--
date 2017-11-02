@@ -350,13 +350,9 @@
                 });
             },
             updatePassword: function () {
-                vm.getUser();
-                layer.open({
-                    type: 1,
-                    skin: 'layui-layer-molv',
+                openWindow({
                     title: "修改密码",
                     area: ['350px', '300px'],
-                    shadeClose: false,
                     content: jQuery("#passwordLayer"),
                     btn: ['修改', '取消'],
                     btn1: function (index) {
@@ -409,12 +405,11 @@
                 });
             },
             love: function () {
-                layer.open({
+                openWindow({
                     type: 2,
                     title: '支持开源',
                     area: ['806px', '467px'],
                     closeBtn: 2,
-                    shadeClose: false,
                     content: ['statics/img/love.jpg', 'no']
                 });
             }

@@ -146,14 +146,9 @@ var vm = new Vue({
             });
         },
         deptTree: function () {
-            layer.open({
-                type: 1,
-                offset: '50px',
-                skin: 'layui-layer-molv',
+            openWindow({
                 title: "选择部门",
                 area: ['300px', '450px'],
-                shade: 0,
-                shadeClose: false,
                 content: jQuery("#deptLayer"),
                 btn: ['确定', '取消'],
                 btn1: function (index) {

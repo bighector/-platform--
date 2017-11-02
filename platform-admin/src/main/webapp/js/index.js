@@ -51,12 +51,10 @@ var vm = new Vue({
             });
         },
         updatePassword: function () {
-            layer.open({
+            openWindow({
                 type: 1,
-                skin: 'layui-layer-molv',
                 title: "修改密码",
                 area: ['350px', '300px'],
-                shadeClose: false,
                 content: jQuery("#passwordLayer"),
                 btn: ['修改', '取消'],
                 btn1: function (index) {

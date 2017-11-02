@@ -151,6 +151,9 @@ var vm = new Vue({
                 });
             });
         },
+        exportUser: function () {
+            exportFile('#rrapp', '../user/export', {'username': vm.q.username});
+        },
         getInfo: function (id) {
             $.get("../user/info/" + id, function (r) {
                 vm.user = r.user;

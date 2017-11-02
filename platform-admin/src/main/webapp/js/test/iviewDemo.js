@@ -177,12 +177,10 @@ var vm = new Vue({
             this.targetKeys1 = newTargetKeys;
         },
         api: function () {
-            layer.open({
+            openWindow({
                 type: 2,
-                skin: 'layui-layer-molv',
                 title: "iView Api",
                 area: ['80%', '500px'],
-                shadeClose: false,
                 content: ['https://www.iviewui.com/docs/guide/install']
             });
         }

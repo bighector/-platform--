@@ -91,8 +91,7 @@
                         </i-select>
                     </Form-item>
                     <Form-item label="类别" prop="attributeCategory" style="width: 268px;">
-                        <i-select v-model="goods.attributeCategory" filterable @on-change="changeCategory"
-                                  label-in-value>
+                        <i-select v-model="goods.attributeCategory" filterable label-in-value>
                             <i-option v-for="attributeCategory in attributeCategories" :value="attributeCategory.id"
                                       :key="attributeCategory.id">{{attributeCategory.name}}
                             </i-option>

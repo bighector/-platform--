@@ -63,24 +63,29 @@ window.confirm = function (msg, callback) {
 
 /**
  *
- * @param type 1：html里的div内容 2：iframe方式，页面的路径
- * @param title 标题
- * @param content 内容
+ * @param options
  */
-window.openWindow = function (type, title, content) {
-    layer.open({
-        skin: 'layui-layer-molv',
-        title: title,
-        type: type,
-        closeBtn: 1,
+window.openWindow = function (options) {
+    let globalParams = {
+        skin: 'layui-layer-molv',//皮肤
+        title: '标题',//标题
+        type: 1,//打开窗口的类型 1：html里的div内容 2：iframe方式，页面的路径
+        closeBtn: 1, //关闭按钮的形状 0、1
         anim: -1,
         isOutAnim: false,
         shadeClose: false,
         shade: 0.3,
-        area: ['90%', '90%'],
-        content: content,
-        btn: false
-    });
+        area: ['90%', '95%'],
+        content: '',
+        btn: false, //按钮
+        top: false //窗口弹出是否在iframe上层
+    };
+    globalParams = $.extend(globalParams, options);
+    if (globalParams.top) {
+        parent.layer.open(globalParams);
+    } else {
+        layer.open(globalParams);
+    }
 };
 
 //获取选中的数据
@@ -266,4 +271,59 @@ function getQueryString(name) {
         return unescape(r[2]);
     }
     return null;
+}
+
+/**
+ * 主要功能:导出功能公共方法
+ *
+ * @param formId 表单ID,带'#'号,如'#formId'
+ * @param url 请求后台地址
+ * @param extraObj 往后台请求额外参数,对象格式,如:{'aaa': 111}
+ */
+function exportFile(formId, url, extraObj) {
+    var form = $('<form>'); //定义一个form表单
+    form.attr('style', 'display: none');
+    form.attr('target', '');
+    form.attr('method', 'post');
+    form.attr('action', url);
+
+    var json = getJson(formId);
+    if (typeof extraObj != 'undefined') {
+        json = $.extend(json, extraObj);
+    }
+
+    $('body').append(form);//将表单放置在web中
+    for (var i in json) {
+        var input = $('<input>');
+        input.attr('type', 'hidden');
+        input.attr('name', i);
+        input.attr('value', json[i]);
+        form.append(input);
+    }
+
+    form.submit();//表单提交
+}
+
+/**
+ * 将form转化为json
+ * @param form 传入 form表单的dom $("#baseFm")
+ * @returns {___anonymous49_50}  序列化的键值对 {key:value,key2:value2,....}
+ */
+function getJson(form) {
+    var o = {};
+    var $form = $(form).find('input,textarea,select');
+    $.each($form, function (i, item) {
+        var $this = $(item);
+
+        if ($this.attr("type") == 'radio') {
+            o[$this.attr("name")] = $("input[name='" + $this.attr("name") + "']:checked").val();
+            return true;
+        }
+        if ($this.hasClass("rate")) {
+            o[$this.attr("name")] = parseFloat($this.val().toString().replace(/\$|\,/g, '')) * parseFloat($this.attr("unit"));
+        } else {
+            o[$this.attr("name")] = $this.val();
+        }
+    })
+    return o;
 }

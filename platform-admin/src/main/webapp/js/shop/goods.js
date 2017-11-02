@@ -244,14 +244,22 @@ var vm = new Vue({
             if (id == null) {
                 return;
             }
-            openWindow(2, '商品规格', '../shop/goodsspecification.html?goodsId=' + id);
+            openWindow({
+                type: 2,
+                title: '商品规格',
+                content: '../shop/goodsspecification.html?goodsId=' + id
+            })
         },
         openPro: function () {
             var id = getSelectedRow();
             if (id == null) {
                 return;
             }
-            openWindow(2, '产品设置', '../shop/product.html?goodsId=' + id);
+            openWindow({
+                type: 2,
+                title: '产品设置',
+                content: '../shop/product.html?goodsId=' + id
+            });
         },
         unSale: function () {
             var id = getSelectedRow();
@@ -332,10 +340,7 @@ var vm = new Vue({
             })
         },
         categoryTree: function () {
-            layer.open({
-                type: 1,
-                offset: '50px',
-                skin: 'layui-layer-molv',
+            openWindow({
                 title: "选择类型",
                 area: ['300px', '450px'],
                 content: jQuery("#categoryLayer"),
