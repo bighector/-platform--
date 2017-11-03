@@ -5,12 +5,8 @@ $(function () {
         colModel: [
             {label: 'id', name: 'id', index: 'id', key: true, hidden: true},
             {label: '商品类型', name: 'categoryName', index: 'category_id', width: 80},
-            {label: '商品序列号', name: 'goodsSn', index: 'goods_sn', width: 80, hidden: true},
             {label: '名称', name: 'name', index: 'name', width: 160},
             {label: '品牌', name: 'brandName', index: 'brand_id', width: 120},
-            {label: '关键字', name: 'keywords', index: 'keywords', width: 80, hidden: true},
-            {label: '简明介绍', name: 'goodsBrief', index: 'goods_brief', width: 80, hidden: true},
-            {label: '商品描述', name: 'goodsDesc', index: 'goods_desc', width: 80, hidden: true},
             {
                 label: '上架', name: 'isOnSale', index: 'is_on_sale', width: 50,
                 formatter: function (value) {
@@ -22,18 +18,11 @@ $(function () {
                 return transDate(value, 'yyyy-MM-dd');
             }
             },
-            {label: '删除状态', name: 'isDelete', index: 'is_delete', width: 80, hidden: true},
             {label: '属性类别', name: 'attributeCategoryName', index: 'attribute_category', width: 80},
-            {label: '是否新商品', name: 'isNew', index: 'is_new', width: 80, hidden: true},
-            {label: '商品主图', name: 'primaryPicUrl', index: 'primary_pic_url', width: 80, hidden: true},
-            {label: '商品列表图', name: 'listPicUrl', index: 'list_pic_url', width: 80, hidden: true},
             {label: '零售价格', name: 'retailPrice', index: 'retail_price', width: 80},
             {label: '商品库存', name: 'goodsNumber', index: 'goods_number', width: 80},
             {label: '销售量', name: 'sellVolume', index: 'sell_volume', width: 80},
-            {label: '主product_id', name: 'primaryProductId', index: 'primary_product_id', width: 80, hidden: true},
             {label: '市场价', name: 'marketPrice', index: 'market_price', width: 80},
-            {label: '推广描述', name: 'promotionDesc', index: 'promotion_desc', width: 80, hidden: true},
-            {label: '推广标签', name: 'promotionTag', index: 'promotion_tag', width: 80, hidden: true},
             {
                 label: '热销', name: 'isHot', index: 'is_hot', width: 80, formatter: function (value) {
                 return transIsNot(value);
