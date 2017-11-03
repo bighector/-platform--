@@ -2,6 +2,7 @@ $(function () {
     let shippingStatus = getQueryString("shippingStatus");
     let payStatus = getQueryString("payStatus");
     let orderStatus = getQueryString("orderStatus");
+    let orderType = getQueryString("orderType");
     let url = '../order/list';
     if (shippingStatus) {
         url += '?shippingStatus=' + shippingStatus;
@@ -11,6 +12,9 @@ $(function () {
     }
     if (orderStatus) {
         url += '?orderStatus=' + orderStatus;
+    }
+    if (orderType) {
+        url += '?orderType=' + orderType;
     }
     $("#jqGrid").jqGrid({
         url: url,
@@ -28,7 +32,7 @@ $(function () {
                 } else if (value == '3') {
                     return '砍价订单';
                 }
-                return value;
+                return '-';
             }
             },
             {
@@ -107,16 +111,10 @@ $(function () {
                     return transDate(value);
                 }
             },
-            // {label: '确认时间', name: 'confirmTime', index: 'confirm_time', width: 80 },
-            // {label: '付款时间', name: 'payTime', index: 'pay_time', width: 80},
-            // {label: '配送费用', name: 'freightPrice', index: 'freight_price', width: 80},
-            // {label: '使用的优惠券', name: 'couponId', index: 'coupon_id', width: 80 },
-            // {label: '', name: 'parentId', index: 'parent_id', width: 80 },
-            // {label: '优惠价格', name: 'couponPrice', index: 'coupon_price', width: 80}
-            // {label: '', name: 'callbackStatus', index: 'callback_status', width: 80 }
             {
-                label: '操作', width: 80, align: 'center', sortable: false, formatter: function (value, col, row) {
-                return '<button class="ivu-btn ivu-btn-primary ivu-btn-circle ivu-btn-small" onclick="vm.lookDetail(' + row.id + ')"><i class="fa fa-info-circle"></i>&nbsp;详情</button>';
+                label: '操作', width: 160, align: 'center', sortable: false, formatter: function (value, col, row) {
+                return '<button class="btn btn-outline btn-info" onclick="vm.lookDetail(' + row.id + ')"><i class="fa fa-info-circle"></i>&nbsp;详情</button>' +
+                    '<button class="btn btn-outline btn-primary" onclick="vm.printDetail(' + row.id + ')"><i class="fa fa-print"></i>&nbsp;打印</button>';
             }
             }
         ],
@@ -156,8 +154,7 @@ let vm = new Vue({
         shippings: [],
         q: {
             orderSn: '',
-            orderStatus: '',
-            orderType: ''
+            orderStatus: ''
         }
     },
     methods: {
@@ -222,14 +219,10 @@ let vm = new Vue({
             $("#jqGrid").jqGrid('setGridParam', {
                 postData: {
                     'orderSn': vm.q.orderSn,
-                    'orderStatus': vm.q.orderStatus,
-                    'orderType': vm.q.orderType
+                    'orderStatus': vm.q.orderStatus
                 },
                 page: page
             }).trigger("reloadGrid");
-        },
-        print: function () {
-            window.print();
         },
         lookDetail: function (rowId) { //第三步：定义编辑操作
             vm.detail = true;
@@ -237,6 +230,13 @@ let vm = new Vue({
             $.get("../order/info/" + rowId, function (r) {
                 vm.order = r.order;
             });
+        },
+        printDetail: function (rowId) {
+            openWindow({
+                type: 2,
+                title: '<i class="fa fa-print"></i>打印票据',
+                content: '../shop/orderPrint.html?orderId=' + rowId
+            })
         }
     },
     created: function () {

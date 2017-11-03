@@ -23,13 +23,13 @@
                     <i-option value="402">完成</i-option>
                 </i-select>
             </i-col>
-            <i-col span="4">
-                <i-select v-model="q.orderType">
-                    <i-option value="1">普通订单</i-option>
-                    <i-option value="2">团购订单</i-option>
-                    <i-option value="3">砍价订单</i-option>
-                </i-select>
-            </i-col>
+            <!--<i-col span="4">-->
+            <!--<i-select v-model="q.orderType">-->
+            <!--<i-option value="1">普通订单</i-option>-->
+            <!--<i-option value="2">团购订单</i-option>-->
+            <!--<i-option value="3">砍价订单</i-option>-->
+            <!--</i-select>-->
+            <!--</i-col>-->
             <i-button @click="query">查询</i-button>
             #if($shiro.hasPermission("order:sendGoods"))
             <i-button type="warning" @click="sendGoods">发货</i-button>
@@ -63,8 +63,8 @@
     </Card>
 
     <Card v-show="detail">
-        <p slot="title" style="height: auto">{{title}}
-            <i-button type="primary" @click="print">打印订单</i-button>
+        <p slot="title" style="height: auto">
+            {{title}}
         </p>
         <i-form ref="formValidate" :model="order" :label-width="80">
             <Form-item label="订单号" prop="orderSn">

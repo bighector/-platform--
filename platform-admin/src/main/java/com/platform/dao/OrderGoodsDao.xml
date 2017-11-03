@@ -26,6 +26,10 @@
 
 	<select id="queryList" resultType="com.platform.entity.OrderGoodsEntity">
 		select * from nideshop_order_goods
+		WHERE 1=1
+		<if test="orderId != null and orderId != ''">
+			AND order_id = #{orderId}
+		</if>
         <choose>
             <when test="sidx != null and sidx.trim() != ''">
                 order by ${sidx} ${order}
@@ -40,7 +44,11 @@
 	</select>
 	
  	<select id="queryTotal" resultType="int">
-		select count(*) from nideshop_order_goods 
+		select count(*) from nideshop_order_goods
+		WHERE 1=1
+		<if test="orderId != null and orderId != ''">
+			AND order_id = #{orderId}
+		</if>
 	</select>
 	 
 	<insert id="save" parameterType="com.platform.entity.OrderGoodsEntity" useGeneratedKeys="true" keyProperty="id">
