@@ -4056,3 +4056,31 @@ CREATE TABLE `tb_token` (
   UNIQUE KEY `token` (`token`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户Token';
 
+create table sys_region
+(
+  id smallint auto_increment
+    primary key,
+  parent_id smallint default '0' not null,
+  name varchar(120) default '' not null,
+  type tinyint(1) default '2' not null,
+  agency_id smallint default '0' not null
+)
+;
+
+create index agency_id
+  on sys_region (agency_id)
+;
+
+create index parent_id
+  on sys_region (parent_id)
+;
+
+create index region_type
+  on sys_region (type)
+;
+
+INSERT INTO platform.sys_menu (parent_id, name, url, perms, type, icon, order_num, status) VALUES (375, '删除', null, 'sys:region:delete', 2, null, 0, 0);
+INSERT INTO platform.sys_menu (parent_id, name, url, perms, type, icon, order_num, status) VALUES (375, '修改', '', 'sys:region:update', 2, null, 0, 0);
+INSERT INTO platform.sys_menu (parent_id, name, url, perms, type, icon, order_num, status) VALUES (375, '新增', null, 'sys:region:save', 2, null, 0, 0);
+INSERT INTO platform.sys_menu (parent_id, name, url, perms, type, icon, order_num, status) VALUES (375, '查看', null, 'sys:region:list,sys:region:info', 2, null, 0, 0);
+INSERT INTO platform.sys_menu (parent_id, name, url, perms, type, icon, order_num, status) VALUES (1, '地区管理', '../sys/region.html', null, 1, 'fa fa-map-pin', 8, 0);

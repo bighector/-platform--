@@ -7,23 +7,22 @@ $(function () {
             {label: '上级区域', name: 'parentName', index: 'parent_id', width: 80},
             {label: '区域', name: 'name', index: 'name', width: 80},
             {
-                label: '类型', name: 'type', index: 'type', width: 80, formatter: function (value) {
-                if (value === '0' || value === 0) {
-                    return '国家';
+                label: '类型', name: 'type', index: 'type', width: 80,
+                formatter: function (value) {
+                    if (value === '0' || value === 0) {
+                        return '国家';
+                    }
+                    if (value == '1') {
+                        return '省份';
+                    }
+                    if (value == '2') {
+                        return '地市';
+                    }
+                    if (value == '3') {
+                        return '区县';
+                    }
                 }
-                if (value == '1') {
-                    return '省份';
-                }
-                if (value == '2') {
-                    return '地市';
-                }
-                if (value == '3') {
-                    return '区县';
-                }
-            }
-            }
-            // {label: '区域代理Id', name: 'agencyId', index: 'agency_id', width: 80}
-            ],
+            }],
         viewrecords: true,
         height: 385,
         rowNum: 10,

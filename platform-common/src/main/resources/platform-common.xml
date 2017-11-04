@@ -4,5 +4,6 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
 
-    <bean id="regionCacheUtil" class="com.platform.cache.CacheUtil"/>
+    <bean id="cacheUtil" class="com.platform.cache.CacheUtil"/>
+    <bean id="regionCacheUtil" class="com.platform.cache.RegionCacheUtil"/>
 </beans>
