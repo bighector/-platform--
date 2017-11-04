@@ -24,6 +24,9 @@
             #if($shiro.hasPermission("user:export"))
             <i-button type="info" @click="exportUser"><i class="fa fa-cloud-download"></i>&nbsp;导出</i-button>
             #end
+            <i-button type="primary" @click="coupon"><i class="fa fa-cc-visa"></i>&nbsp;优惠券</i-button>
+            <i-button type="primary" @click="shopCart"><i class="fa fa-shopping-cart"></i>&nbsp;购物车</i-button>
+            <i-button type="primary" @click="address"><i class="fa fa-map"></i>&nbsp;收获地址</i-button>
         </Row>
         <table id="jqGrid"></table>
         <div id="jqGridPager"></div>

@@ -1,6 +1,11 @@
 $(function () {
+    let userId = getQueryString("userId");
+    let url = '../address/list';
+    if (userId) {
+        url += '?userId=' + userId;
+    }
     $("#jqGrid").jqGrid({
-        url: '../address/list',
+        url: url,
         datatype: "json",
         colModel: [
             {label: 'id', name: 'id', index: 'id', key: true, hidden: true},
@@ -11,7 +16,7 @@ $(function () {
             {label: '省', name: 'provinceName', index: 'province_Name', width: 80},
             {label: '市', name: 'cityName', index: 'city_Name', width: 80},
             {label: '区', name: 'countyName', index: 'county_Name', width: 80},
-            {label: '详细收货地址信息', name: 'detailInfo', index: 'detail_Info', width: 80},
+            {label: '详细收货地址信息', name: 'detailInfo', index: 'detail_Info', width: 150},
             {label: '邮编', name: 'postalCode', index: 'postal_Code', width: 80}],
         viewrecords: true,
         height: 385,
@@ -48,21 +53,6 @@ var vm = new Vue({
             userName: '',
             telNumber: ''
         }
-        // title: null,
-        // address: {isDefault: '0', cityId: '', districtId: ''},
-        // ruleValidate: {
-        //     mobile: [
-        //         {required: true, message: '联系电话不能为空', trigger: 'blur'}
-        //     ],
-        //     address: [
-        //         {required: true, message: '详细地址不能为空', trigger: 'blur'}
-        //     ]
-        // },
-        // users: [],
-        // countryList: [],
-        // provinceList: [],
-        // cityList: [],
-        // districtList: []
     },
     methods: {
         query: function () {
@@ -78,113 +68,30 @@ var vm = new Vue({
                 },
                 page: page
             }).trigger("reloadGrid");
+        },
+        del: function (event) {
+            var ids = getSelectedRows();
+            if (ids == null) {
+                return;
+            }
+
+            confirm('确定要删除选中的记录？', function () {
+                $.ajax({
+                    type: "POST",
+                    url: "../address/delete",
+                    contentType: "application/json",
+                    data: JSON.stringify(ids),
+                    success: function (r) {
+                        if (r.code == 0) {
+                            alert('操作成功', function (index) {
+                                $("#jqGrid").trigger("reloadGrid");
+                            });
+                        } else {
+                            alert(r.msg);
+                        }
+                    }
+                });
+            });
         }
-        // add: function () {
-        //     vm.showList = false;
-        //     vm.title = "新增";
-        //     vm.address = {isDefault: '0'};
-        //     vm.users = [];
-        //
-        //     this.getUsers();
-        //     this.getCountries();
-        // },
-        // update: function (event) {
-        //     var id = getSelectedRow();
-        //     if (id == null) {
-        //         return;
-        //     }
-        //     vm.showList = false;
-        //     vm.title = "修改";
-        //
-        //     vm.getInfo(id)
-        //     this.getUsers();
-        //     this.getCountries();
-        //     this.changeCountry();
-        //     this.changeProvince();
-        //     this.changeCity();
-        // },
-        // saveOrUpdate: function (event) {
-        //     var url = vm.address.id == null ? "../address/save" : "../address/update";
-        //     $.ajax({
-        //         type: "POST",
-        //         url: url,
-        //         contentType: "application/json",
-        //         data: JSON.stringify(vm.address),
-        //         success: function (r) {
-        //             if (r.code === 0) {
-        //                 alert('操作成功', function (index) {
-        //                     vm.reload();
-        //                 });
-        //             } else {
-        //                 alert(r.msg);
-        //             }
-        //         }
-        //     });
-        // },
-        // del: function (event) {
-        //     var ids = getSelectedRows();
-        //     if (ids == null) {
-        //         return;
-        //     }
-        //
-        //     confirm('确定要删除选中的记录？', function () {
-        //         $.ajax({
-        //             type: "POST",
-        //             url: "../address/delete",
-        //             contentType: "application/json",
-        //             data: JSON.stringify(ids),
-        //             success: function (r) {
-        //                 if (r.code == 0) {
-        //                     alert('操作成功', function (index) {
-        //                         $("#jqGrid").trigger("reloadGrid");
-        //                     });
-        //                 } else {
-        //                     alert(r.msg);
-        //                 }
-        //             }
-        //         });
-        //     });
-        // },
-        // getInfo: function (id) {
-        //     $.get("../address/info/" + id, function (r) {
-        //         vm.address = r.address;
-        //     });
-        // },
-        // getUsers: function () {
-        //     $.get("../user/queryAll", function (r) {
-        //         vm.users = r.list;
-        //     });
-        // },
-        // getCountries: function () {
-        //     $.get("../sys/region/getAllCountry", function (r) {
-        //         vm.countryList = r.list;
-        //     });
-        // },
-        // //选择国家
-        // changeCountry: function () {
-        //     $.get("../sys/region/getAllProvice?areaId=" + vm.address.countryId, function (r) {
-        //         vm.provinceList = r.list;
-        //     });
-        // },
-        // //选择省份
-        // changeProvince: function () {
-        //     $.get("../sys/region/getAllCity?areaId=" + vm.address.provinceId, function (r) {
-        //         vm.cityList = r.list;
-        //     });
-        // },
-        // //选择城市
-        // changeCity: function () {
-        //     $.get("../sys/region/getChildrenDistrict?areaId=" + vm.address.cityId, function (r) {
-        //         vm.districtList = r.list;
-        //     });
-        // },
-        // handleSubmit: function (name) {
-        //     handleSubmitValidate(this, name, function () {
-        //         vm.saveOrUpdate()
-        //     });
-        // },
-        // handleReset: function (name) {
-        //     handleResetForm(this, name);
-        // }
     }
 });

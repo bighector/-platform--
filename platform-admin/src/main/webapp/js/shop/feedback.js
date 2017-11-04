@@ -4,17 +4,32 @@ $(function () {
         datatype: "json",
         colModel: [
             {label: 'msgId', name: 'msgId', index: 'msg_id', key: true, hidden: true},
-            {label: '父节点', name: 'parentId', index: 'parent_id', width: 80},
             {label: '会员名称', name: 'userName', index: 'user_name', width: 80},
-            {label: '邮件', name: 'userEmail', index: 'user_email', width: 80},
-            {label: '标题', name: 'msgTitle', index: 'msg_title', width: 80},
-            {label: '类型', name: 'msgType', index: 'msg_type', width: 80},
-            {label: '状态', name: 'msgStatus', index: 'msg_status', width: 80},
-            {label: '详细内容', name: 'msgContent', index: 'msg_content', width: 80},
-            {label: '反馈时间', name: 'msgTime', index: 'msg_time', width: 80},
-            {label: '图片', name: 'messageImg', index: 'message_img', width: 80},
-            {label: '订单Id', name: 'orderId', index: 'order_id', width: 80},
-            {label: 'msgArea', name: 'msgArea', index: 'msg_area', width: 80}],
+            {label: '手机', name: 'mobile', index: 'mobile', width: 80},
+            {
+                label: '反馈类型', name: 'feedType', index: 'feed_Type', width: 80, formatter: function (value) {
+                if (value == 1) {
+                    return '商品相关';
+                } else if (value == 2) {
+                    return '物流状况';
+                } else if (value == 3) {
+                    return '客户服务';
+                } else if (value == 4) {
+                    return '优惠活动';
+                } else if (value == 5) {
+                    return '功能异常';
+                } else if (value == 6) {
+                    return '产品建议';
+                } else if (value == 7) {
+                    return '其他';
+                }
+                return '';
+            }
+            },
+            {label: '详细内容', name: 'content', index: 'content', width: 80},
+            {label: '反馈时间', name: 'addTime', index: 'add_time', width: 80,formatter:function (value) {
+                return transDate(value);
+            }}],
         viewrecords: true,
         height: 385,
         rowNum: 10,
@@ -41,12 +56,17 @@ $(function () {
     });
 });
 
-var vm = new Vue({
+let vm = new Vue({
     el: '#rrapp',
     data: {
         showList: true,
         title: null,
         feedback: {},
+        ruleValidate: {
+            name: [
+                {required: true, message: '名称不能为空', trigger: 'blur'}
+            ]
+        },
         q: {
             userName: ''
         }
@@ -61,7 +81,7 @@ var vm = new Vue({
             vm.feedback = {};
         },
         update: function (event) {
-            var msgId = getSelectedRow();
+            let msgId = getSelectedRow();
             if (msgId == null) {
                 return;
             }
@@ -71,7 +91,7 @@ var vm = new Vue({
             vm.getInfo(msgId)
         },
         saveOrUpdate: function (event) {
-            var url = vm.feedback.msgId == null ? "../feedback/save" : "../feedback/update";
+            let url = vm.feedback.msgId == null ? "../feedback/save" : "../feedback/update";
             $.ajax({
                 type: "POST",
                 url: url,
@@ -89,7 +109,7 @@ var vm = new Vue({
             });
         },
         del: function (event) {
-            var msgIds = getSelectedRows();
+            let msgIds = getSelectedRows();
             if (msgIds == null) {
                 return;
             }
@@ -119,11 +139,20 @@ var vm = new Vue({
         },
         reload: function (event) {
             vm.showList = true;
-            var page = $("#jqGrid").jqGrid('getGridParam', 'page');
+            let page = $("#jqGrid").jqGrid('getGridParam', 'page');
             $("#jqGrid").jqGrid('setGridParam', {
-                postData: {'userName': vm.q.userName},
+                postData: {'name': vm.q.userName},
                 page: page
             }).trigger("reloadGrid");
+            vm.handleReset('formValidate');
+        },
+        handleSubmit: function (name) {
+            handleSubmitValidate(this, name, function () {
+                vm.saveOrUpdate()
+            });
+        },
+        handleReset: function (name) {
+            handleResetForm(this, name);
         }
     }
 });

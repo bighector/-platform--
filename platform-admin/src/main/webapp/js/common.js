@@ -74,7 +74,6 @@ window.openWindow = function (options) {
         anim: -1,
         isOutAnim: false,
         shadeClose: false,
-        shade: 0.3,
         area: ['90%', '95%'],
         content: '',
         btn: false, //按钮

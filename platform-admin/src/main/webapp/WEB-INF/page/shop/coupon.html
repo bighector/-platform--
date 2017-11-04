@@ -95,7 +95,7 @@
             </Form-item>
         </i-form>
     </Card>
-    <Card v-show="showGoods">
+    <Card id="sendDiv" v-show="showGoods">
         <i-form :label-width="100">
             <Form-item v-if="selectData.sendType == 3" label="下发商品">
                 <i-select v-model="goods" filterable multiple>

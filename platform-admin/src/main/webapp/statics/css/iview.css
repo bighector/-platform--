@@ -343,11 +343,11 @@ code, kbd, pre, samp {
 }
 
 @font-face {
-    font-family: "Ionicons";
-    src: url("../fonts/ionicons.eot?v=2.0.0");
-    src: url("../fonts/ionicons.eot?v=2.0.0#iefix") format("embedded-opentype"), url("../fonts/ionicons.ttf?v=2.0.0") format("truetype"), url("../fonts/ionicons.woff?v=2.0.0") format("woff"), url("../fonts/ionicons.svg?v=2.0.0#Ionicons") format("svg");
-    font-weight: normal;
-    font-style: normal;
+    font-family: Ionicons;
+    src: url(../fonts/ionicons.eot?v=2.0.0);
+    src: url(../fonts/ionicons.eot?v=2.0.0#iefix) format("embedded-opentype"), url(../fonts/ionicons.ttf?v=2.0.0) format("truetype"), url(../fonts/ionicons.woff?v=2.0.0) format("woff"), url(../fonts/ionicons.svg?v=2.0.0#Ionicons) format("svg");
+    font-weight: 400;
+    font-style: normal
 }
 
 .ivu-icon {
@@ -8179,21 +8179,31 @@ code, kbd, pre, samp {
 .ivu-spin-fix {
     position: absolute;
     top: 0;
-    bottom: 0;
     left: 0;
-    right: 0;
     z-index: 8;
-    display: table;
     width: 100%;
     height: 100%;
-    background-color: #fff
+    background-color: rgba(255, 255, 255, .9)
+}
+
+.ivu-spin-fullscreen {
+    z-index: 2010
+}
+
+.ivu-spin-fullscreen-wrapper {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0
 }
 
 .ivu-spin-fix .ivu-spin-main {
-    display: table-cell;
-    vertical-align: middle;
-    width: inherit;
-    height: inherit
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%)
 }
 
 .ivu-spin-fix .ivu-spin-dot {
@@ -8206,6 +8216,12 @@ code, kbd, pre, samp {
 
 .ivu-spin-show-text .ivu-spin-text {
     display: block
+}
+
+.ivu-table-wrapper > .ivu-spin-fix {
+    border: 1px solid #dddee1;
+    border-top: 0;
+    border-left: 0
 }
 
 @keyframes ani-spin-bounce {
@@ -8456,14 +8472,18 @@ code, kbd, pre, samp {
     z-index: 1010;
     width: 100%;
     top: 16px;
-    left: 0
+    left: 0;
+    pointer-events: none
 }
 
 .ivu-message-notice {
-    width: auto;
-    vertical-align: middle;
-    position: absolute;
-    left: 50%
+    padding: 8px;
+    text-align: center;
+    transition: height .3s ease-in-out, padding .3s ease-in-out
+}
+
+.ivu-message-notice:first-child {
+    margin-top: -8px
 }
 
 .ivu-message-notice-close {
@@ -8487,13 +8507,13 @@ code, kbd, pre, samp {
 }
 
 .ivu-message-notice-content {
-    position: relative;
-    right: 50%;
+    display: inline-block;
+    pointer-events: all;
     padding: 8px 16px;
     border-radius: 4px;
     box-shadow: 0 1px 6px rgba(0, 0, 0, .2);
     background: #fff;
-    display: block
+    position: relative
 }
 
 .ivu-message-notice-content-text {
@@ -8729,6 +8749,34 @@ code, kbd, pre, samp {
     transition: all .2s ease-in-out;
     -ms-transform: scale(0);
     transform: scale(0)
+}
+
+.ivu-radio-large {
+    font-size: 14px
+}
+
+.ivu-radio-large .ivu-radio-inner {
+    width: 16px;
+    height: 16px
+}
+
+.ivu-radio-large .ivu-radio-inner:after {
+    width: 10px;
+    height: 10px
+}
+
+.ivu-radio-large .ivu-radio-wrapper, .ivu-radio-large.ivu-radio-wrapper {
+    font-size: 14px
+}
+
+.ivu-radio-small .ivu-radio-inner {
+    width: 12px;
+    height: 12px
+}
+
+.ivu-radio-small .ivu-radio-inner:after {
+    width: 6px;
+    height: 6px
 }
 
 .ivu-radio-input {
@@ -8971,6 +9019,30 @@ span.ivu-radio + * {
     transition: all .2s ease-in-out
 }
 
+.ivu-checkbox-large .ivu-checkbox-inner {
+    width: 16px;
+    height: 16px
+}
+
+.ivu-checkbox-large .ivu-checkbox-inner:after {
+    width: 5px;
+    height: 9px
+}
+
+.ivu-checkbox-small {
+    font-size: 12px
+}
+
+.ivu-checkbox-small .ivu-checkbox-inner {
+    width: 12px;
+    height: 12px
+}
+
+.ivu-checkbox-small .ivu-checkbox-inner:after {
+    top: 0;
+    left: 3px
+}
+
 .ivu-checkbox-input {
     width: 100%;
     height: 100%;
@@ -9011,6 +9083,16 @@ span.ivu-radio + * {
     -ms-transform: rotate(45deg) scale(1);
     transform: rotate(45deg) scale(1);
     transition: all .2s ease-in-out
+}
+
+.ivu-checkbox-large .ivu-checkbox-checked .ivu-checkbox-inner:after {
+    width: 5px;
+    height: 9px
+}
+
+.ivu-checkbox-small .ivu-checkbox-checked .ivu-checkbox-inner:after {
+    top: 0;
+    left: 3px
 }
 
 .ivu-checkbox-disabled.ivu-checkbox-checked:hover .ivu-checkbox-inner {
@@ -9070,6 +9152,25 @@ span.ivu-radio + * {
     border-color: #2d8cf0
 }
 
+.ivu-checkbox-indeterminate.ivu-checkbox-disabled .ivu-checkbox-inner {
+    background-color: #f3f3f3;
+    border-color: #dddee1
+}
+
+.ivu-checkbox-indeterminate.ivu-checkbox-disabled .ivu-checkbox-inner:after {
+    border-color: #bbbec4
+}
+
+.ivu-checkbox-large .ivu-checkbox-indeterminate .ivu-checkbox-inner:after {
+    width: 10px;
+    top: 6px
+}
+
+.ivu-checkbox-small .ivu-checkbox-indeterminate .ivu-checkbox-inner:after {
+    width: 6px;
+    top: 4px
+}
+
 .ivu-checkbox-wrapper {
     cursor: pointer;
     font-size: 12px;
@@ -9079,6 +9180,10 @@ span.ivu-radio + * {
 
 .ivu-checkbox-wrapper-disabled {
     cursor: not-allowed
+}
+
+.ivu-checkbox-wrapper.ivu-checkbox-large {
+    font-size: 14px
 }
 
 .ivu-checkbox + span, .ivu-checkbox-wrapper + span {
@@ -9509,6 +9614,67 @@ textarea.ivu-input-number {
     box-shadow: 0 0 0 2px rgba(237, 63, 20, .2)
 }
 
+.ivu-scroll-wrapper {
+    width: auto;
+    margin: 0 auto;
+    position: relative;
+    outline: 0
+}
+
+.ivu-scroll-container {
+    overflow-y: scroll
+}
+
+.ivu-scroll-content {
+    opacity: 1;
+    transition: opacity .5s
+}
+
+.ivu-scroll-content-loading {
+    opacity: .5
+}
+
+.ivu-scroll-loader {
+    text-align: center;
+    padding: 0;
+    transition: padding .5s
+}
+
+.ivu-scroll-loader-wrapper {
+    padding: 5px 0;
+    height: 0;
+    background-color: inherit;
+    -ms-transform: scale(0);
+    transform: scale(0);
+    transition: opacity .3s, transform .5s, height .5s
+}
+
+.ivu-scroll-loader-wrapper-active {
+    height: 40px;
+    -ms-transform: scale(1);
+    transform: scale(1)
+}
+
+@keyframes ani-demo-spin {
+    from {
+        transform: rotate(0)
+    }
+    50% {
+        transform: rotate(180deg)
+    }
+    to {
+        transform: rotate(360deg)
+    }
+}
+
+.ivu-scroll-loader-wrapper .ivu-scroll-spinner {
+    position: relative
+}
+
+.ivu-scroll-loader-wrapper .ivu-scroll-spinner-icon {
+    animation: ani-demo-spin 1s linear infinite
+}
+
 .ivu-tag {
     display: inline-block;
     height: 22px;
@@ -9523,6 +9689,16 @@ textarea.ivu-input-number {
     opacity: 1;
     overflow: hidden;
     cursor: pointer
+}
+
+.ivu-tag:not(.ivu-tag-border):not(.ivu-tag-dot):not(.ivu-tag-checked) {
+    background: 0 0;
+    border: 0;
+    color: #495060
+}
+
+.ivu-tag:not(.ivu-tag-border):not(.ivu-tag-dot):not(.ivu-tag-checked) .ivu-icon-ios-close-empty {
+    color: #495060 !important
 }
 
 .ivu-tag-dot {
@@ -10960,7 +11136,8 @@ textarea.ivu-page-options-elevator input {
 }
 
 .ivu-select-small .ivu-select-input {
-    height: 24px
+    height: 22px;
+    line-height: 22px
 }
 
 .ivu-select-multiple .ivu-select-input {
@@ -11130,6 +11307,10 @@ textarea.ivu-page-options-elevator input {
 
 .ivu-select-dropdown-transfer {
     z-index: 1060
+}
+
+.ivu-select-dropdown.ivu-transfer-no-max-height {
+    max-height: none
 }
 
 .ivu-modal .ivu-select-dropdown {
@@ -11863,6 +12044,10 @@ textarea.ivu-form-item-error .ivu-transfer .ivu-input {
     padding-right: 32px
 }
 
+.ivu-form-item .ivu-input-wrapper-small .ivu-input-icon {
+    line-height: 32px
+}
+
 .ivu-slider {
     line-height: normal
 }
@@ -12275,6 +12460,16 @@ textarea.ivu-form-item-error .ivu-transfer .ivu-input {
     color: #ed3f14
 }
 
+.ivu-cascader-transfer .ivu-cascader-menu-item {
+    padding-right: 24px;
+    transition: all .2s ease-in-out
+}
+
+.ivu-cascader-transfer .ivu-cascader-menu-item-active {
+    background-color: #f3f3f3;
+    color: #2d8cf0
+}
+
 .ivu-form-item-error .ivu-cascader-arrow {
     color: #ed3f14
 }
@@ -12659,6 +12854,10 @@ td.ivu-table-expanded-cell {
     background-color: #f8f8f9
 }
 
+.ivu-table-stripe .ivu-table-body tr.ivu-table-row-hover td, .ivu-table-stripe .ivu-table-fixed-body tr.ivu-table-row-hover td {
+    background-color: #ebf7ff
+}
+
 tr.ivu-table-row-hover td {
     background-color: #ebf7ff
 }
@@ -12957,6 +13156,10 @@ tr.ivu-table-row-hover td {
     min-width: 100px
 }
 
+.ivu-dropdown-transfer {
+    width: auto
+}
+
 .ivu-dropdown-item {
     margin: 0;
     line-height: normal;
@@ -13105,7 +13308,30 @@ tr.ivu-table-row-hover td {
 }
 
 .ivu-tabs-nav-right {
-    float: right
+    float: right;
+    margin-left: 5px
+}
+
+.ivu-tabs-nav-prev {
+    position: absolute;
+    line-height: 32px;
+    cursor: pointer;
+    left: 0
+}
+
+.ivu-tabs-nav-next {
+    position: absolute;
+    line-height: 32px;
+    cursor: pointer;
+    right: 0
+}
+
+.ivu-tabs-nav-scrollable {
+    padding: 0 12px
+}
+
+.ivu-tabs-nav-scroll-disabled {
+    display: none
 }
 
 .ivu-tabs-nav {
@@ -13270,7 +13496,8 @@ tr.ivu-table-row-hover td {
     list-style: none;
     color: #495060;
     font-size: 14px;
-    position: relative
+    position: relative;
+    z-index: 900
 }
 
 .ivu-menu-horizontal {
@@ -13762,7 +13989,8 @@ span.ivu-date-picker-cells-cell-disabled.ivu-date-picker-cells-cell-selected em 
 
 .ivu-date-picker-transfer {
     z-index: 1060;
-    max-height: none
+    max-height: none;
+    width: auto
 }
 
 .ivu-picker-panel-icon-btn {
@@ -14039,9 +14267,7 @@ span.ivu-date-picker-cells-cell-disabled.ivu-date-picker-cells-cell-selected em 
 }
 
 .ivu-form-item {
-    margin-top: 10px;
-    margin-bottom: 15px;
-    margin-right: 10px;
+    margin-bottom: 24px;
     vertical-align: top;
     zoom: 1
 }
@@ -14123,6 +14349,10 @@ span.ivu-date-picker-cells-cell-disabled.ivu-date-picker-cells-cell-selected em 
     display: block;
     overflow: hidden;
     z-index: 1
+}
+
+.ivu-carousel-track.higher {
+    z-index: 2
 }
 
 .ivu-carousel-item {
@@ -14232,6 +14462,12 @@ span.ivu-date-picker-cells-cell-disabled.ivu-date-picker-cells-cell-selected em 
     transition: all .5s
 }
 
+.ivu-carousel-dots li button.radius {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%
+}
+
 .ivu-carousel-dots li:hover > button {
     opacity: .7
 }
@@ -14239,6 +14475,10 @@ span.ivu-date-picker-cells-cell-disabled.ivu-date-picker-cells-cell-selected em 
 .ivu-carousel-dots li.ivu-carousel-active > button {
     opacity: 1;
     width: 24px
+}
+
+.ivu-carousel-dots li.ivu-carousel-active > button.radius {
+    width: 6px
 }
 
 .ivu-rate {
@@ -14434,7 +14674,10 @@ span.ivu-date-picker-cells-cell-disabled.ivu-date-picker-cells-cell-selected em 
 }
 
 .ivu-tree-arrow {
-    cursor: pointer
+    cursor: pointer;
+    width: 12px;
+    text-align: center;
+    display: inline-block
 }
 
 .ivu-tree-arrow i {
@@ -14446,14 +14689,319 @@ span.ivu-date-picker-cells-cell-disabled.ivu-date-picker-cells-cell-selected em 
     transform: rotate(90deg)
 }
 
-.ivu-tree-arrow-hidden {
-    cursor: auto
+.ivu-tree-arrow-disabled {
+    cursor: not-allowed
 }
 
-.ivu-tree-arrow-hidden i {
+.ivu-avatar {
+    display: inline-block;
+    text-align: center;
+    background: #ccc;
+    color: #fff;
+    white-space: nowrap;
+    position: relative;
+    overflow: hidden;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    border-radius: 16px
+}
+
+.ivu-avatar > * {
+    line-height: 32px
+}
+
+.ivu-avatar.ivu-avatar-icon {
+    font-size: 18px
+}
+
+.ivu-avatar-large {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 20px
+}
+
+.ivu-avatar-large > * {
+    line-height: 40px
+}
+
+.ivu-avatar-large.ivu-avatar-icon {
+    font-size: 24px
+}
+
+.ivu-avatar-small {
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    border-radius: 12px
+}
+
+.ivu-avatar-small > * {
+    line-height: 24px
+}
+
+.ivu-avatar-small.ivu-avatar-icon {
+    font-size: 14px
+}
+
+.ivu-avatar-square {
+    border-radius: 4px
+}
+
+.ivu-avatar > img {
+    width: 100%;
+    height: 100%
+}
+
+.ivu-color-picker {
+    display: inline-block
+}
+
+.ivu-color-picker .ivu-select-dropdown {
+    padding: 0
+}
+
+.ivu-color-picker-rel {
+    line-height: 0
+}
+
+.ivu-color-picker-color {
+    width: 18px;
+    height: 18px;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAAGUlEQVQYV2M4gwH+YwCGIasIUwhT25BVBADtzYNYrHvv4gAAAABJRU5ErkJggg==);
+    border-radius: 2px;
+    position: relative;
+    top: 2px
+}
+
+.ivu-color-picker-color div {
+    width: 100%;
+    height: 100%;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .15);
+    border-radius: 2px
+}
+
+.ivu-color-picker-color-empty {
+    background: #fff;
+    overflow: hidden;
+    text-align: center
+}
+
+.ivu-color-picker-color-empty i {
+    font-size: 20px
+}
+
+.ivu-color-picker-large .ivu-color-picker-color {
+    width: 20px;
+    height: 20px;
+    top: 1px
+}
+
+.ivu-color-picker-small .ivu-color-picker-color {
+    width: 14px;
+    height: 14px;
+    top: 3px
+}
+
+.ivu-color-picker-picker-wrapper {
+    padding: 8px 8px 0
+}
+
+.ivu-color-picker-picker-panel {
+    width: 240px;
+    margin: 0 auto;
+    box-sizing: initial;
+    position: relative
+}
+
+.ivu-color-picker-picker-alpha-slider, .ivu-color-picker-picker-hue-slider {
+    height: 10px;
+    margin-top: 8px;
+    position: relative
+}
+
+.ivu-color-picker-picker-colors {
+    margin-top: 8px;
+    overflow: hidden
+}
+
+.ivu-color-picker-picker-colors span {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    float: left
+}
+
+.ivu-color-picker-picker-colors span em {
+    display: block;
+    width: 16px;
+    height: 16px;
+    margin: 2px;
+    cursor: pointer;
+    border-radius: 2px;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .15)
+}
+
+.ivu-color-picker-picker .ivu-picker-confirm {
+    margin-top: 8px
+}
+
+.ivu-color-picker-saturation-wrapper {
+    width: 100%;
+    padding-bottom: 75%;
+    position: relative;
+    overflow: hidden
+}
+
+.ivu-color-picker-saturation, .ivu-color-picker-saturation--black, .ivu-color-picker-saturation--white {
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0
+}
+
+.ivu-color-picker-saturation--white {
+    background: linear-gradient(to right, #fff, rgba(255, 255, 255, 0))
+}
+
+.ivu-color-picker-saturation--black {
+    background: linear-gradient(to top, #000, rgba(0, 0, 0, 0))
+}
+
+.ivu-color-picker-saturation-pointer {
+    cursor: pointer;
+    position: absolute
+}
+
+.ivu-color-picker-saturation-circle {
+    width: 4px;
+    height: 4px;
+    box-shadow: 0 0 0 1.5px #fff, inset 0 0 1px 1px rgba(0, 0, 0, .3), 0 0 1px 2px rgba(0, 0, 0, .4);
+    border-radius: 50%;
+    -ms-transform: translate(-2px, -2px);
+    transform: translate(-2px, -2px)
+}
+
+.ivu-color-picker-hue {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: 2px;
+    background: linear-gradient(to right, red 0, #ff0 17%, #0f0 33%, #0ff 50%, #00f 67%, #f0f 83%, red 100%)
+}
+
+.ivu-color-picker-hue-container {
+    cursor: pointer;
+    margin: 0 2px;
+    position: relative;
+    height: 100%
+}
+
+.ivu-color-picker-hue-pointer {
+    z-index: 2;
+    position: absolute
+}
+
+.ivu-color-picker-hue-picker {
+    cursor: pointer;
+    margin-top: 1px;
+    width: 4px;
+    border-radius: 1px;
+    height: 8px;
+    box-shadow: 0 0 2px rgba(0, 0, 0, .6);
+    background: #fff;
+    -ms-transform: translateX(-2px);
+    transform: translateX(-2px)
+}
+
+.ivu-color-picker-alpha {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0
+}
+
+.ivu-color-picker-alpha-checkboard-wrap {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    border-radius: 2px
+}
+
+.ivu-color-picker-alpha-checkerboard {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAAGUlEQVQYV2M4gwH+YwCGIasIUwhT25BVBADtzYNYrHvv4gAAAABJRU5ErkJggg==)
+}
+
+.ivu-color-picker-alpha-gradient {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: 2px
+}
+
+.ivu-color-picker-alpha-container {
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    margin: 0 3px
+}
+
+.ivu-color-picker-alpha-pointer {
+    z-index: 2;
+    position: absolute
+}
+
+.ivu-color-picker-alpha-picker {
+    cursor: pointer;
+    width: 4px;
+    border-radius: 1px;
+    height: 8px;
+    box-shadow: 0 0 2px rgba(0, 0, 0, .6);
+    background: #fff;
+    margin-top: 1px;
+    -ms-transform: translateX(-2px);
+    transform: translateX(-2px)
+}
+
+.ivu-color-picker-confirm {
+    position: relative
+}
+
+.ivu-color-picker-confirm-color {
+    position: absolute;
+    top: 11px;
+    left: 8px
+}
+
+.ivu-auto-complete .ivu-select-not-found {
     display: none
 }
 
-.ivu-tree-arrow-disabled {
-    cursor: not-allowed
+.ivu-auto-complete .ivu-icon-ios-close {
+    display: none
+}
+
+.ivu-auto-complete:hover .ivu-icon-ios-close {
+    display: inline-block
+}
+
+.ivu-auto-complete.ivu-select-dropdown {
+    max-height: none
 }

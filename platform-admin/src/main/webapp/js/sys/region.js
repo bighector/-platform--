@@ -1,28 +1,29 @@
 $(function () {
-    let userId = getQueryString("userId");
-    let url = '../cart/list';
-    if (userId) {
-        url += '?userId=' + userId;
-    }
     $("#jqGrid").jqGrid({
-        url: url,
+        url: '../sys/region/list',
         datatype: "json",
         colModel: [
             {label: 'id', name: 'id', index: 'id', key: true, hidden: true},
-            {label: '会员', name: 'userName', index: 'user_name', width: 20},
-            // {label: 'sessionId', name: 'sessionId', index: 'session_id', width: 80 },
-            {label: '商品', name: 'goodsName', index: 'goods_name', width: 100},
-            {label: '商品序列号', name: 'goodsSn', index: 'goods_sn', width: 30},
-            // {label: '产品Id', name: 'productId', index: 'product_id', width: 80 },
-            {label: '产品名称', name: 'goodsName', index: 'goods_name', width: 80},
-            {label: '市场价', name: 'marketPrice', index: 'market_price', width: 20},
-            {label: '零售价格', name: 'retailPrice', index: 'retail_price', width: 30},
-            {label: '数量', name: 'number', index: 'number', width: 20},
-            {label: '规格属性', name: 'goodsSpecifitionNameValue', index: 'goods_specifition_name_value', width: 100}
-            // {label: 'product表对应的goods_specifition_ids', name: 'goodsSpecifitionIds', index: 'goods_specifition_ids', width: 80 },
-            // {label: '', name: 'checked', index: 'checked', width: 80 },
-            // {label: '商品图片', name: 'listPicUrl', index: 'list_pic_url', width: 80 }
-        ],
+            {label: '上级区域', name: 'parentName', index: 'parent_id', width: 80},
+            {label: '区域', name: 'name', index: 'name', width: 80},
+            {
+                label: '类型', name: 'type', index: 'type', width: 80, formatter: function (value) {
+                if (value === '0' || value === 0) {
+                    return '国家';
+                }
+                if (value == '1') {
+                    return '省份';
+                }
+                if (value == '2') {
+                    return '地市';
+                }
+                if (value == '3') {
+                    return '区县';
+                }
+            }
+            }
+            // {label: '区域代理Id', name: 'agencyId', index: 'agency_id', width: 80}
+            ],
         viewrecords: true,
         height: 385,
         rowNum: 10,
@@ -54,10 +55,18 @@ var vm = new Vue({
     data: {
         showList: true,
         title: null,
-        cart: {},
+        region: {type: '1'},
+        ruleValidate: {
+            name: [
+                {required: true, message: '区域名称不能为空', trigger: 'blur'}
+            ]
+        },
         q: {
-            name: ''
-        }
+            parentName: '',
+            name: '',
+            type: ''
+        },
+        regionList: []
     },
     methods: {
         query: function () {
@@ -66,7 +75,8 @@ var vm = new Vue({
         add: function () {
             vm.showList = false;
             vm.title = "新增";
-            vm.cart = {};
+            vm.region = {type: '1'};
+            vm.changeType(1);
         },
         update: function (event) {
             var id = getSelectedRow();
@@ -79,12 +89,12 @@ var vm = new Vue({
             vm.getInfo(id)
         },
         saveOrUpdate: function (event) {
-            var url = vm.cart.id == null ? "../cart/save" : "../cart/update";
+            var url = vm.region.id == null ? "../sys/region/save" : "../sys/region/update";
             $.ajax({
                 type: "POST",
                 url: url,
                 contentType: "application/json",
-                data: JSON.stringify(vm.cart),
+                data: JSON.stringify(vm.region),
                 success: function (r) {
                     if (r.code === 0) {
                         alert('操作成功', function (index) {
@@ -105,7 +115,7 @@ var vm = new Vue({
             confirm('确定要删除选中的记录？', function () {
                 $.ajax({
                     type: "POST",
-                    url: "../cart/delete",
+                    url: "../sys/region/delete",
                     contentType: "application/json",
                     data: JSON.stringify(ids),
                     success: function (r) {
@@ -121,17 +131,36 @@ var vm = new Vue({
             });
         },
         getInfo: function (id) {
-            $.get("../cart/info/" + id, function (r) {
-                vm.cart = r.cart;
+            $.get("../sys/region/info/" + id, function (r) {
+                vm.region = r.region;
+                vm.changeType(vm.region.type);
+            });
+        },
+        changeType: function (type) {
+            $.get("../sys/region/getAreaByType?type=" + type, function (r) {
+                vm.regionList = r.list;
             });
         },
         reload: function (event) {
             vm.showList = true;
             var page = $("#jqGrid").jqGrid('getGridParam', 'page');
             $("#jqGrid").jqGrid('setGridParam', {
-                postData: {'name': vm.q.name},
+                postData: {
+                    'name': vm.q.name,
+                    'parentName': vm.q.parentName,
+                    'type': vm.q.type
+                },
                 page: page
             }).trigger("reloadGrid");
+            vm.handleReset('formValidate');
+        },
+        handleSubmit: function (name) {
+            handleSubmitValidate(this, name, function () {
+                vm.saveOrUpdate()
+            });
+        },
+        handleReset: function (name) {
+            handleResetForm(this, name);
         }
     }
 });

@@ -66,7 +66,7 @@ TreeGrid.initColumn = function () {
             }
         },
         {title: '排序', field: 'orderNum', align: 'center', valign: 'middle', width: '50px'},
-        {title: '菜单URL', field: 'url', align: 'center', valign: 'middle', width: '150px'},
+        {title: '菜单URL', field: 'url', align: 'center', valign: 'middle', width: '200px'},
         {title: '授权标识', field: 'perms', align: 'center', valign: 'middle'},
         {
             title: '状态', field: 'status', align: 'center', valign: 'middle', width: '80px',
@@ -125,14 +125,9 @@ var vm = new Vue({
     },
     methods: {
         selectIcon: function () {
-            layer.open({
+            openWindow({
                 type: 2,
                 title: '选取图标',
-                closeBtn: 1,
-                anim: -1,
-                isOutAnim: false,
-                shadeClose: false,
-                shade: 0.3,
                 area: ['1030px', '500px'],
                 content: ['icon.html'],
                 btn: false
@@ -226,10 +221,7 @@ var vm = new Vue({
             });
         },
         menuTree: function () {
-            layer.open({
-                type: 1,
-                offset: '50px',
-                skin: 'layui-layer-molv',
+            openWindow({
                 title: "选择菜单",
                 area: ['300px', '450px'],
                 content: jQuery("#menuLayer"),

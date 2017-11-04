@@ -23,6 +23,7 @@ $(function () {
                 } else if (value == 7) {
                     return '包邮优惠';
                 }
+                return '-';
             }
             },
             {label: '最小金额', name: 'minAmount', index: 'min_amount', width: 80},
@@ -205,13 +206,17 @@ var vm = new Vue({
         },
         publish: function (id, sendType) {
             vm.showGoods = true;
-            vm.showList = false;
             vm.goods = [];
             vm.user = [];
             vm.getGoodss();
             vm.getUsers();
             vm.selectData = {id: id, sendType: sendType};
             vm.sendSms = false;
+            openWindow({
+                title: "发放",
+                area: ['600px', '350px'],
+                content: jQuery("#sendDiv")
+            })
         },
         getUsers: function () {
             $.get("../user/queryAll", function (r) {

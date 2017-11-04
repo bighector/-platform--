@@ -34,9 +34,9 @@
 
     <Card v-show="!showList">
         <p slot="title">{{title}}</p>
-        <i-form ref="formValidate" :model="goodsGroup" :rules="ruleValidate" :label-width="80">
-            <Form-item label="标题" prop="title">
-                <i-input v-model="goodsGroup.title" placeholder="标题"/>
+        <i-form ref="formValidate" :model="goodsGroup" :rules="ruleValidate" :label-width="100">
+            <Form-item label="团购主题" prop="title">
+                <i-input v-model="goodsGroup.title" placeholder="团购主题"/>
             </Form-item>
             <Form-item label="子标题" prop="subtitle">
                 <i-input v-model="goodsGroup.subtitle" placeholder="子标题"/>
@@ -64,13 +64,34 @@
                     </Form-item>
                 </i-col>
             </Row>
+            <Form-item label="开团次数" prop="launchNum">
+                <Input-number :min="0" v-model="goodsGroup.launchNum" placeholder="开团次数" style="width: 188px;"/>
+            </Form-item>
             <Form-item label="商品" prop="goodsId">
                 <i-select v-model="goodsGroup.goodsId" filterable style="width: 188px;">
                     <i-option v-for="goods in goodss" :value="goods.id" :key="goods.id">{{goods.name}}</i-option>
                 </i-select>
             </Form-item>
-            <Form-item label="浏览数" prop="readCount">
-                <Input-number :min="0" v-model="goodsGroup.readCount" placeholder="浏览数" style="width: 188px;"/>
+            <Form-item label="最低开团人数" prop="minOpenGroup">
+                <Input-number :min="0" :step="1" v-model="goodsGroup.minOpenGroup" placeholder="最低开团人数"
+                              style="width: 188px;"/>
+            </Form-item>
+            <Form-item label="团购价格" prop="retailMinPrice">
+                <i-input v-model="goodsGroup.retailMinPrice" placeholder="团购价格"/>
+            </Form-item>
+            <Form-item label="开团时间" prop="openTime">
+                <Date-picker v-model="goodsGroup.openTime" placeholder="开团时间"/>
+            </Form-item>
+            <Form-item label="结束时间" prop="endTime">
+                <Date-picker v-model="goodsGroup.endTime" placeholder="结束时间"/>
+            </Form-item>
+            <Form-item label="状态" prop="openStatus">
+                <i-select v-model="goodsGroup.openStatus" style="width: 188px;">
+                    <i-option v-for="status in selStatus" :value="status.id" :key="status.id">{{status.name}}</i-option>
+                </i-select>
+            </Form-item>
+            <Form-item label="开团有效期" prop="validDays">
+                <i-input v-model="goodsGroup.validDays" placeholder="开团有效期"/>
             </Form-item>
             <Form-item label="排序" prop="sortOrder">
                 <Input-number :min="0" v-model="goodsGroup.sortOrder" placeholder="排序" style="width: 188px;"/>

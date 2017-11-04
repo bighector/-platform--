@@ -63,7 +63,7 @@ var vm = new Vue({
         },
         showError: function (logId) {
             $.get("../sys/scheduleLog/info/" + logId, function (r) {
-                parent.layer.open({
+                openWindow({
                     title: '失败信息',
                     closeBtn: 0,
                     content: r.log.error

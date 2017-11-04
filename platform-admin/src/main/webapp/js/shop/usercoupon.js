@@ -1,12 +1,17 @@
 $(function () {
+    let userId = getQueryString("userId");
+    let url = '../usercoupon/list';
+    if (userId) {
+        url += '?userId=' + userId;
+    }
     $("#jqGrid").jqGrid({
-        url: '../usercoupon/list',
+        url: url,
         datatype: "json",
         colModel: [
             {label: 'id', name: 'id', index: 'id', key: true, hidden: true},
             {label: '会员', name: 'userName', index: 'user_id', width: 80},
             {label: '优惠券', name: 'couponName', index: 'coupon_id', width: 80},
-            {label: '优惠券数量', name: 'couponNumber', index: 'coupon_number', width: 80},
+            {label: '优惠券序号', name: 'couponNumber', index: 'coupon_number', width: 80},
             {
                 label: '下发时间', name: 'addTime', index: 'add_time', width: 80, formatter: function (value) {
                 return transDate(value);
