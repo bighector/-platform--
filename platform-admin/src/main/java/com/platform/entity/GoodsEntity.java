@@ -93,6 +93,8 @@ public class GoodsEntity implements Serializable {
     private Long updateUserId;
 
     List<GoodsAttributeEntity> attributeEntityList = new ArrayList<>();
+
+    List<GoodsGalleryEntity> goodsImgList = new ArrayList<>();
     /**
      * 翻译用字段
      */
@@ -102,6 +104,22 @@ public class GoodsEntity implements Serializable {
     private String attributeCategoryName;
     //品牌
     private String brandName;
+
+    public Long getCreateUserDeptId() {
+        return createUserDeptId;
+    }
+
+    public void setCreateUserDeptId(Long createUserDeptId) {
+        this.createUserDeptId = createUserDeptId;
+    }
+
+    public List<GoodsGalleryEntity> getGoodsImgList() {
+        return goodsImgList;
+    }
+
+    public void setGoodsImgList(List<GoodsGalleryEntity> goodsImgList) {
+        this.goodsImgList = goodsImgList;
+    }
 
     public String getBrandName() {
         return brandName;
@@ -577,14 +595,6 @@ public class GoodsEntity implements Serializable {
 
     public void setUpdateUserId(Long updateUserId) {
         this.updateUserId = updateUserId;
-    }
-
-    public Long getCreateUserDeptId() {
-        return createUserDeptId;
-    }
-
-    public void setCreateUserDeptId(Long createUserDeptId) {
-        this.createUserDeptId = createUserDeptId;
     }
 
     public Date getUpdateTime() {

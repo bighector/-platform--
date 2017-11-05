@@ -3,7 +3,9 @@ package com.platform.service.impl;
 import com.platform.annotation.DataFilter;
 import com.platform.dao.GoodsAttributeDao;
 import com.platform.dao.GoodsDao;
+import com.platform.dao.GoodsGalleryDao;
 import com.platform.dao.ProductDao;
+import com.platform.entity.GoodsGalleryEntity;
 import com.platform.entity.GoodsAttributeEntity;
 import com.platform.entity.GoodsEntity;
 import com.platform.entity.ProductEntity;
@@ -35,6 +37,8 @@ public class GoodsServiceImpl implements GoodsService {
     private GoodsAttributeDao goodsAttributeDao;
     @Autowired
     private ProductDao productDao;
+    @Autowired
+    private GoodsGalleryDao goodsGalleryDao;
 
     @Override
     public GoodsEntity queryObject(Integer id) {
@@ -86,6 +90,15 @@ public class GoodsServiceImpl implements GoodsService {
             }
         }
 
+        //商品轮播图
+        List<GoodsGalleryEntity> galleryEntityList = goods.getGoodsImgList();
+        if (null != galleryEntityList && galleryEntityList.size() > 0) {
+            for (GoodsGalleryEntity galleryEntity : galleryEntityList) {
+                galleryEntity.setGoodsId(id);
+                goodsGalleryDao.save(galleryEntity);
+            }
+        }
+
         goods.setCreateUserId(user.getUserId());
         goods.setUpdateUserId(user.getUserId());
         goods.setUpdateTime(new Date());
@@ -107,6 +120,19 @@ public class GoodsServiceImpl implements GoodsService {
         }
         goods.setUpdateUserId(user.getUserId());
         goods.setUpdateTime(new Date());
+        //商品轮播图
+        //修改时全删全插
+        List<GoodsGalleryEntity> galleryEntityList = goods.getGoodsImgList();
+        Map<String, Integer> map = new HashMap<String, Integer>();
+        map.put("goodsId", goods.getId());
+        goodsGalleryDao.deleteByGoodsId(map);
+
+        if (null != galleryEntityList && galleryEntityList.size() > 0) {
+            for (GoodsGalleryEntity galleryEntity : galleryEntityList) {
+                galleryEntity.setGoodsId(goods.getId());
+                goodsGalleryDao.save(galleryEntity);
+            }
+        }
         return goodsDao.update(goods);
     }
 

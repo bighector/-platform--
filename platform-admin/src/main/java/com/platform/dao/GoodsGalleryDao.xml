@@ -89,6 +89,10 @@
         delete from nideshop_goods_gallery where id = #{value}
     </delete>
 
+    <delete id="deleteByGoodsId">
+        delete from nideshop_goods_gallery where goods_id = #{goodsId}
+    </delete>
+
     <delete id="deleteBatch">
         delete from nideshop_goods_gallery where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
