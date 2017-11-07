@@ -14,6 +14,7 @@
         <module>platform-api</module> <!-- API模块 -->
         <module>platform-admin</module>
         <module>platform-shop</module>
+        <module>platform-framework</module>
     </modules>
 
     <properties>
@@ -271,44 +272,20 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
                 <configuration>
-                    <source>${java-version}</source>
-                    <target>${java-version}</target>
-                    <!-- true:跳过测试 -->
-                    <skip>true</skip>
-                    <encoding>UTF-8</encoding>
+                    <source>1.7</source>
+                    <target>1.7</target>
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.6</version>
                 <configuration>
-                    <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.tomcat.maven</groupId>
-                <artifactId>tomcat7-maven-plugin</artifactId>
-                <version>2.2</version>
-                <configuration>
-                    <path>/</path>
-                    <charset>UTF-8</charset>
-                    <port>80</port>
-                    <uriEncoding>UTF-8</uriEncoding>
+                    <warSourceDirectory>src/main/webapp</warSourceDirectory>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
         </plugins>
-        <resources>
-            <resource>
-                <directory>src/main/java</directory>
-                <includes>
-                    <include>**/*.xml</include>
-                    <include>**/*.js</include>
-                </includes>
-            </resource>
-            <resource>
-                <directory>src/main/resources</directory>
-            </resource>
-        </resources>
     </build>
 </project>

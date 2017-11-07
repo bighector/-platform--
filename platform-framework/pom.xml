@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>platform</artifactId>
+        <groupId>com.platform</groupId>
+        <version>2.1.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <description>
+        此项目为系统WEB合并，
+        合并项目可以根据需要自己配置。
+        最终打包的项目也根据此配置进行打包。
+    </description>
+
+    <artifactId>platform-framework</artifactId>
+    <version>2.1.0</version>
+    <dependencies>
+        <dependency>
+            <groupId>com.platform</groupId>
+            <artifactId>platform-common</artifactId>
+            <version>${platform-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.platform</groupId>
+            <artifactId>platform-shiro</artifactId>
+            <version>${platform-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.platform</groupId>
+            <artifactId>platform-gen</artifactId>
+            <version>${platform-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.platform</groupId>
+            <artifactId>platform-schedule</artifactId>
+            <version>${platform-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.platform</groupId>
+            <artifactId>platform-api</artifactId>
+            <version>${platform-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.platform</groupId>
+            <artifactId>platform-shop</artifactId>
+            <version>${platform-version}</version>
+            <type>war</type>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <sourceDirectory>src/main/java</sourceDirectory>
+        <finalName>platform</finalName>
+        <plugins>
+            <!-- 合并多个war -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <packagingExcludes>WEB-INF/web.xml</packagingExcludes>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <overlays>
+                        <overlay>
+                            <groupId>com.platform</groupId>
+                            <artifactId>platform-shop</artifactId>
+                        </overlay>
+
+                        <!-- 待添加其他要合并的 web 模块 -->
+                    </overlays>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
