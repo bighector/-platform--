@@ -3,7 +3,6 @@ package com.platform.entity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-
 /**
  * 实体
  * 表名 nideshop_topic

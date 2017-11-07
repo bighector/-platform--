@@ -13,6 +13,7 @@
         <module>platform-gen</module> <!-- 代码生成器模块 -->
         <module>platform-api</module> <!-- API模块 -->
         <module>platform-admin</module>
+        <module>platform-shop</module>
     </modules>
 
     <properties>
@@ -226,10 +227,6 @@
                 <exclusion>
                     <artifactId>struts-tiles</artifactId>
                     <groupId>org.apache.struts</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>commons-validator</artifactId>
-                    <groupId>commons-validator</groupId>
                 </exclusion>
                 <exclusion>
                     <artifactId>commons-beanutils</artifactId>

@@ -4,7 +4,7 @@ import com.platform.dao.CommentDao;
 import com.platform.dao.CommentPictureDao;
 import com.platform.entity.CommentEntity;
 import com.platform.service.CommentService;
-import com.platform.util.Base64;
+import com.platform.utils.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

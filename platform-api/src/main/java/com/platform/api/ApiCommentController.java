@@ -9,7 +9,7 @@ import com.platform.entity.*;
 import com.platform.service.*;
 import com.platform.util.ApiBaseAction;
 import com.platform.util.ApiPageUtils;
-import com.platform.util.Base64;
+import com.platform.utils.Base64;
 import com.platform.utils.CharUtil;
 import com.platform.utils.Query;
 import org.springframework.beans.factory.annotation.Autowired;

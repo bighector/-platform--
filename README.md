@@ -1,7 +1,30 @@
-    自己客户的资料放在自己的服务器才放心，各位老铁说对吧。
+    致力打造通用综合管理平台
 
-    初始化sql在群文件
-
+    技术选型
+    1、后端使用技术
+        springframework4.3.7.RELEASE
+        mybatis3.4.1
+        shiro1.3.2
+        servlet3.1.0
+        druid1.0.28
+        slf4j1.7.19
+        fastjson1.2.30
+        poi3.15
+        velocity1.7
+        alisms1.0
+        quartz2.2.3
+        mysql5.1.39
+        
+    前端使用技术
+        Vue2.5.1
+        iview
+        layer3.0.3
+        jquery2.2.4
+        bootstrap3.3.7
+        jqgrid5.1.1
+        ztreev3.5.26
+        froala_editor1.2.2
+        iNotify
 
     platform-admin 
     后台管理
@@ -20,6 +43,9 @@
 
     platform-shiro 
     登陆权限相关
+    
+    platform-shop
+    商城后台管理
 
     wx-mall 
     微信小程序商城
@@ -81,8 +107,7 @@
     一：微信公众号开发
     二：进销存模块开发
     三：CMS模块开发
-    四：统计报表
-    五：接入工作流activiti
+    四：接入工作流activiti
 
     注意
     若使用微信支付，请下载证书放入platform-common/src/main/resources/cert/目录下

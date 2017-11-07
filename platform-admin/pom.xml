@@ -37,8 +37,9 @@
         </dependency>
         <dependency>
             <groupId>com.platform</groupId>
-            <artifactId>platform-common</artifactId>
+            <artifactId>platform-shop</artifactId>
             <version>${platform-version}</version>
+            <type>war</type>
         </dependency>
         <!--验证码生成工具-->
         <dependency>
@@ -47,8 +48,30 @@
             <version>${kaptcha.version}</version>
         </dependency>
     </dependencies>
-    <build>
-        <finalName>platform</finalName>
-    </build>
 
+    <build>
+        <sourceDirectory>src/main/java</sourceDirectory>
+        <finalName>platform</finalName>
+        <plugins>
+            <!-- 合并多个war -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <packagingExcludes>WEB-INF/web.xml</packagingExcludes>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+
+                    <overlays>
+                        <overlay>
+                            <groupId>com.platform</groupId>
+                            <artifactId>platform-shop</artifactId>
+                        </overlay>
+
+                        <!-- 待添加其他要合并的 web 模块 -->
+                    </overlays>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
