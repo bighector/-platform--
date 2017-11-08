@@ -1,44 +1,47 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.platform</groupId>
         <artifactId>platform</artifactId>
-        <version>${platform-version}</version>
+        <version>1.0.0</version>
     </parent>
-    <modelVersion>4.0.0</modelVersion>
+
     <artifactId>platform-admin</artifactId>
     <packaging>war</packaging>
+    <name>platform-admin</name>
     <description>管理后台</description>
 
     <dependencies>
         <dependency>
             <groupId>com.platform</groupId>
             <artifactId>platform-common</artifactId>
-            <version>${platform-version}</version>
+            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>com.platform</groupId>
             <artifactId>platform-shiro</artifactId>
-            <version>${platform-version}</version>
+            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>com.platform</groupId>
             <artifactId>platform-gen</artifactId>
-            <version>${platform-version}</version>
+            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>com.platform</groupId>
             <artifactId>platform-schedule</artifactId>
-            <version>${platform-version}</version>
+            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>com.platform</groupId>
             <artifactId>platform-api</artifactId>
-            <version>${platform-version}</version>
+            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>com.platform</groupId>
             <artifactId>platform-shop</artifactId>
-            <version>${platform-version}</version>
+            <version>1.0.0</version>
             <type>war</type>
         </dependency>
         <!--验证码生成工具-->
@@ -50,6 +53,39 @@
     </dependencies>
 
     <build>
-        <finalName>platform</finalName>
+        <scriptSourceDirectory>src/main/java</scriptSourceDirectory>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/java</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <warSourceDirectory>src/main/webapp</warSourceDirectory>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <webResources>
+                        <resource>
+                            <diretory>resources</diretory>
+                            <targetPath>WEB-INF/classes</targetPath>
+                            <filtering>true</filtering>
+                        </resource>
+                        <resource>
+                            <directory>resources</directory>
+                            <filtering>true</filtering>
+                        </resource>
+                    </webResources>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
 </project>

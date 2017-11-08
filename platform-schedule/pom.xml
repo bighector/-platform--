@@ -2,7 +2,7 @@
     <parent>
         <groupId>com.platform</groupId>
         <artifactId>platform</artifactId>
-        <version>${platform-version}</version>
+        <version>1.0.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>platform-schedule</artifactId>
@@ -17,7 +17,7 @@
         <dependency>
             <groupId>com.platform</groupId>
             <artifactId>platform-common</artifactId>
-            <version>${platform-version}</version>
+            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>org.quartz-scheduler</groupId>
