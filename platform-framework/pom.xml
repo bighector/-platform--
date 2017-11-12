@@ -8,9 +8,9 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>platform_framework</artifactId>
+    <artifactId>platform-framework</artifactId>
     <packaging>war</packaging>
-    <name>platform_framework</name>
+    <name>platform-framework</name>
     <description>
         此项目为系统WEB合并，
         合并项目可以根据需要自己配置。
