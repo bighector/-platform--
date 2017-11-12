@@ -273,13 +273,13 @@
                 <div class="form-group">
                     <div class="col-sm-2 control-label">原密码</div>
                     <div class="col-sm-10">
-                        <input type="password" class="form-control" v-model="password" placeholder="原密码"/>
+                        <i-input type="password" v-model="password" placeholder="原密码"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-2 control-label">新密码</div>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" v-model="newPassword" placeholder="新密码"/>
+                        <i-input v-model="newPassword" placeholder="新密码"/>
                     </div>
                 </div>
             </div>
@@ -345,7 +345,7 @@
             updatePassword: function () {
                 openWindow({
                     title: "修改密码",
-                    area: ['350px', '300px'],
+                    area: ['350px', '280px'],
                     content: jQuery("#passwordLayer"),
                     btn: ['修改', '取消'],
                     btn1: function (index) {
@@ -408,6 +408,7 @@
             }
         },
         created: function () {
+            this.getUser();
             this.getMenuList();
             this.love();
         },
