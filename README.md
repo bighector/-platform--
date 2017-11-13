@@ -35,6 +35,9 @@
     platform-common 
     公共模块
 
+    platform-framework 
+    系统WEB合并
+    
     platform-gen 
     代码生成
 
@@ -105,12 +108,11 @@
 
     下步计划
     一：微信公众号开发
-    二：进销存模块开发
-    三：CMS模块开发
-    四：接入工作流activiti
+    二：CMS模块开发
+    三：接入工作流activiti
 
     注意
-    若使用微信支付，请下载证书放入platform-common/src/main/resources/cert/目录下
+    若使用微信支付，请下载证书放入platform-shop/src/main/resources/cert/目录下
     apiclient_cert.p12
     apiclient_cert.pem
     apiclient_key.pem
