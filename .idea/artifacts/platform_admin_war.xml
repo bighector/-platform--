@@ -1,7 +1,7 @@
 <component name="ArtifactManager">
   <artifact type="war" name="platform-admin:war">
     <output-path>$PROJECT_DIR$/platform-admin/target</output-path>
-    <root id="archive" name="platform.war">
+    <root id="archive" name="platform-admin-1.0.0.war">
       <element id="artifact" artifact-name="platform-admin:war exploded" />
     </root>
   </artifact>

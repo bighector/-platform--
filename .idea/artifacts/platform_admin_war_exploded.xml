@@ -1,20 +1,20 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="platform-admin:war exploded">
-    <output-path>$PROJECT_DIR$/platform-admin/target/platform</output-path>
+    <output-path>$PROJECT_DIR$/platform-admin/target/platform-admin-1.0.0</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="platform-admin" />
         </element>
         <element id="directory" name="lib">
-          <element id="archive" name="platform-common-2.1.0.jar">
+          <element id="archive" name="platform-common-1.0.0.jar">
             <element id="module-output" name="platform-common" />
           </element>
-          <element id="library" level="project" name="Maven: com.qiniu:qiniu-java-sdk:7.2.7" />
+          <element id="library" level="project" name="Maven: com.qiniu:qiniu-java-sdk:7.2.8" />
           <element id="library" level="project" name="Maven: com.squareup.okhttp3:okhttp:3.3.1" />
           <element id="library" level="project" name="Maven: com.squareup.okio:okio:1.8.0" />
           <element id="library" level="project" name="Maven: com.google.code.gson:gson:2.6.2" />
-          <element id="library" level="project" name="Maven: com.qiniu:happy-dns-java:0.1.4" />
+          <element id="library" level="project" name="Maven: com.qiniu:happy-dns-java:0.1.6" />
           <element id="library" level="project" name="Maven: com.aliyun.oss:aliyun-sdk-oss:2.5.0" />
           <element id="library" level="project" name="Maven: org.apache.httpcomponents:httpclient:4.4.1" />
           <element id="library" level="project" name="Maven: org.jdom:jdom:1.1" />
@@ -28,22 +28,29 @@
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.5.0" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.5.0" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.5.0" />
-          <element id="library" level="project" name="Maven: com.alibaba:alisms:1.0" />
           <element id="library" level="project" name="Maven: dom4j:dom4j:1.6.1" />
           <element id="library" level="project" name="Maven: xml-apis:xml-apis:1.0.b2" />
-          <element id="archive" name="platform-shiro-2.1.0.jar">
+          <element id="library" level="project" name="Maven: org.apache.poi:poi:3.15" />
+          <element id="library" level="project" name="Maven: org.apache.commons:commons-collections4:4.1" />
+          <element id="library" level="project" name="Maven: org.apache.poi:poi-ooxml:3.15" />
+          <element id="library" level="project" name="Maven: com.github.virtuald:curvesapi:1.04" />
+          <element id="library" level="project" name="Maven: org.apache.poi:poi-ooxml-schemas:3.15" />
+          <element id="library" level="project" name="Maven: org.apache.xmlbeans:xmlbeans:2.6.0" />
+          <element id="archive" name="platform-shiro-1.0.0.jar">
             <element id="module-output" name="platform-shiro" />
           </element>
-          <element id="archive" name="platform-gen-2.1.0.jar">
+          <element id="archive" name="platform-gen-1.0.0.jar">
             <element id="module-output" name="platform-gen" />
           </element>
-          <element id="archive" name="platform-schedule-2.1.0.jar">
+          <element id="archive" name="platform-schedule-1.0.0.jar">
             <element id="module-output" name="platform-schedule" />
           </element>
           <element id="library" level="project" name="Maven: org.quartz-scheduler:quartz:2.2.3" />
-          <element id="archive" name="platform-api-2.1.0.jar">
+          <element id="archive" name="platform-api-1.0.0.jar">
             <element id="module-output" name="platform-api" />
           </element>
+          <element id="library" level="project" name="Maven: com.github.axet:kaptcha:0.0.9" />
+          <element id="library" level="project" name="Maven: com.jhlabs:filters:2.0.235" />
           <element id="library" level="project" name="Maven: org.mybatis:mybatis:3.4.1" />
           <element id="library" level="project" name="Maven: org.mybatis:mybatis-spring:1.3.0" />
           <element id="library" level="project" name="Maven: org.hibernate:hibernate-validator:5.4.1.Final" />
@@ -78,21 +85,21 @@
           <element id="library" level="project" name="Maven: commons-beanutils:commons-beanutils:1.8.3" />
           <element id="library" level="project" name="Maven: org.apache.shiro:shiro-spring:1.3.2" />
           <element id="library" level="project" name="Maven: org.apache.shiro:shiro-web:1.3.2" />
-          <element id="library" level="project" name="Maven: com.github.axet:kaptcha:0.0.9" />
-          <element id="library" level="project" name="Maven: com.jhlabs:filters:2.0.235" />
           <element id="library" level="project" name="Maven: org.apache.velocity:velocity:1.7" />
           <element id="library" level="project" name="Maven: commons-collections:commons-collections:3.2.1" />
           <element id="library" level="project" name="Maven: org.apache.velocity:velocity-tools:2.0" />
           <element id="library" level="project" name="Maven: commons-digester:commons-digester:1.8" />
+          <element id="library" level="project" name="Maven: commons-validator:commons-validator:1.3.1" />
           <element id="library" level="project" name="Maven: jstl:jstl:1.2" />
           <element id="library" level="project" name="Maven: taglibs:standard:1.1.2" />
           <element id="library" level="project" name="Maven: org.freemarker:freemarker:2.3.23" />
         </element>
       </element>
       <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/platform-admin/target/platform/META-INF/MANIFEST.MF" />
+        <element id="file-copy" path="$PROJECT_DIR$/platform-admin/target/platform-admin-1.0.0/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="platform-admin/web/Web" />
+      <element id="artifact" artifact-name="platform-shop:war exploded" />
     </root>
   </artifact>
 </component>
