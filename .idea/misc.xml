@@ -2,7 +2,10 @@
 <project version="4">
   <component name="FrameworkDetectionExcludesConfiguration">
     <file url="file://$PROJECT_DIR$/platform-framework/overlays" />
-    <file type="web" url="file://$PROJECT_DIR$" />
+    <file type="web" url="file://$PROJECT_DIR$/platform-activiti" />
+    <file type="web" url="file://$PROJECT_DIR$/platform-admin" />
+    <file type="web" url="file://$PROJECT_DIR$/platform-framework" />
+    <file type="web" url="file://$PROJECT_DIR$/platform-shop" />
   </component>
   <component name="JavaScriptSettings">
     <option name="languageLevel" value="ES6" />
@@ -14,7 +17,5 @@
       </list>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" default="false" project-jdk-name="1.8" project-jdk-type="JavaSDK">
-    <output url="file://$PROJECT_DIR$/platform-admin" />
-  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_9" default="false" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
 </project>

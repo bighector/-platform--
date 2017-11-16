@@ -93,6 +93,23 @@
           <element id="library" level="project" name="Maven: jstl:jstl:1.2" />
           <element id="library" level="project" name="Maven: taglibs:standard:1.1.2" />
           <element id="library" level="project" name="Maven: org.freemarker:freemarker:2.3.23" />
+          <element id="library" level="project" name="Maven: org.activiti:activiti-engine:5.22.0" />
+          <element id="library" level="project" name="Maven: org.activiti:activiti-bpmn-converter:5.22.0" />
+          <element id="library" level="project" name="Maven: org.activiti:activiti-process-validation:5.22.0" />
+          <element id="library" level="project" name="Maven: org.activiti:activiti-image-generator:5.22.0" />
+          <element id="library" level="project" name="Maven: org.apache.commons:commons-email:1.4" />
+          <element id="library" level="project" name="Maven: com.sun.mail:javax.mail:1.5.2" />
+          <element id="library" level="project" name="Maven: javax.activation:activation:1.1.1" />
+          <element id="library" level="project" name="Maven: org.apache.commons:commons-lang3:3.3.2" />
+          <element id="library" level="project" name="Maven: joda-time:joda-time:2.6" />
+          <element id="library" level="project" name="Maven: org.slf4j:jcl-over-slf4j:1.7.6" />
+          <element id="library" level="project" name="Maven: org.activiti:activiti-json-converter:5.22.0" />
+          <element id="library" level="project" name="Maven: org.activiti:activiti-bpmn-model:5.22.0" />
+          <element id="library" level="project" name="Maven: math.geom2d:javaGeom:0.11.1" />
+          <element id="library" level="project" name="Maven: org.activiti:activiti-spring:5.21.0" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-orm:4.1.5.RELEASE" />
+          <element id="library" level="project" name="Maven: commons-dbcp:commons-dbcp:1.4" />
+          <element id="library" level="project" name="Maven: commons-pool:commons-pool:1.5.4" />
         </element>
       </element>
       <element id="directory" name="META-INF">
@@ -100,6 +117,7 @@
       </element>
       <element id="javaee-facet-resources" facet="platform-admin/web/Web" />
       <element id="artifact" artifact-name="platform-shop:war exploded" />
+      <element id="artifact" artifact-name="platform-activiti:war exploded" />
     </root>
   </artifact>
 </component>
