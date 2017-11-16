@@ -43,11 +43,14 @@
     <!-- 为了加载拦截器 需要 日志拦截器 （登录拦截和权限拦截已在shiro实现，看实现 情况处理） -->
     <mvc:interceptors>
         <!-- 使用bean定义一个Interceptor，直接定义在mvc:interceptors根下面的Interceptor将拦截所有的请求 -->
-        <bean class="com.platform.interceptor.LogInterceptor"/>
-        <!--<mvc:interceptor>-->
-        <!--<mvc:mapping path="/**"/>-->
-        <!--<bean class="com.platformrm.interceptor.LogInterceptor"/>-->
-        <!--</mvc:interceptor>-->
+        <!--<bean class="com.platform.interceptor.LogInterceptor"/>-->
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/statics/**"/>
+            <mvc:exclude-mapping path="/**/**.html"/>
+            <mvc:exclude-mapping path="/**/**.js"/>
+            <bean class="com.platform.interceptor.LogInterceptor"/>
+        </mvc:interceptor>
     </mvc:interceptors>
 
     <!-- Velocity视图解析器    默认视图  -->
@@ -77,8 +80,8 @@
 
     <!-- JSP视图解析器  -->
     <bean id="viewResolverJsp" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/jsp/"/>
-        <property name="suffix" value=".jsp" />
+        <property name="prefix" value="/WEB-INF/page/"/>
+        <property name="suffix" value=".jsp"/>
     </bean>
 
     <!-- FreeMarker视图解析器 -->

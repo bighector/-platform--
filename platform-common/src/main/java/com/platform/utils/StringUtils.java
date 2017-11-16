@@ -1,6 +1,8 @@
 package com.platform.utils;
 
+import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -78,5 +80,77 @@ public class StringUtils {
         }
         matcher.appendTail(sb);
         return sb.toString();
+    }
+    /**
+     * Object 对象转换成字符串
+     * @param obj
+     * @return
+     */
+    public static String toStringByObject(Object obj){
+        return toStringByObject(obj,false,null);
+    }
+    /**
+     * Object 对象转换成字符串，并可以根据参数去掉两端空格
+     * @param obj
+     * @return
+     */
+    public static String toStringByObject(Object obj, boolean isqdkg, String datatype){
+        if(obj==null){
+            return "";
+        }else{
+            if(isqdkg){
+                return obj.toString().trim();
+            }else{
+                //如果有设置时间格式类型，这转换
+                if(StringUtils.hasText(datatype)){
+                    if(obj instanceof Timestamp){
+                        return DateUtils.format((Timestamp)obj,datatype);
+                    }else if(obj instanceof Date){
+                        return DateUtils.format((Timestamp)obj,datatype);
+                    }
+                }
+                return obj.toString();
+            }
+
+
+        }
+    }
+    public static boolean hasText(CharSequence str) {
+        if (!hasLength(str)) {
+            return false;
+        } else {
+            int strLen = str.length();
+
+            for(int i = 0; i < strLen; ++i) {
+                if (!Character.isWhitespace(str.charAt(i))) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+    }
+
+    public static boolean hasLength(CharSequence str) {
+        return str != null && str.length() > 0;
+    }
+
+    public static boolean hasText(String str) {
+        return hasText((CharSequence)str);
+    }
+
+    public static int parseInt(Object str) {
+        return parseInt(str, 0);
+    }
+
+    public static int parseInt(Object str, int defaultValue) {
+        if (str == null || str.equals("")) {
+            return defaultValue;
+        }
+        String s = str.toString().trim();
+        if (!s.matches("-?\\d+")) {
+            return defaultValue;
+        }
+        return Integer.parseInt(s);
     }
 }

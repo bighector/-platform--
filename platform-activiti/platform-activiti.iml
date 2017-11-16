@@ -6,12 +6,8 @@
     </facet>
     <facet type="web" name="Web">
       <configuration>
-        <descriptors>
-          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/src/main/webapp/WEB-INF/web.xml" />
-        </descriptors>
         <webroots>
-          <root url="file://$MODULE_DIR$/src/main/resources/dev" relative="WEB-INF/classes" />
-          <root url="file://$MODULE_DIR$/src/main/resources" relative="/" />
+          <root url="file://$MODULE_DIR$/src/main/resources" relative="WEB-INF/classes" />
           <root url="file://$MODULE_DIR$/src/main/webapp" relative="/" />
         </webroots>
         <sourceRoots>
@@ -69,14 +65,7 @@
     <orderEntry type="library" name="Maven: org.apache.poi:poi-ooxml-schemas:3.15" level="project" />
     <orderEntry type="library" name="Maven: org.apache.xmlbeans:xmlbeans:2.6.0" level="project" />
     <orderEntry type="module" module-name="platform-shiro" />
-    <orderEntry type="module" module-name="platform-gen" />
-    <orderEntry type="module" module-name="platform-schedule" />
-    <orderEntry type="library" name="Maven: org.quartz-scheduler:quartz:2.2.3" level="project" />
-    <orderEntry type="module" module-name="platform-api" />
-    <orderEntry type="module" module-name="platform-shop" />
-    <orderEntry type="module" module-name="platform-activiti" />
-    <orderEntry type="library" name="Maven: com.github.axet:kaptcha:0.0.9" level="project" />
-    <orderEntry type="library" name="Maven: com.jhlabs:filters:2.0.235" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.uuid:java-uuid-generator:3.1.4" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.12" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: javax.servlet:javax.servlet-api:3.1.0" level="project" />
@@ -141,6 +130,8 @@
     <orderEntry type="library" name="Maven: jstl:jstl:1.2" level="project" />
     <orderEntry type="library" name="Maven: taglibs:standard:1.1.2" level="project" />
     <orderEntry type="library" name="Maven: org.freemarker:freemarker:2.3.23" level="project" />
+    <orderEntry type="library" name="Maven: com.github.axet:kaptcha:0.0.9" level="project" />
+    <orderEntry type="library" name="Maven: com.jhlabs:filters:2.0.235" level="project" />
     <orderEntry type="library" name="Maven: org.activiti:activiti-engine:5.22.0" level="project" />
     <orderEntry type="library" name="Maven: org.activiti:activiti-bpmn-converter:5.22.0" level="project" />
     <orderEntry type="library" name="Maven: org.activiti:activiti-process-validation:5.22.0" level="project" />
