@@ -3,6 +3,9 @@ package com.platform.service.impl;
 import com.platform.Global;
 import com.platform.dao.SysUserDao;
 import com.platform.entity.SysUserEntity;
+import com.platform.entity.UserWindowDto;
+import com.platform.page.Page;
+import com.platform.page.PageHelper;
 import com.platform.service.SysRoleService;
 import com.platform.service.SysUserRoleService;
 import com.platform.service.SysUserService;
@@ -130,5 +133,13 @@ public class SysUserServiceImpl implements SysUserService {
         if (!roleIdList.containsAll(user.getRoleIdList())) {
             throw new RRException("新增用户所选角色，不是本人创建");
         }
+    }
+
+
+    @Override
+    public Page<UserWindowDto> findPage(UserWindowDto userWindowDto, int pageNum) {
+        PageHelper.startPage(pageNum, Constant.pageSize);
+        sysUserDao.queryListByBean(userWindowDto);
+        return PageHelper.endPage();
     }
 }

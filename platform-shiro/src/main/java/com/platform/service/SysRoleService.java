@@ -1,6 +1,8 @@
 package com.platform.service;
 
 import com.platform.entity.SysRoleEntity;
+import com.platform.entity.UserWindowDto;
+import com.platform.page.Page;
 
 import java.util.List;
 import java.util.Map;
@@ -31,4 +33,10 @@ public interface SysRoleService {
      * 查询用户创建的角色ID列表
      */
     List<Long> queryRoleIdList(Long createUserId);
+
+    /**
+     * 分页查询角色审批选择范围
+     * @return
+     */
+    Page<UserWindowDto> queryPageByDto(UserWindowDto userWindowDto, int pageNmu);
 }

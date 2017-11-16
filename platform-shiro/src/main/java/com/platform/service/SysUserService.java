@@ -1,6 +1,8 @@
 package com.platform.service;
 
 import com.platform.entity.SysUserEntity;
+import com.platform.entity.UserWindowDto;
+import com.platform.page.Page;
 
 import java.util.List;
 import java.util.Map;
@@ -73,4 +75,12 @@ public interface SysUserService {
      * @param newPassword 新密码
      */
     int updatePassword(Long userId, String password, String newPassword);
+
+    /**
+     * 根据条件分页查询
+     * @param userEntity
+     * @param pageNum
+     * @return
+     */
+    Page<UserWindowDto> findPage(UserWindowDto userEntity, int pageNum);
 }

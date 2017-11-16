@@ -58,5 +58,14 @@
 	<select id="queryDetpIdList" resultType="long">
 		select dept_id from sys_dept where parent_id = #{value} and del_flag = 0
 	</select>
-
+	<!--查询组织审批选择范围-->
+	<select id="queryPageByDto" resultType="com.platform.entity.UserWindowDto" >
+		select
+		dept_id id,name,dept_id
+		from sys_dept
+		WHERE 1=1
+		<if test="name != null and name.trim() != ''" >
+			AND name=#{name}
+		</if>
+	</select>
 </mapper>

@@ -1,9 +1,13 @@
 package com.platform.service.impl;
 
-import com.qiniu.util.StringUtils;
 import com.platform.dao.SysDeptDao;
 import com.platform.entity.SysDeptEntity;
+import com.platform.entity.UserWindowDto;
+import com.platform.page.Page;
+import com.platform.page.PageHelper;
 import com.platform.service.SysDeptService;
+import com.platform.utils.Constant;
+import com.qiniu.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -74,5 +78,12 @@ public class SysDeptServiceImpl implements SysDeptService {
 
             deptIdList.add(deptId);
         }
+    }
+
+    @Override
+    public Page<UserWindowDto> queryPageByDto(UserWindowDto userWindowDto, int pageNum) {
+        PageHelper.startPage(pageNum, Constant.pageSize);
+        sysDeptDao.queryPageByDto(userWindowDto);
+        return PageHelper.endPage();
     }
 }

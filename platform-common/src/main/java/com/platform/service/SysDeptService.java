@@ -1,6 +1,8 @@
 package com.platform.service;
 
 import com.platform.entity.SysDeptEntity;
+import com.platform.entity.UserWindowDto;
+import com.platform.page.Page;
 
 import java.util.List;
 import java.util.Map;
@@ -36,4 +38,9 @@ public interface SysDeptService {
      */
     String getSubDeptIdList(Long deptId);
 
+    /**
+     * 分页查询组织审批选择范围
+     * @return
+     */
+    Page<UserWindowDto> queryPageByDto(UserWindowDto userWindowDto, int pageNum);
 }

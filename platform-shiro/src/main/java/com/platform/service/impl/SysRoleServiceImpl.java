@@ -2,7 +2,13 @@ package com.platform.service.impl;
 
 import com.platform.dao.SysRoleDao;
 import com.platform.entity.SysRoleEntity;
-import com.platform.service.*;
+import com.platform.entity.UserWindowDto;
+import com.platform.page.Page;
+import com.platform.page.PageHelper;
+import com.platform.service.SysRoleDeptService;
+import com.platform.service.SysRoleMenuService;
+import com.platform.service.SysRoleService;
+import com.platform.service.SysUserService;
 import com.platform.utils.Constant;
 import com.platform.utils.RRException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -104,5 +110,12 @@ public class SysRoleServiceImpl implements SysRoleService {
         if (!menuIdList.containsAll(role.getMenuIdList())) {
             throw new RRException("新增角色的权限，已超出你的权限范围");
         }
+    }
+
+    @Override
+    public Page<UserWindowDto> queryPageByDto(UserWindowDto userWindowDto, int pageNum) {
+        PageHelper.startPage(pageNum, Constant.pageSize);
+        sysRoleDao.queryPageByDto(userWindowDto);
+        return PageHelper.endPage();
     }
 }

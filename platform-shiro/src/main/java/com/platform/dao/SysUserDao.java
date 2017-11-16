@@ -1,6 +1,7 @@
 package com.platform.dao;
 
 import com.platform.entity.SysUserEntity;
+import com.platform.entity.UserWindowDto;
 
 import java.util.List;
 import java.util.Map;
@@ -35,4 +36,10 @@ public interface SysUserDao extends BaseDao<SysUserEntity> {
      * 修改密码
      */
     int updatePassword(Map<String, Object> map);
+    /**
+     * 根据实体类查询
+     * @param userWindowDto
+     * @return
+     */
+    List<UserWindowDto> queryListByBean(UserWindowDto userWindowDto);
 }

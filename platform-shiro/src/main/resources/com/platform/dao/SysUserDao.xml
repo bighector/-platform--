@@ -28,7 +28,17 @@
 			limit #{offset}, #{limit}
 		</if>
 	</select>
-	
+
+	<select id="queryListByBean" resultType="com.platform.entity.UserWindowDto">
+		select
+		id,username name,dept_Id
+		from sys_user
+		WHERE 1=1
+		<if test="name != null and name.trim() != ''" >
+			AND username LIKE concat('%',#{name},'%')
+		</if>
+	</select>
+
 	<select id="queryTotal" resultType="int">
 		select count(*) from sys_user
 		<where>

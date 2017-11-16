@@ -98,5 +98,16 @@
 	<!-- 查询用户创建的角色ID列表 -->
 	<select id="queryRoleIdList" resultType="long">
 		select role_id from sys_role where create_user_id = #{createUserId} 
-	</select> 
+	</select>
+
+	<!--根据角色id查询可用的组织机构-->
+	<select id="queryPageByDto" resultType="com.platform.entity.UserWindowDto" >
+		select
+		role_id id,role_name name ,dept_id
+		from sys_role
+		where 1=1
+		<if test="name != null and name != '' ">
+			AND role_name LIKE concat('%',#{name},'%')
+		</if>
+	</select>
 </mapper>
