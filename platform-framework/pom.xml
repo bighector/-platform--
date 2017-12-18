@@ -55,12 +55,6 @@
             <version>1.0.0</version>
             <type>war</type>
         </dependency>
-        <dependency>
-            <groupId>com.platform</groupId>
-            <artifactId>platform-activiti</artifactId>
-            <version>1.0.0</version>
-            <type>war</type>
-        </dependency>
     </dependencies>
 
     <build>
@@ -84,10 +78,6 @@
                         <overlay>
                             <groupId>com.platform</groupId>
                             <artifactId>platform-shop</artifactId>
-                        </overlay>
-                        <overlay>
-                            <groupId>com.platform</groupId>
-                            <artifactId>platform-activiti</artifactId>
                         </overlay>
 
                         <!-- 待添加其他要合并的 web 模块 -->

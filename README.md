@@ -104,12 +104,14 @@
         系统日志
         文件上传
         通用字典表
+        
+    六：短信服务平台
+            配置短信平台账户信息
+		    向外提供发送短信接口：
+		        http://域名:端口/api/sendSms?mobile=13000000000,15209831990&content=发送的短信内容
+                安全起见，需配置有效IP地址。ApiSmsController.VALID_IP
+		
 
-
-    下步计划
-    一：微信公众号开发
-    二：CMS模块开发
-    三：接入工作流activiti
 
     注意
     若使用微信支付，请下载证书放入platform-shop/src/main/resources/cert/目录下
@@ -119,10 +121,26 @@
     rootca.pem
     
     后台管理项目演示
-    演示地址：http://fly2you.cn
+    演示地址：http://47.100.0.48
     账号密码：admin/admin
     
     如何交流、反馈、参与贡献？
     官方QQ群：66502035
     git：https://gitee.com/fuyang_lipengjun/platform
     如需获取项目最新源码，请Watch、Star项目，同时也是对项目最好的支持
+    
+    针对企业级开发版本：
+    git：https://gitee.com/feixiangni/platform
+
+### 登录页面
+![](http://7xqbwh.dl1.z0.glb.clouddn.com/20171218/2148136661c3fe.png "登录")
+### 首页
+![](http://7xqbwh.dl1.z0.glb.clouddn.com/20171218/214845752e735c.png "首页")
+### 发送短信
+![](http://7xqbwh.dl1.z0.glb.clouddn.com/20171218/214922955b884f.png "发送短信")
+### 捐赠
+![](http://7xqbwh.dl1.z0.glb.clouddn.com/20171218/214952238bda7e.png "捐赠")
+### 小程序首页
+![](http://7xqbwh.dl1.z0.glb.clouddn.com/20171218/2150559434c33e.png "小程序首页")
+### 小程序分类页面
+![](http://7xqbwh.dl1.z0.glb.clouddn.com/20171218/215133346b45e8.png "小程序分类页面")

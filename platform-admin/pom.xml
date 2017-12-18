@@ -44,12 +44,6 @@
             <version>1.0.0</version>
             <type>war</type>
         </dependency>
-        <dependency>
-            <groupId>com.platform</groupId>
-            <artifactId>platform-activiti</artifactId>
-            <version>1.0.0</version>
-            <type>war</type>
-        </dependency>
         <!--验证码生成工具-->
         <dependency>
             <groupId>com.github.axet</groupId>

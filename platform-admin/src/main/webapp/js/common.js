@@ -192,10 +192,14 @@ function handleSubmitValidate(vue, name, callback) {
  */
 function transDate(date, fmt) {
     if (date) {
-        try {
+        if (typeof date == 'number') {
             return new Date(date).dateFormat(fmt);
-        } catch (e) {
-            return '-';
+        } else {
+            try {
+                return new Date(date.replace('-', '/').replace('-', '/')).dateFormat(fmt);
+            } catch (e) {
+                return '-';
+            }
         }
     } else {
         return '-';
@@ -235,6 +239,13 @@ function transIsNot(value) {
         return '<span class="label label-success">是</span>';
     }
     return '<span class="label label-danger">否</span>';
+};
+
+function transStatus(value) {
+    if (value == 1) {
+        return '<span class="label label-success">有效</span>';
+    }
+    return '<span class="label label-danger">无效</span>';
 };
 
 function toUrl(href) {
@@ -326,3 +337,105 @@ function getJson(form) {
     })
     return o;
 }
+
+/**
+ *
+ Ajax.request({
+        url: '', //访问路径
+        dataType: 'json', //访问类型 'json','html'等
+        params: getJson(form),
+        resultMsg: true, false, //是否需要提示信息
+        type: 'GET',//,'get','post'
+        beforeSubmit: function (data) {},//提交前处理
+        successCallback: function (data) {} //提交后处理
+    });
+ */
+Ajax = function () {
+
+    //var opt = { type:'GET',dataType:'json',resultMsg:true };
+    function request(opt) {
+
+        if (typeof opt.cache == 'undefined') {
+            opt.cache = false;
+        }
+
+        if (typeof opt == 'undefined') {
+            return;
+        }
+        //opt = $.extend(opt, p);
+        if (typeof(opt.type) == 'undefined') {
+            opt.type = 'GET'
+        }
+        if (typeof(opt.async) == 'undefined') {
+            opt.async = false;
+        }
+        if (typeof(opt.dataType) == 'undefined') {
+            opt.dataType = 'json'
+        }
+        if (typeof(opt.contentType) == 'undefined') {
+            opt.contentType = 'application/x-www-form-urlencoded;chartset=UTF-8'
+        }
+        if (typeof(opt.params) == 'undefined' || opt.params == null) {
+            opt.params = {};
+        }
+        opt.params.date = new Date();
+        if (typeof(opt.beforeSubmit) != 'undefined') {
+            var flag = opt.beforeSubmit(opt);
+            if (!flag) {
+                return;
+            }
+        }
+
+        if (typeof(opt.resultMsg) == 'undefined') {
+            opt.resultMsg = true;
+        }
+
+        $.ajax({
+            async: opt.async,
+            url: opt.url,
+            dataType: opt.dataType,
+            contentType: opt.contentType,
+            data: opt.params,
+            crossDomain: opt.crossDomain || false,
+            type: opt.type,
+            cache: opt.cache,
+            success: function (data) {
+                if (typeof data == 'string' && data.indexOf("exception") > 0 || typeof data.code != 'undefined' && data.code != '0') {
+                    var result = {code: null};
+                    if (typeof data == 'string') {
+                        result = eval('(' + data + ')')
+                    } else if (typeof data == 'object') {
+                        result = data;
+                    }
+
+                    if (opt.resultMsg && result.msg) {
+                        layer.alert(result.msg, {icon: 5});
+                    }
+                    return;
+                }
+                if (opt.resultMsg && data.msg) {
+                    layer.alert(data.msg, {icon: 6}, function () {
+                        if (typeof(opt.successCallback) != 'undefined') {
+                            opt.successCallback(data);
+                        }
+                    });
+                    return;
+                }
+
+                if (typeof(opt.successCallback) != 'undefined') {
+                    opt.successCallback(data);
+                }
+            },
+            error: function () {
+                layer.alert("此页面发生未知异常,请联系管理员", {icon: 5});
+            }
+        });
+    }
+
+    return {
+        /**
+         * Ajax调用request
+         */
+        request: request
+    };
+}();

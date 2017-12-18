@@ -68,7 +68,6 @@
     <orderEntry type="module" module-name="platform-api" />
     <orderEntry type="module" module-name="platform-admin" />
     <orderEntry type="module" module-name="platform-shop" />
-    <orderEntry type="module" module-name="platform-activiti" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.12" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: javax.servlet:javax.servlet-api:3.1.0" level="project" />

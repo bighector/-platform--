@@ -16,7 +16,7 @@ import java.util.HashMap;
  * @email 939961241@qq.com
  * @date 2016年10月27日 下午10:16:19
  */
-@RestControllerAdvice
+@RestControllerAdvice(value = {"com.platform"})
 public class RRExceptionHandler {
     private Logger logger = LoggerFactory.getLogger(getClass());
 

@@ -103,3 +103,13 @@ tbody > tr > th {
 #rrapp {
     margin: 0px 10px;
 }
+.search-group {
+    padding-left: 10px;
+    padding-top: 5px;
+    display:inline;
+}
+.buttons-group {
+    display:inline;
+    float: right;
+    padding-right: 10px;
+}

@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/platform.iml" filepath="$PROJECT_DIR$/platform.iml" />
-      <module fileurl="file://$PROJECT_DIR$/platform-activiti/platform-activiti.iml" filepath="$PROJECT_DIR$/platform-activiti/platform-activiti.iml" />
       <module fileurl="file://$PROJECT_DIR$/platform-admin/platform-admin.iml" filepath="$PROJECT_DIR$/platform-admin/platform-admin.iml" />
       <module fileurl="file://$PROJECT_DIR$/platform-api/platform-api.iml" filepath="$PROJECT_DIR$/platform-api/platform-api.iml" />
       <module fileurl="file://$PROJECT_DIR$/platform-common/platform-common.iml" filepath="$PROJECT_DIR$/platform-common/platform-common.iml" />
