@@ -97,7 +97,7 @@ var vm = new Vue({
             vm.showList = false;
             vm.title = "新增(默认密码：888888)";
             vm.roleList = {};
-            vm.user = {status: 1, roleIdList: []};
+            vm.user = {status: 1, roleIdList: [], deptId: '', deptName: ''};
 
             //获取角色信息
             this.getRoleList();
