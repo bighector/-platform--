@@ -480,7 +480,7 @@ public class ApiGoodsController extends ApiBaseAction {
         for (RelatedGoodsVo relatedGoodsEntity : relatedGoodsEntityList) {
             relatedGoodsIds.add(relatedGoodsEntity.getRelated_goods_id());
         }
-        List<Integer> relatedGoods = new ArrayList();
+        List<GoodsVo> relatedGoods = new ArrayList<>();
         if (null == relatedGoodsIds || relatedGoods.size() < 1) {
             //查找同分类下的商品
             GoodsVo goodsCategory = goodsService.queryObject(id);
