@@ -7,7 +7,7 @@
             </view>
             <view class="c">
                 <view class="mobile">{{item.telNumber}}</view>
-                <view class="address">{{item.provinceName + item.cityName + item.countyName+ item.detailInfo}}</view>
+                <view class="address">{{item.detailInfo}}</view>
             </view>
             <view class="r">
                 <image catchtap="deleteAddress" data-address-id="{{item.id}}" class="del" src="/static/images/del-address.png"></image>

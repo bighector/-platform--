@@ -74,11 +74,11 @@ public class ApiCartController extends ApiBaseAction {
             BigDecimal fullCutDec = new BigDecimal(0);
             BigDecimal minAmount = new BigDecimal(100000);
             for (CouponVo couponVo : couponVos) {
-                BigDecimal difDec = couponVo.getMin_amount().subtract(checkedGoodsAmount).setScale(2, BigDecimal.ROUND_HALF_UP);
+                BigDecimal difDec = couponVo.getMin_goods_amount().subtract(checkedGoodsAmount).setScale(2, BigDecimal.ROUND_HALF_UP);
                 if (couponVo.getSend_type() == 0 && difDec.doubleValue() > 0.0
-                        && minAmount.compareTo(couponVo.getMin_amount()) > 0) {
+                        && minAmount.compareTo(couponVo.getMin_goods_amount()) > 0) {
                     fullCutDec = couponVo.getType_money();
-                    minAmount = couponVo.getMin_amount();
+                    minAmount = couponVo.getMin_goods_amount();
                     fullCutVo.setType(1);
                     fullCutVo.setMsg(couponVo.getName() + "，还差" + difDec + "元");
                 } else if (couponVo.getSend_type() == 0 && difDec.doubleValue() < 0.0 && fullCutDec.compareTo(couponVo.getType_money()) < 0) {

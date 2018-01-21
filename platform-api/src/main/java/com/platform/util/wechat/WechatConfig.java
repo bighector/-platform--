@@ -11,9 +11,13 @@ import java.security.KeyStore;
 public class WechatConfig {
 
     /**
-     * 商户id
+     * 小程序ID
      */
     public static String appId = "appId";
+    /**
+     * 小程序密钥
+     */
+    public static String secret = "secret";
     /**
      * 商户号
      */

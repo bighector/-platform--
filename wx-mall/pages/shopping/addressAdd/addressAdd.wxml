@@ -1,10 +1,10 @@
 <view class="add-address">
     <view class="add-form">
         <view class="form-item">
-            <input class="input" bindinput="bindinputName" placeholder="姓名" value="{{address.name}}" auto-focus/>
+            <input class="input" bindinput="bindinputName" placeholder="姓名" value="{{address.userName}}" auto-focus/>
         </view>
         <view class="form-item">
-            <input class="input" bindinput="bindinputMobile" value="{{address.mobile}}" placeholder="手机号码"/>
+            <input class="input" bindinput="bindinputMobile" value="{{address.telNumber}}" placeholder="手机号码"/>
         </view>
         <view class="form-item">
             <input class="input" value="{{address.full_region}}" disabled="true" bindtap="chooseRegion" placeholder="省份、城市、区县"/>

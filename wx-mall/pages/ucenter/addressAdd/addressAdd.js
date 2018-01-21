@@ -10,8 +10,8 @@ Page({
       district_id: 0,
       address: '',
       full_region: '',
-      name: '',
-      mobile: '',
+      userName: '',
+      telNumber: '',
       is_default: 0
     },
     addressId: 0,
@@ -27,14 +27,14 @@ Page({
   },
   bindinputMobile(event) {
     let address = this.data.address;
-    address.mobile = event.detail.value;
+    address.telNumber = event.detail.value;
     this.setData({
       address: address
     });
   },
   bindinputName(event) {
     let address = this.data.address;
-    address.name = event.detail.value;
+    address.userName = event.detail.value;
     this.setData({
       address: address
     });
@@ -56,10 +56,12 @@ Page({
   getAddressDetail() {
     let that = this;
     util.request(api.AddressDetail, { id: that.data.addressId }).then(function (res) {
-      if (res.errno === 0 && res.data) {
-        that.setData({
-          address: res.data
-        });
+      if (res.errno === 0) {
+        if(res.data){
+            that.setData({
+                address: res.data
+            });
+        }
       }
     });
   },
@@ -259,21 +261,21 @@ Page({
     });
   },
   cancelAddress(){
-    wx.navigateTo({
-      url: '/pages/ucenter/address/address',
+    wx.reLaunch({
+      url: '/pages/shopping/address/address',
     })
   },
   saveAddress(){
     console.log(this.data.address)
     let address = this.data.address;
 
-    if (address.name == '') {
+    if (address.userName == '') {
       util.showErrorToast('请输入姓名');
 
       return false;
     }
 
-    if (address.mobile == '') {
+    if (address.telNumber == '') {
       util.showErrorToast('请输入手机号码');
       return false;
     }
@@ -288,21 +290,26 @@ Page({
       util.showErrorToast('请输入详细地址');
       return false;
     }
- 
+
+
     let that = this;
     util.request(api.AddressSave, { 
       id: address.id,
-      userName: address.name,
-      telNumber: address.mobile,
+      userName: address.userName,
+      telNumber: address.telNumber,
+      province_id: address.province_id,
+      city_id: address.city_id,
+      district_id: address.district_id,
+      address: address.address,
+      is_default: address.is_default,
       provinceName: address.province_name,
       cityName: address.city_name,
       countyName: address.district_name,
-      detailInfo: address.address,
-      is_default: address.is_default,
+      detailInfo: address.full_region + address.address,
     }, 'POST').then(function (res) {
       if (res.errno === 0) {
-        wx.navigateTo({
-          url: '/pages/ucenter/address/address',
+        wx.reLaunch({
+          url: '/pages/shopping/address/address',
         })
       }
     });

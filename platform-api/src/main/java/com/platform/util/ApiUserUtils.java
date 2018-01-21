@@ -1,16 +1,6 @@
 package com.platform.util;
 
-import org.apache.log4j.Logger;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.List;
-import java.util.Map;
+import com.platform.util.wechat.WechatConfig;
 
 /**
  * 作者: @author Harmon <br>
@@ -18,13 +8,8 @@ import java.util.Map;
  * 描述: ApiUserUtils <br>
  */
 public class ApiUserUtils {
-    private static Logger logger = Logger.getLogger(ApiUserUtils.class);
     //获取code的请求地址
     public static String Get_Code = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=%s&redirect_uri=%s&response_type=code&scope=%s&state=STAT#wechat_redirect";
-
-    public static String APPID = "APPID";
-    public static String SECRET = "SECRET";
-    private static final String EMPTY = "";
 
     //替换字符串
     public static String getCode(String APPID, String REDIRECT_URI, String SCOPE) {
@@ -37,8 +22,8 @@ public class ApiUserUtils {
     //替换字符串
     public static String getWebAccess(String CODE) {
         return String.format(Web_access_tokenhttps,
-                APPID/*这里填小程序的appid*/,
-                SECRET/*这里填该小程序的SECRET*/,
+                WechatConfig.appId,
+                WechatConfig.secret,
                 CODE);
     }
 
