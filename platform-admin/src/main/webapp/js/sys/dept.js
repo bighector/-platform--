@@ -16,7 +16,7 @@ function getGrid() {
     table.setIdField("deptId");
     table.setCodeField("deptId");
     table.setParentCodeField("parentId");
-    table.setExpandAll(false);
+    table.setExpandAll(true);
     table.setHeight($(window).height() - 100);
     table.init();
     TreeGrid.table = table;
@@ -79,15 +79,25 @@ var vm = new Vue({
             $.get("../sys/dept/select", function (r) {
                 ztree = $.fn.zTree.init($("#deptTree"), setting, r.deptList);
                 var node = ztree.getNodeByParam("deptId", vm.dept.parentId);
-                ztree.selectNode(node);
-
-                vm.dept.parentName = node.name;
+                if (node) {
+                    ztree.selectNode(node);
+                    vm.dept.parentName = node.name;
+                } else {
+                    node = ztree.getNodeByParam("deptId", 0);
+                    ztree.selectNode(node);
+                    vm.dept.parentName = node.name;
+                }
             })
         },
         add: function () {
             vm.showList = false;
             vm.title = "新增";
-            vm.dept = {parentName: null, parentId: 0, orderNum: 0};
+            var deptId = TreeGrid.table.getSelectedRow();
+            var parentId = 0;
+            if (deptId.length != 0) {
+                parentId = deptId[0].id;
+            }
+            vm.dept = {parentName: null, parentId: parentId, orderNum: 0};
             vm.getDept();
         },
         update: function () {
@@ -106,7 +116,7 @@ var vm = new Vue({
         },
         del: function () {
             var deptId = getDeptId();
-            if (deptId == null) {
+            if (!deptId) {
                 return;
             }
 
