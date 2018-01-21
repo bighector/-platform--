@@ -4060,10 +4060,10 @@ create table sys_region
 (
   id smallint auto_increment
     primary key,
-  parent_id smallint default '0' not null,
+  parent_id smallint default '0' ,
   name varchar(120) default '' not null,
   type tinyint(1) default '2' not null,
-  agency_id smallint default '0' not null
+  agency_id smallint default '0'
 )
 ;
 

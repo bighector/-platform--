@@ -56,7 +56,7 @@ Page({
   getAddressDetail() {
     let that = this;
     util.request(api.AddressDetail, { id: that.data.addressId }).then(function (res) {
-      if (res.errno === 0) {
+      if (res.errno === 0 && res.data) {
         that.setData({
           address: res.data
         });
@@ -288,17 +288,16 @@ Page({
       util.showErrorToast('请输入详细地址');
       return false;
     }
-
-
+ 
     let that = this;
     util.request(api.AddressSave, { 
       id: address.id,
-      name: address.name,
-      mobile: address.mobile,
-      province_id: address.province_id,
-      city_id: address.city_id,
-      district_id: address.district_id,
-      address: address.address,
+      userName: address.name,
+      telNumber: address.mobile,
+      provinceName: address.province_name,
+      cityName: address.city_name,
+      countyName: address.district_name,
+      detailInfo: address.address,
       is_default: address.is_default,
     }, 'POST').then(function (res) {
       if (res.errno === 0) {
