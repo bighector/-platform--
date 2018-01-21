@@ -39,7 +39,6 @@ public class ApiCartController extends ApiBaseAction {
     private ApiCouponService apiCouponService;
     @Autowired
     private ApiGoodsCrashService apiGoodsCrashService;
-
     /**
      * 获取购物车中的数据
      */
@@ -376,7 +375,12 @@ public class ApiCartController extends ApiBaseAction {
         Map<String, Object> resultObj = new HashMap();
         //根据收货地址计算运费
         BigDecimal freightPrice = new BigDecimal(10.00);
+        //默认收货地址
+        Map param = new HashMap();
+        param.put("user_id", loginUser.getUserId());
+        List<AddressVo> addressEntities = addressService.queryList(param);
 
+        resultObj.put("checkedAddress", addressEntities.get(0));
         //获取要购买的商品
         Map<String, Object> cartData = (Map<String, Object>) this.getCart(loginUser);
 

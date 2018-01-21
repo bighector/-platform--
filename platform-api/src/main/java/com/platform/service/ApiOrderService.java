@@ -73,8 +73,12 @@ public class ApiOrderService {
         Integer couponId = jsonParam.getInteger("couponId");
         String couponNumber = jsonParam.getString("couponNumber");
         BigDecimal fullCutCouponDec = jsonParam.getBigDecimal("fullCutCouponDec");
+        if(fullCutCouponDec == null ){
+            fullCutCouponDec = BigDecimal.valueOf(0);
+        }
         String postscript = jsonParam.getString("postscript");
-        AddressVo addressVo = jsonParam.getObject("checkedAddress",AddressVo.class);
+//        AddressVo addressVo = jsonParam.getObject("checkedAddress",AddressVo.class);
+        AddressVo addressVo = apiAddressMapper.queryObject(jsonParam.getInteger("addressId"));
 
         Integer freightPrice = 10;
         //获取要购买的商品

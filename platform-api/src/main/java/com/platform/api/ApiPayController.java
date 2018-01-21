@@ -56,7 +56,7 @@ public class ApiPayController extends ApiBaseAction {
     /**
      * 获取支付的请求参数
      */
-    @RequestMapping("pay_prepay")
+    @RequestMapping("prepay")
     public Object payPrepay(@LoginUser UserVo loginUser, Integer orderId) {
         //
         OrderVo orderInfo = orderService.queryObject(orderId);
