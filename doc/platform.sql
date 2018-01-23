@@ -4056,6 +4056,7 @@ CREATE TABLE `tb_token` (
   UNIQUE KEY `token` (`token`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户Token';
 
+DROP TABLE IF EXISTS sys_region;
 create table sys_region
 (
   id smallint auto_increment
@@ -4085,7 +4086,8 @@ INSERT INTO platform.sys_menu (parent_id, name, url, perms, type, icon, order_nu
 INSERT INTO platform.sys_menu (parent_id, name, url, perms, type, icon, order_num, status) VALUES (375, '查看', null, 'sys:region:list,sys:region:info', 2, null, 0, 0);
 INSERT INTO platform.sys_menu (parent_id, name, url, perms, type, icon, order_num, status) VALUES (1, '地区管理', '../sys/region.html', null, 1, 'fa fa-map-pin', 8, 0);
 
---20171218
+
+
 DROP TABLE IF EXISTS `sys_sms_log`;
 CREATE TABLE `sys_sms_log` (
   `id` varchar(32) NOT NULL COMMENT '主键',
