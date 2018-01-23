@@ -29,13 +29,13 @@ page{
 }
 
 .address-list .l{
-    width: 125rpx;
+    width: 155rpx;
     height: 80rpx;
     overflow: hidden;
 }
 
 .address-list .name{
-    width: 125rpx;
+    width: 155rpx;
     height: 43rpx;
     font-size: 29rpx;
     color: #333;

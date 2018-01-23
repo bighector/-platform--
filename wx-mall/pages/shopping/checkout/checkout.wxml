@@ -7,7 +7,7 @@
             </view>
             <view class="m">
                 <text class="mobile">{{checkedAddress.telNumber}}</text>
-                <text class="address">{{checkedAddress.detailInfo}}</text>
+                <text class="address">{{checkedAddress.full_region+checkedAddress.detailInfo}}</text>
             </view>
             <view class="r">
                 <image src="/static/images/address_right.png"></image>
@@ -72,7 +72,7 @@
                     <text class="name">{{item.goods_name}}</text>
                     <text class="number">x{{item.number}}</text>
                 </view>
-                <view class="m">{{item.goods_specifition_name_value}}</view>
+                <view class="m">{{item.goods_specifition_name_value||''}}</view>
                 <view class="b">￥{{item.retail_price}}</view>
             </view>
         </view>

@@ -25,7 +25,7 @@ page{
 }
 
 .address-box .l{
-    width: 125rpx;
+    width: 155rpx;
     height: 100%;
 }
 
@@ -33,7 +33,7 @@ page{
     margin-left: 6.25rpx;
     margin-top: -7.25rpx;
     display: block;
-    width: 125rpx;
+    width: 155rpx;
     height: 43rpx;
     line-height: 43rpx;
     font-size: 30rpx;

@@ -1,5 +1,7 @@
 package com.platform.entity;
 
+import org.apache.commons.lang.StringUtils;
+
 import java.io.Serializable;
 
 
@@ -31,6 +33,11 @@ public class AddressVo implements Serializable {
     private String countyName;
     //详细收货地址信息
     private String detailInfo;
+
+    //默认
+    private Integer is_default = 0;
+
+    private String full_region;
 
     /**
      * 设置：
@@ -170,5 +177,25 @@ public class AddressVo implements Serializable {
      */
     public String getDetailInfo() {
         return detailInfo;
+    }
+
+    public Integer getIs_default() {
+        return is_default;
+    }
+
+    public void setIs_default(Integer is_default) {
+        this.is_default = is_default;
+    }
+
+    public String getFull_region() {
+        if (StringUtils.isEmpty(full_region)) {
+            full_region = getProvinceName() + getCityName() + getCountyName();
+        }
+        return full_region;
+    }
+
+    public void setFull_region(String full_region) {
+
+        this.full_region = full_region;
     }
 }

@@ -41,7 +41,7 @@ Page({
   },
   bindinputAddress (event){
     let address = this.data.address;
-    address.address = event.detail.value;
+    address.detailInfo = event.detail.value;
     this.setData({
       address: address
     });
@@ -286,7 +286,7 @@ Page({
       return false;
     }
 
-    if (address.address == '') {
+    if (address.detailInfo == '') {
       util.showErrorToast('请输入详细地址');
       return false;
     }
@@ -300,12 +300,11 @@ Page({
       province_id: address.province_id,
       city_id: address.city_id,
       district_id: address.district_id,
-      address: address.address,
       is_default: address.is_default,
       provinceName: address.province_name,
       cityName: address.city_name,
       countyName: address.district_name,
-      detailInfo: address.full_region + address.address,
+      detailInfo: address.detailInfo,
     }, 'POST').then(function (res) {
       if (res.errno === 0) {
         wx.reLaunch({

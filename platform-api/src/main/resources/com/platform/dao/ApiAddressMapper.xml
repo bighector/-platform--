@@ -15,6 +15,7 @@
         <result property="cityName" column="city_Name"/>
         <result property="countyName" column="county_Name"/>
         <result property="detailInfo" column="detail_Info"/>
+        <result property="is_default" column="is_default"/>
     </resultMap>
 
     <select id="queryObject" resultMap="addressMap">
@@ -55,7 +56,8 @@
 			`province_Name`,
 			`city_Name`,
 			`county_Name`,
-			`detail_Info`)
+			`detail_Info`,
+			`is_default`)
 		values(
 			#{userId},
 			#{userName},
@@ -65,7 +67,8 @@
 			#{provinceName},
 			#{cityName},
 			#{countyName},
-			#{detailInfo})
+			#{detailInfo},
+			#{is_default})
 	</insert>
 
     <update id="update" parameterType="com.platform.entity.AddressVo">
@@ -79,7 +82,8 @@
             <if test="provinceName != null">`province_Name` = #{provinceName}, </if>
             <if test="cityName != null">`city_Name` = #{cityName}, </if>
             <if test="countyName != null">`county_Name` = #{countyName}, </if>
-            <if test="detailInfo != null">`detail_Info` = #{detailInfo}</if>
+            <if test="detailInfo != null">`detail_Info` = #{detailInfo},</if>
+            <if test="is_default != null">`is_default` = #{is_default}</if>
         </set>
         where id = #{id}
     </update>
