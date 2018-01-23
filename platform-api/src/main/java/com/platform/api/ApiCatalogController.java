@@ -48,8 +48,10 @@ public class ApiCatalogController extends ApiBaseAction {
         if (null != id) {
             currentCategory = categoryService.queryObject(id);
         }
-        if (null == currentCategory) {
+        if (null == currentCategory && null!= data && data.size() != 0) {
             currentCategory = data.get(0);
+        } else {
+            currentCategory = new CategoryVo();
         }
 
         //获取子分类数据
