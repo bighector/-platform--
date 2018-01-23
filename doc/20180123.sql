@@ -1,1 +1,0 @@
-ALTER TABLE nideshop_address ADD is_default INT(1) DEFAULT 0 NULL;
