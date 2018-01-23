@@ -1,5 +1,6 @@
 package com.platform.util.wechat;
 
+import com.platform.utils.ResourceUtil;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLContexts;
 
@@ -9,35 +10,6 @@ import java.security.KeyStore;
 
 @SuppressWarnings("deprecation")
 public class WechatConfig {
-
-    /**
-     * 小程序ID
-     */
-    public static String appId = "appId";
-    /**
-     * 小程序密钥
-     */
-    public static String secret = "secret";
-    /**
-     * 商户号
-     */
-    public static String mchId = "mchId";
-    /**
-     * 交易类型
-     */
-    public static String tradeType = "JSAPI";
-    /**
-     * 签名
-     */
-    public static String paySignKey = "paySignKey";
-    /**
-     * 证书名称，对应不同的商户号
-     */
-    public static String certName = "/cert/apiclient_cert.p12";
-    /**
-     * 支付回调地址
-     */
-    public static String notifyUrl = "url/api/notify";
 
     private static SSLConnectionSocketFactory sslcsf;
 
@@ -52,14 +24,13 @@ public class WechatConfig {
         try {
             KeyStore keyStore = KeyStore.getInstance("PKCS12");
             Thread.currentThread().getContextClassLoader();
-            InputStream instream = new WechatRefundApiResult().getClass().getResourceAsStream(certName);
-//            InputStream instream = new FileInputStream(certName);
+            InputStream instream = new WechatRefundApiResult().getClass().getResourceAsStream(ResourceUtil.getConfigByName("wx.certName"));
             try {
-                keyStore.load(instream, mchId.toCharArray());
+                keyStore.load(instream, ResourceUtil.getConfigByName("wx.mchId").toCharArray());
             } finally {
                 instream.close();
             }
-            SSLContext sslcontext = SSLContexts.custom().loadKeyMaterial(keyStore, mchId.toCharArray()).build();
+            SSLContext sslcontext = SSLContexts.custom().loadKeyMaterial(keyStore, ResourceUtil.getConfigByName("wx.mchId").toCharArray()).build();
             sslcsf = new SSLConnectionSocketFactory(sslcontext, new String[]{"TLSv1"}, null, SSLConnectionSocketFactory.BROWSER_COMPATIBLE_HOSTNAME_VERIFIER);
         } catch (Exception e) {
             e.printStackTrace();

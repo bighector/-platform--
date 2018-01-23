@@ -4,6 +4,7 @@ import com.alibaba.druid.support.logging.Log;
 import com.alibaba.druid.support.logging.LogFactory;
 import com.platform.utils.CharUtil;
 import com.platform.utils.MapUtils;
+import com.platform.utils.ResourceUtil;
 import com.platform.utils.XmlUtil;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -22,12 +23,17 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.BasicHttpClientConnectionManager;
 import org.apache.http.util.EntityUtils;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * <p>Title: 微信退款工具类</p>
@@ -46,14 +52,6 @@ public class WechatUtil {
      * 充值客户端类型--app
      */
     public static Integer CLIENTTYPE_APP = 1;
-    /**
-     * 退款地址
-     */
-    public static final String refundUrl = "https://api.mch.weixin.qq.com/secapi/pay/refund";
-    /**
-     * 退款查询地址
-     */
-    public static final String refundqueryUrl = "https://api.mch.weixin.qq.com/pay/refundquery";
 
     /**
      * 方法描述：微信退款逻辑
@@ -87,16 +85,24 @@ public class WechatUtil {
      */
     private static Map<Object, Object> buildRequsetMapParam(String out_trade_no, BigDecimal bdOrderMoney, BigDecimal bdRefundMoney) {
         Map<Object, Object> params = new HashMap<Object, Object>();
-        params.put("appid", WechatConfig.appId);//微信分配的公众账号ID（企业号corpid即为此appId）
-        params.put("mch_id", WechatConfig.mchId);//微信支付分配的商户号
-        params.put("nonce_str", CharUtil.getRandomString(16));//随机字符串，不长于32位。推荐随机数生成算法
-        params.put("out_trade_no", out_trade_no);//商户侧传给微信的订单号
-        params.put("out_refund_no", getBundleId());//商户系统内部的退款单号，商户系统内部唯一，同一退款单号多次请求只退一笔
-        params.put("total_fee", bdOrderMoney.multiply(new BigDecimal(100)).intValue());//订单总金额，单位为分，只能为整数
-        params.put("refund_fee", bdRefundMoney.multiply(new BigDecimal(100)).intValue());//退款总金额，订单总金额，单位为分，只能为整数
-        params.put("op_user_id", WechatConfig.mchId);//操作员帐号, 默认为商户号
+        //微信分配的公众账号ID（企业号corpid即为此appId）
+        params.put("appid", ResourceUtil.getConfigByName("wx.appId"));
+        //微信支付分配的商户号
+        params.put("mch_id", ResourceUtil.getConfigByName("wx.mchId"));
+        //随机字符串，不长于32位。推荐随机数生成算法
+        params.put("nonce_str", CharUtil.getRandomString(16));
+        //商户侧传给微信的订单号
+        params.put("out_trade_no", out_trade_no);
+        //商户系统内部的退款单号，商户系统内部唯一，同一退款单号多次请求只退一笔
+        params.put("out_refund_no", getBundleId());
+        //订单总金额，单位为分，只能为整数
+        params.put("total_fee", bdOrderMoney.multiply(new BigDecimal(100)).intValue());
+        //退款总金额，订单总金额，单位为分，只能为整数
+        params.put("refund_fee", bdRefundMoney.multiply(new BigDecimal(100)).intValue());
+        //操作员帐号, 默认为商户号
+        params.put("op_user_id", ResourceUtil.getConfigByName("wx.mchId"));
         //签名前必须要参数全部写在前面
-        params.put("sign", arraySign(params, WechatConfig.paySignKey));//签名
+        params.put("sign", arraySign(params, ResourceUtil.getConfigByName("wx.paySignKey")));
         return params;
     }
 
@@ -105,7 +111,7 @@ public class WechatUtil {
      **/
     public static String sendSSLPostToWx(String mapToXml, SSLConnectionSocketFactory sslcsf) {
         logger.info("*******退款（WX Request：" + mapToXml);
-        HttpPost httPost = new HttpPost(refundUrl);
+        HttpPost httPost = new HttpPost(ResourceUtil.getConfigByName("wx.refundUrl"));
         httPost.addHeader("Connection", "keep-alive");
         httPost.addHeader("Accept", "*/*");
         httPost.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
@@ -146,14 +152,19 @@ public class WechatUtil {
      */
     public Map<String, Object> wxRefundquery(String out_trade_no, String out_refund_no) {
         Map<Object, Object> params = new HashMap<Object, Object>();
-        params.put("appid", WechatConfig.appId);//微信分配的公众账号ID（企业号corpid即为此appId）
-        params.put("mch_id", WechatConfig.mchId);//微信支付分配的商户号
-        params.put("nonce_str", CharUtil.getRandomString(16));//随机字符串，不长于32位。推荐随机数生成算法
-        params.put("out_trade_no", out_trade_no);//商户侧传给微信的订单号
+        //微信分配的公众账号ID（企业号corpid即为此appId）
+        params.put("appid", ResourceUtil.getConfigByName("wx.appId"));
+        //微信支付分配的商户号
+        params.put("mch_id", ResourceUtil.getConfigByName("wx.mchId"));
+        //随机字符串，不长于32位。推荐随机数生成算法
+        params.put("nonce_str", CharUtil.getRandomString(16));
+        //商户侧传给微信的订单号
+        params.put("out_trade_no", out_trade_no);
         //签名前必须要参数全部写在前面
-        params.put("sign", arraySign(params, WechatConfig.paySignKey));//签名
+        //签名
+        params.put("sign", arraySign(params, ResourceUtil.getConfigByName("wx.paySignKey")));
         String mapToXml = MapUtils.convertMap2Xml(params);
-        HttpPost httPost = new HttpPost(refundqueryUrl);
+        HttpPost httPost = new HttpPost(ResourceUtil.getConfigByName("wx.refundqueryUrl"));
         httPost.addHeader("Connection", "keep-alive");
         httPost.addHeader("Accept", "*/*");
         httPost.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
@@ -276,7 +287,7 @@ public class WechatUtil {
 
         StringEntity postEntity = new StringEntity(data, "UTF-8");
         httpPost.addHeader("Content-Type", "text/xml");
-        httpPost.addHeader("User-Agent", "wxpay sdk java v1.0 " + WechatConfig.mchId);
+        httpPost.addHeader("User-Agent", "wxpay sdk java v1.0 " + ResourceUtil.getConfigByName("wx.mchId"));
         httpPost.setEntity(postEntity);
 
         HttpResponse httpResponse = httpClient.execute(httpPost);
