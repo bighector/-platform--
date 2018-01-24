@@ -105,11 +105,11 @@
         文件上传
         通用字典表
         
-    六：短信服务平台
+    六：短信服务平台(需要短信验证码、短信通知、短信营销的客户进群私聊我)
             配置短信平台账户信息
 		    向外提供发送短信接口：
 		        http://域名:端口/api/sendSms?mobile=13000000000,15209831990&content=发送的短信内容
-                安全起见，需配置有效IP地址。ApiSmsController.VALID_IP
+                安全起见，需配置有效IP地址。platform.properties -> sms.validIp
 		
 
 
