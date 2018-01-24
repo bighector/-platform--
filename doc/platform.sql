@@ -4084,7 +4084,7 @@ INSERT INTO platform.sys_menu (parent_id, name, url, perms, type, icon, order_nu
 INSERT INTO platform.sys_menu (parent_id, name, url, perms, type, icon, order_num, status) VALUES (375, '修改', '', 'sys:region:update', 2, null, 0, 0);
 INSERT INTO platform.sys_menu (parent_id, name, url, perms, type, icon, order_num, status) VALUES (375, '新增', null, 'sys:region:save', 2, null, 0, 0);
 INSERT INTO platform.sys_menu (parent_id, name, url, perms, type, icon, order_num, status) VALUES (375, '查看', null, 'sys:region:list,sys:region:info', 2, null, 0, 0);
-INSERT INTO platform.sys_menu (parent_id, name, url, perms, type, icon, order_num, status) VALUES (1, '地区管理', '../sys/region.html', null, 1, 'fa fa-map-pin', 8, 0);
+INSERT INTO platform.sys_menu (parent_id, name, url, perms, type, icon, order_num, status) VALUES (1, '地区管理', 'sys/region.html', null, 1, 'fa fa-map-pin', 8, 0);
 
 
 
