@@ -97,6 +97,34 @@ public class OrderVo implements Serializable {
     private String order_status_text;//订单状态的处理
     private Map handleOption; //可操作的选项
     private BigDecimal full_cut_price; //订单满减
+    private String full_region;//区县
+
+    public String getFull_region() {
+    //    return full_region;
+        if (StringUtils.isNotEmpty(this.full_region)){
+            return full_region;
+        } else{
+            StringBuffer strBuff = new StringBuffer();
+            if (StringUtils.isNotEmpty(this.country)){
+                strBuff.append(this.country).append(" ");
+            }
+            if(StringUtils.isNotEmpty(this.province)){
+                strBuff.append(this.province).append(" ");
+            }
+            if (StringUtils.isNotEmpty(this.city)){
+                strBuff.append(this.city).append(" ");
+            }
+            if (StringUtils.isNotEmpty(this.district)){
+                strBuff.append(this.district).append(" ");
+            }
+            this.full_region = strBuff.toString();
+            return this.full_region;
+        }
+    }
+
+    public void setFull_region(String full_region) {
+        this.full_region = full_region;
+    }
 
     public Integer getId() {
         return id;
