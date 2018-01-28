@@ -54,7 +54,7 @@ module.exports = {
 
     OrderList: NewApiRootUrl + 'order/list',  //订单列表
     OrderDetail: NewApiRootUrl + 'order/detail',  //订单详情
-    OrderCancel: NewApiRootUrl + 'order/cancel',  //取消订单
+    OrderCancel: NewApiRootUrl + 'order/cancelOrder',  //取消订单
 
     FootprintList: NewApiRootUrl + 'footprint/list',  //足迹列表
     FootprintDelete: NewApiRootUrl + 'footprint/delete',  //删除足迹
