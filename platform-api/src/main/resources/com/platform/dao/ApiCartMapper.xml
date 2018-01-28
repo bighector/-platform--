@@ -161,6 +161,14 @@
         </foreach>
     </delete>
 
+    <delete id="deleteByUserAndProductIds">
+        delete from nideshop_cart where product_id in
+        <foreach item="id" collection="productIds" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+          and user_id = #{user_id}
+    </delete>
+
     <delete id="deleteByCart">
         delete from nideshop_cart
         where  user_id = #{user_id} and  session_id = #{session_id} and  checked = #{checked}
