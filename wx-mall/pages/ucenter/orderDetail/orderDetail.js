@@ -51,37 +51,47 @@ Page({
 
     var order_status = orderInfo.order_status;
     console.log(order_status);
-    if (order_status == 300){
-      console.log('已发货，不能取消');
-      util.showErrorToast('订单已发货');
-      return false;
-    }
-    if (order_status == 301) {
-      console.log('已收货');
-      util.showErrorToast('订单已收货');
-      return false;
-    }
-    if (order_status == 101) {
-      console.log('已经取消');
-      util.showErrorToast('订单已取消');
-      return false;
-    }
-    if (order_status == 102) {
-      console.log('已经删除');
-      util.showErrorToast('订单已删除');
-      return false;
-    }
-    if (order_status == 401) {
-      console.log('已经退款');
-      util.showErrorToast('订单已退款');
-      return false;
-    }
-    if (order_status == 402) {
-      console.log('已经退款退货');
-      util.showErrorToast('订单已退货');
-      return false;
-    }
 
+    var errorMessage = '';
+    switch (order_status){
+      case 300: {
+        console.log('已发货，不能取消');
+        errorMessage = '订单已发货';
+        break;
+      }
+      case 301:{
+        console.log('已收货，不能取消');
+        errorMessage = '订单已收货';
+        break;
+      }
+      case 101:{
+        console.log('已经取消');
+        errorMessage = '订单已取消';
+        break;
+      }
+      case 102: {
+        console.log('已经删除');
+        errorMessage = '订单已删除';
+        break;
+      }
+      case 401: {
+        console.log('已经退款');
+        errorMessage = '订单已退款';
+        break;
+      }
+      case 402: {
+        console.log('已经退款退货');
+        errorMessage = '订单已退货';
+        break;
+      }
+    }
+      
+    if (errorMessage != '') {
+      console.log(errorMessage);
+      util.showErrorToast(errorMessage);
+      return false;
+    }
+    
     console.log('可以取消订单的情况');
     wx.showModal({
       title: '',
@@ -96,7 +106,15 @@ Page({
             console.log(res.errno);
             if (res.errno === 0) {
               console.log(res.data);
-              
+              wx.showModal({
+                title:'提示',
+                content: res.data,
+                showCancel:false,
+                confirmText:'继续',
+                success: function (res) {
+                  util.redirect('/pages/ucenter/order/order');
+                }
+              });
             }
           });
 
