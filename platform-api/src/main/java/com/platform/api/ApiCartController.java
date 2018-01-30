@@ -327,18 +327,17 @@ public class ApiCartController extends ApiBaseAction {
     //删除选中的购物车商品，批量删除
     @RequestMapping("delete")
     public Object delete(@LoginUser UserVo loginUser) {
+        Long userId = loginUser.getUserId();
+
         JSONObject jsonObject = getJsonRequest();
-//        String productIds = jsonObject.getString("productIds");
-        Integer cartId = jsonObject.getInteger("cartId");
-        if (null == cartId) {
+        String productIds = jsonObject.getString("productIds");
+
+        if (StringUtils.isNullOrEmpty(productIds)) {
             return toResponsFail("删除出错");
         }
-//        if (StringUtils.isNullOrEmpty(productIds)) {
-//            return toResponsFail("删除出错");
-//        }
-//        String[] productIdsArray = productIds.split(",");
-//        cartService.deleteByProductIds(productIdsArray);
-        cartService.delete(cartId);
+        String[] productIdsArray = productIds.split(",");
+        cartService.deleteByUserAndProductIds(userId, productIdsArray);
+
         return toResponsSuccess(getCart(loginUser));
     }
 
