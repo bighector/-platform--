@@ -31,18 +31,26 @@ Page({
         title: '',
         content: '要删除所选足迹？',
         success: function (res) {
+          console.log(footprint.id);
           if (res.confirm) {
-            util.request(api.FootprintDelete, { footprintId: footprint.id }, 'POST').then(function (res) {
+            util.request(api.FootprintDelete, { footprintId: footprint.id }).then(function (res) {
+              console.log(res);
               if (res.errno === 0) {
                 wx.showToast({
-                  title: '删除成功',
+                  title: res.errmsg,
                   icon: 'success',
-                  duration: 2000
-                });
-                that.getFootprintList();
+                  duration: 2000,
+                  complete:function(){
+                    that.getFootprintList();
+                    console.log('重新加载');
+                    console.log(that.data.footprintList);
+                  }
+                });                
+              } else{
+                util.showErrorToast(res.errmsg);
               }
             });
-            console.log('用户点击确定')
+            console.log('用户点击确定');
           }
         }
       });
