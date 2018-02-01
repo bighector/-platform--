@@ -103,8 +103,8 @@
     <delete id="deleteByParam">
         delete from nideshop_footprint
         where 1 = 1
-        <if test="userId != null">and `user_id` = #{userId},</if>
-        <if test="goodsId != null">and `goods_id` = #{goodsId},</if>
+        <if test="userId != null">and `user_id` = #{userId} </if>
+        <if test="goodsId != null">and `goods_id` = #{goodsId} </if>
     </delete>
 
     <delete id="deleteBatch">
