@@ -11,11 +11,19 @@ Page({
   },
   getFootprintList() {
     let that = this;
+    var tmpFootPrint;
     util.request(api.FootprintList).then(function (res) {
       if (res.errno === 0) {
         console.log(res.data);
+      
+        if (res.data.data != undefined){
+          tmpFootPrint = res.data.data;
+        } else {
+          tmpFootPrint = [];
+        }
+       
         that.setData({
-          footprintList: res.data.data
+          footprintList: tmpFootPrint 
         });
       }
     });
