@@ -2,15 +2,17 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
-import router from './router'
+import {router} from './router'
 import YDUI from 'vue-ydui';
 import 'vue-ydui/dist/ydui.px.css';
-import {ActionSheet} from 'vue-ydui/dist/lib.px/actionsheet'
+import 'normalize.css';
+import components from './components';
+import plugin from './plugin';
 
 Vue.config.productionTip = false
-
-Vue.component(ActionSheet.name, ActionSheet);
 Vue.use(YDUI);
+Vue.use(components);
+Vue.use(plugin);
 
 /* eslint-disable no-new */
 new Vue({

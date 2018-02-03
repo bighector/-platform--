@@ -10,9 +10,15 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "axios": "^0.17.1",
+    "less": "^2.7.3",
+    "less-loader": "^4.0.5",
+    "moment": "^2.20.1",
+    "normalize.css": "^7.0.0",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
-    "vue-ydui": "^1.1.5"
+    "vue-ydui": "^1.1.5",
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
