@@ -25,6 +25,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@import '../../../../assets/css/var.less';
 .app-shell{
     position: absolute;
     top:0px;
@@ -43,12 +44,13 @@ export default {
         flex:1;
         overflow-x: hidden;
         overflow-y: auto;
+        background: @background-color;
     }
     .app-shell-with-header{
         padding-top:46px;
     }
     .app-shell-with-footer{
-        padding-bottom:51px;
+        padding-bottom:53px;
     }
     footer{
         position:absolute;

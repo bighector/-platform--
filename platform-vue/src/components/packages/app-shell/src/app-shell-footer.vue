@@ -1,32 +1,47 @@
 <template>
   <div class="app-shell-footer">
-        <yd-tabbar>
-            <yd-tabbar-item title="首页" link="/index" :active="this.$route.path === '/index'">
-                <yd-icon name="home" slot="icon" size="20px"></yd-icon>
-            </yd-tabbar-item>
-            <yd-tabbar-item title="活动" link="/activity" :active="this.$route.path === '/activity'">
-                <yd-icon name="discount" slot="icon" size="20px"></yd-icon>
-            </yd-tabbar-item>
-            <yd-tabbar-item title="分类" link="category" :active="this.$route.path === '/category'">
-                <yd-icon name="type" slot="icon" size="20px"></yd-icon>
-            </yd-tabbar-item>
-            <yd-tabbar-item title="购物车" link="/cart" :active="this.$route.path === '/cart'">
-                <yd-icon name="shopcart" slot="icon" size="20px"></yd-icon>
-            </yd-tabbar-item>
-            <yd-tabbar-item title="个人中心" link="/center" :active="this.$route.path === '/center'">
-                <yd-icon name="ucenter" slot="icon" size="20px"></yd-icon>
-            </yd-tabbar-item>
-        </yd-tabbar>
+        <tabbar>
+            <tabbar-item link="/index" :selected="this.$route.path === '/index'">
+                <i class="iconfont" slot="icon">&#xe601;</i>
+                <span slot="label">首页</span>
+            </tabbar-item>
+            <tabbar-item link="/activity" :selected="this.$route.path === '/activity'">
+                <i class="iconfont" slot="icon">&#xe88d;</i>
+                <span slot="label">活动</span>
+            </tabbar-item>
+            <tabbar-item link="/category" :selected="this.$route.path === '/category'">
+                <i class="iconfont" slot="icon">&#xe609;</i>
+                <span slot="label">分类</span>
+            </tabbar-item>
+            <tabbar-item link="/cart" :selected="this.$route.path === '/cart'">
+                <i class="iconfont" slot="icon">&#xe600;</i>
+                <span slot="label">购物车</span>
+            </tabbar-item>
+            <tabbar-item link="/center" :selected="this.$route.path === '/center'">
+                <i class="iconfont" slot="icon">&#xe698;</i>
+                <span slot="label">购物车</span>
+            </tabbar-item>
+        </tabbar>
   </div>
 </template>
 
 <script>
+import { Tabbar, TabbarItem} from 'vux'
+
 export default {
-  data(){
-      return {
-          active:true
-      }
+  components: {
+    Tabbar,
+    TabbarItem
   }
 }
 </script>
+
+<style lang="less" scoped>
+.app-shell-footer{
+    .weui-tabbar__item{
+        text-decoration: none;
+    }
+}
+</style>
+
 

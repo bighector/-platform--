@@ -1,6 +1,6 @@
 # platform-vue
 
-> A Vue.js project
+> wechat-end h5 client powered by vuejs and vux
 
 ## Build Setup
 
