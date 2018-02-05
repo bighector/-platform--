@@ -13,4 +13,16 @@ export default {
 }
 </script>
 
+<style lang="less">
+@import '../../../../assets/css/var.less';
+.app-shell-header{
+  .vux-header{
+    background: white;
+    .vux-header-title{
+        color:@title-color;
+    }
+  }
+}
+</style>
+
 
