@@ -14,19 +14,19 @@ Page({
       if (res.errno === 0) {
         console.log(res.data);
         that.setData({
-          collectList: res.data.data
+          collectList: res.data
         });
       }
     });
   },
   onLoad: function (options) {
-    this.getCollectList();
+    
   },
   onReady: function () {
 
   },
   onShow: function () {
-
+    this.getCollectList();
   },
   onHide: function () {
     // 页面隐藏
@@ -39,6 +39,7 @@ Page({
     
     let that = this;
     let goodsId = this.data.collectList[event.currentTarget.dataset.index].value_id;
+    console.log(goodsId);
 
     //触摸时间距离页面打开的毫秒数  
     var touchTime = that.data.touch_end - that.data.touch_start;
@@ -47,10 +48,10 @@ Page({
     if (touchTime > 350) {
       wx.showModal({
         title: '',
-        content: '确定删除吗？',
+        content: '确定删除收藏吗？',
         success: function (res) {
           if (res.confirm) {
-            
+            console.log('用户点击确认');
             util.request(api.CollectAddOrDelete, { typeId: that.data.typeId, valueId: goodsId}, 'POST').then(function (res) {
               if (res.errno === 0) {
                 console.log(res.data);
