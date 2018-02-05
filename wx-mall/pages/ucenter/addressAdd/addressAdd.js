@@ -261,7 +261,7 @@ Page({
     });
   },
   cancelAddress(){
-    wx.reLaunch({
+    wx.navigateBack({
       url: '/pages/ucenter/address/address',
     })
   },
@@ -280,7 +280,6 @@ Page({
       return false;
     }
 
-
     if (address.district_id == 0) {
       util.showErrorToast('请输入省市区');
       return false;
@@ -290,7 +289,6 @@ Page({
       util.showErrorToast('请输入详细地址');
       return false;
     }
-
 
     let that = this;
     util.request(api.AddressSave, { 
@@ -307,7 +305,7 @@ Page({
       detailInfo: address.detailInfo,
     }, 'POST').then(function (res) {
       if (res.errno === 0) {
-        wx.reLaunch({
+        wx.navigateBack({
           url: '/pages/ucenter/address/address',
         })
       }
