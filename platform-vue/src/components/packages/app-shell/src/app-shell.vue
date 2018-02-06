@@ -39,8 +39,10 @@ export default {
         top:0px;
         left:0px;
         right:0px;
+        z-index:9;
     }
     section{
+        position: relative;
         flex:1;
         overflow-x: hidden;
         overflow-y: auto;
@@ -57,6 +59,7 @@ export default {
         bottom:0px;
         left:0px;
         right:0px;
+        z-index:9
     }
 }
 </style>
