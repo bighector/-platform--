@@ -3938,7 +3938,13 @@ INSERT INTO `sys_menu` VALUES ('371', '368', '修改', null, 'sys:dept:update', 
 INSERT INTO `sys_menu` VALUES ('372', '368', '删除', null, 'sys:dept:delete', '2', null, '0', '0');
 INSERT INTO `sys_menu` VALUES ('373', '368', '选择部门', null, 'sys:dept:select', '2', null, '0', '0');
 INSERT INTO `sys_menu` VALUES ('374', '0', '订单管理', null, null, '0', 'fa fa-first-order', '4', '0');
-
+INSERT INTO `sys_menu` VALUES ('375', '0', '短信平台', null, null, '0', 'fa fa-television', '9', '0');
+INSERT INTO `sys_menu` VALUES ('376','375', '短信配置', 'sys/smslog.html', 'sys:smslog:list,sys:smslog:info', '1', 'fa fa-envelope-open', '1', '0');
+INSERT INTO `sys_menu` VALUES ('377', '1', '地区管理', 'sys/region.html', null, '1', 'fa fa-map-pin', '8', '0');
+INSERT INTO `sys_menu` VALUES ('378', '377', '删除', null, 'sys:region:delete', '2', null, '0', '0');
+INSERT INTO `sys_menu` VALUES ('379', '377', '修改', '', 'sys:region:update', '2', null, '0', '0');
+INSERT INTO `sys_menu` VALUES ('380', '377', '新增', null, 'sys:region:save', '2', null, '0', '0');
+INSERT INTO `sys_menu` VALUES ('381', '377', '查看', null, 'sys:region:list,sys:region:info', '2', null, '0', '0');
 -- ----------------------------
 -- Table structure for `sys_oss`
 -- ----------------------------
@@ -4080,14 +4086,6 @@ create index region_type
   on sys_region (type)
 ;
 
-INSERT INTO platform.sys_menu (parent_id, name, url, perms, type, icon, order_num, status) VALUES (375, '删除', null, 'sys:region:delete', 2, null, 0, 0);
-INSERT INTO platform.sys_menu (parent_id, name, url, perms, type, icon, order_num, status) VALUES (375, '修改', '', 'sys:region:update', 2, null, 0, 0);
-INSERT INTO platform.sys_menu (parent_id, name, url, perms, type, icon, order_num, status) VALUES (375, '新增', null, 'sys:region:save', 2, null, 0, 0);
-INSERT INTO platform.sys_menu (parent_id, name, url, perms, type, icon, order_num, status) VALUES (375, '查看', null, 'sys:region:list,sys:region:info', 2, null, 0, 0);
-INSERT INTO platform.sys_menu (parent_id, name, url, perms, type, icon, order_num, status) VALUES (1, '地区管理', 'sys/region.html', null, 1, 'fa fa-map-pin', 8, 0);
-
-
-
 DROP TABLE IF EXISTS `sys_sms_log`;
 CREATE TABLE `sys_sms_log` (
   `id` varchar(32) NOT NULL COMMENT '主键',
@@ -4108,9 +4106,6 @@ CREATE TABLE `sys_sms_log` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO sys_config VALUES ('2', 'SMS_CONFIG_KEY', '{"domain":"http://web.cr6868.com/asmx/smsservice.aspx?","name":"","pwd":"","sign":"","type":1}', 0, '短信配置');
-
-INSERT INTO sys_menu (parent_id, name, url, perms, type, icon, order_num, status) VALUES (0, '短信平台', null, null, 0, 'fa fa-television', 9, 0);
-INSERT INTO sys_menu (parent_id, name, url, perms, type, icon, order_num, status) VALUES (375, '短信配置', 'sys/smslog.html', 'sys:smslog:list,sys:smslog:info', 1, 'fa fa-envelope-open', 1, 0);
 
 -- 20180123
 ALTER TABLE nideshop_address ADD is_default INT(1) DEFAULT 0 NULL;
