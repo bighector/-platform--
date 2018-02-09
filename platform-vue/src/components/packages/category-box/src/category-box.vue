@@ -29,6 +29,7 @@ export default {
         position: relative;
         height: 45px;
         width:100%;
+        background: white;
         .header-line{
             position: absolute;
             top:50%;

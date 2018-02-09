@@ -1,6 +1,6 @@
 <template>
   <div class="app-shell-header">
-      <x-header :left-options="{showBack: false}">{{this.$route.meta.title}}</x-header>
+      <x-header :left-options="{showBack: this.$route.meta.level === 1}">{{this.$route.meta.title}}</x-header>
   </div>
 </template>
 
@@ -18,6 +18,9 @@ export default {
 .app-shell-header{
   .vux-header{
     background: white;
+    .vux-header-back{
+      color:@title-color;
+    }
     .vux-header-title{
         color:@title-color;
     }

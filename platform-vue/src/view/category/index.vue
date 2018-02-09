@@ -101,7 +101,6 @@ export default {
   background: white;
   .category-header {
     flex-grow: 0;
-    border-top: 1px solid @divider-color;
     padding: 0px 10px;
     .header-search {
       padding: 10px 0px;

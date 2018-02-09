@@ -9,9 +9,11 @@ import plugin from './plugin';
 import {router} from './router'
 import './assets/icon/index.css';
 import './assets/css/reset.css';
+import  { ToastPlugin } from 'vux'
 
 Vue.use(components);
 Vue.use(plugin);
+Vue.use(ToastPlugin)
 
 FastClick.attach(document.body)
 

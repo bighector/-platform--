@@ -38,8 +38,11 @@ export default {
 
 <style lang="less" scoped>
 .app-shell-footer{
-    .weui-tabbar__item{
-        text-decoration: none;
+    .weui-tabbar{
+        background: white;
+        .weui-tabbar__item{
+          text-decoration: none;
+        }
     }
 }
 </style>

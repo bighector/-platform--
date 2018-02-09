@@ -85,6 +85,18 @@ let routes = [
     component: (resolve) => {
       require(['../view/search'], resolve)
     }
+  },
+  {
+    name: 'order-confirm',
+    path: '/order/confirm',
+    meta: {
+      requiresAuth: false,
+      title: '确认订单',
+      level:1
+    },
+    component: (resolve) => {
+      require(['../view/order/order-confirm'], resolve)
+    }
   }
 ]
 

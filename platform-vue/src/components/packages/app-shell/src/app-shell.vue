@@ -40,6 +40,16 @@ export default {
         left:0px;
         right:0px;
         z-index:9;
+        &::after{
+            position: absolute;
+            content: '';
+            bottom:0px;
+            left:0px;
+            width:100%;
+            border-bottom:1px solid @divider-color;
+            transform: scaleY(0.5);
+            z-index:9;
+        }
     }
     section{
         position: relative;
