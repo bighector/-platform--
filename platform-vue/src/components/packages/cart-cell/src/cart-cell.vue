@@ -25,7 +25,7 @@
                   <div class="detials-spec">
                         <div class="spec-box">
                                 <p>深蓝精巧</p>
-                                <i class="iconfont">&#xe632;</i>
+                                <i class="iconfont">&#xe619;</i>
                         </div>
                   </div>
                     <div class="detials-num">
