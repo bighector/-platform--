@@ -42,12 +42,16 @@ export default {
                 top:50%;
                 left:50%;
                 transform: translate(-50%,-50%);
-                font-size: 12px;
+                font-size: 16px;
                 background: white;
                 padding:0px 10px;
                 color:@content-color;
+                white-space:nowrap;
             }
         }
+    }
+    .category-box-view{
+        padding:0px 10px;
     }
 }
 </style>

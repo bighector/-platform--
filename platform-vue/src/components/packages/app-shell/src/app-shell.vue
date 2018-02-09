@@ -1,12 +1,12 @@
 <template>
   <div class="app-shell">
-      <header>
+      <header v-if="this.$route.meta.level !== 0">
           <app-shell-header></app-shell-header>
       </header>
       <section class="app-shell-with-header app-shell-with-footer">
           <router-view></router-view>
       </section>
-      <footer>
+      <footer v-if="this.$route.meta.level === 2">
           <app-shell-footer></app-shell-footer>
       </footer>
   </div>

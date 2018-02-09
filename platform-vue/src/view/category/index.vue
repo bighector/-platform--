@@ -2,7 +2,10 @@
   <div class="category">
     <div class="category-header">
       <div class="header-search">
-        <input type="text" placeholder="商品搜索，共有239款好物">
+        <div class="search-view" @click="goto('/search')">
+            <i class="iconfont">&#xe626;</i>
+            <p>商品搜索，共有239款好物</p>
+        </div>
       </div>
       <div class="header-tabbar">
         <tab>
@@ -102,16 +105,24 @@ export default {
     padding: 0px 10px;
     .header-search {
       padding: 10px 0px;
-      input {
-        display: block;
-        border: none;
-        width: 100%;
-        height: 25px;
-        background: @divider-color;
-        outline: none;
-        line-height: 25px;
+      .search-view {
+        display: flex;
+        height: 35px;
+        padding:0px 10px;
+        background: @background-color;
         border-radius: 5px;
         text-align: center;
+        i{
+            flex-basis: 35px;
+            font-size: 20px;
+            line-height: 35px;
+        }
+        p{
+            flex:1;
+            font-size: 14px;
+            line-height: 35px;
+            color:@content-color;
+        }
       }
     }
   }
@@ -130,9 +141,9 @@ export default {
         list-style: none;
         li{
           position: relative;
-          flex-basis:35px;
+          flex-basis:45px;
           flex-grow: 0;
-          line-height: 35px;
+          line-height: 45px;
           text-align: center;
           font-size: 14px;
           color:@content-color;

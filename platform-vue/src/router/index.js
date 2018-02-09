@@ -11,6 +11,7 @@ let routes = [
     meta: {
       requiresAuth: false,
       title: '重定向',
+      level:0
     }
   },
   {
@@ -19,6 +20,7 @@ let routes = [
     meta: {
       requiresAuth: false,
       title: '首页',
+      level:2
     },
     component: (resolve) => {
       require(['../view/index/index'], resolve)
@@ -30,6 +32,7 @@ let routes = [
     meta: {
       requiresAuth: false,
       title: '活动',
+      level:2
     },
     component: (resolve) => {
       require(['../view/activity/index'], resolve)
@@ -41,6 +44,7 @@ let routes = [
     meta: {
       requiresAuth: false,
       title: '分类',
+      level:2
     },
     component: (resolve) => {
       require(['../view/category/index'], resolve)
@@ -52,6 +56,7 @@ let routes = [
     meta: {
       requiresAuth: false,
       title: '购物车',
+      level:2
     },
     component: (resolve) => {
       require(['../view/cart/index'], resolve)
@@ -63,9 +68,22 @@ let routes = [
     meta: {
       requiresAuth: false,
       title: '个人中心',
+      level:2
     },
     component: (resolve) => {
       require(['../view/center/index'], resolve)
+    }
+  },
+  {
+    name: 'search',
+    path: '/search',
+    meta: {
+      requiresAuth: false,
+      title: '搜索',
+      level:0
+    },
+    component: (resolve) => {
+      require(['../view/search'], resolve)
     }
   }
 ]
