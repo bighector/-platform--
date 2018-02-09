@@ -148,13 +148,22 @@ page{
   padding: 0 30rpx;
 }
 
-.region-select .region-list{
+.region-select {
   height: auto;
   overflow: scroll;
 
 }
 
-.region-select .region-list .item{
+.region-list{
+  width: 100%;
+  height: 100%;
+  line-height: 104rpx;
+  text-align: left;
+  color: #333;
+  font-size: 28rpx;
+}
+
+.region-select .item{
   width: 100%;
   height: 104rpx;
   line-height: 104rpx;

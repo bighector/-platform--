@@ -112,7 +112,10 @@ Page({
                 showCancel:false,
                 confirmText:'继续',
                 success: function (res) {
-                  util.redirect('/pages/ucenter/order/order');
+                //  util.redirect('/pages/ucenter/order/order');
+                  wx.navigateBack({
+                    url: 'pages/ucenter/order/order',
+                  });
                 }
               });
             }

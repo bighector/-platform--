@@ -8,7 +8,6 @@ Page({
   onLoad:function(options){
     // 页面初始化 options为页面跳转所带来的参数
 
-    this.getOrderList();
   },
   getOrderList(){
     let that = this;
@@ -18,6 +17,7 @@ Page({
         that.setData({
           orderList: res.data.data
         });
+        wx.hideLoading();
       }
     });
   },
@@ -31,6 +31,14 @@ Page({
   },
   onShow:function(){
     // 页面显示
+
+    wx.showLoading({
+      title: '加载中...',
+      success: function () {
+
+      }
+    });
+    this.getOrderList();
   },
   onHide:function(){
     // 页面隐藏
