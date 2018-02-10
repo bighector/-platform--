@@ -3923,7 +3923,7 @@ INSERT INTO `sys_menu` VALUES ('356', '352', '删除', null, 'goodsspecification
 INSERT INTO `sys_menu` VALUES ('357', '0', '编辑商品', null, null, '0', 'fa fa-edit', '3', '0');
 INSERT INTO `sys_menu` VALUES ('358', '357', '商品回收站', 'shop/goodshistory.html', '', '1', 'fa fa-history', '12', '0');
 INSERT INTO `sys_menu` VALUES ('359', '358', '恢复', null, 'goods:back', '2', null, '0', '0');
-INSERT INTO `sys_menu` VALUES ('360', '294', '确认收获', null, 'order:confirm', '2', null, '0', '0');
+INSERT INTO `sys_menu` VALUES ('360', '294', '确认收货', null, 'order:confirm', '2', null, '0', '0');
 INSERT INTO `sys_menu` VALUES ('361', '357', '团购设置', 'shop/goodsgroup.html', null, '1', 'fa fa-group', '5', '0');
 INSERT INTO `sys_menu` VALUES ('362', '361', '查看', null, 'goodsgroup:list,goodsgroup:info', '2', null, '6', '0');
 INSERT INTO `sys_menu` VALUES ('363', '361', '新增', null, 'goodsgroup:save', '2', null, '6', '0');
