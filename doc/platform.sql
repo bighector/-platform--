@@ -591,7 +591,7 @@ CREATE TABLE `nideshop_feedback` (
   `feed_Type` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '反馈类型',
   `content` text COLLATE utf8_unicode_ci NOT NULL COMMENT '详细内容',
   `status` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '状态',
-  `add_time` datetime DEFAULT NULL COMMENT '反馈时间',
+  `add_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '反馈时间',
   PRIMARY KEY (`msg_id`),
   KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
