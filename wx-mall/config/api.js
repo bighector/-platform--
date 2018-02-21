@@ -58,4 +58,6 @@ module.exports = {
 
     FootprintList: NewApiRootUrl + 'footprint/list',  //足迹列表
     FootprintDelete: NewApiRootUrl + 'footprint/delete',  //删除足迹
+    
+    FeedbackAdd: NewApiRootUrl + 'feedback/save', //添加反馈
 };

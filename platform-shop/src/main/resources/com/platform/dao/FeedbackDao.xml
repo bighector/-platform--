@@ -78,8 +78,8 @@
 			#{userName},
 			#{mobile},
 			#{feedType},
-			#{msgContent},
-			#{msgTime},
+			#{content},
+			#{addTime},
 			#{status})
 	</insert>
 	 
@@ -90,8 +90,8 @@
 			<if test="userName != null">`user_name` = #{userName}, </if>
 			<if test="mobile != null">`mobile` = #{mobile}, </if>
 			<if test="feedType != null">`feed_Type` = #{feedType}, </if>
-			<if test="msgContent != null">`content` = #{msgContent}, </if>
-			<if test="msgTime != null">`add_time` = #{msgTime}, </if>
+			<if test="content != null">`content` = #{content}, </if>
+			<if test="addTime != null">`add_time` = #{addTime}, </if>
 			<if test="status != null">`status` = #{status}, </if>
 		</set>
 		where msg_id = #{msgId}

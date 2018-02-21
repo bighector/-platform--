@@ -1,6 +1,7 @@
 package com.platform.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 
 /**
@@ -12,133 +13,116 @@ public class FeedbackVo implements Serializable {
     private static final long serialVersionUID = 1L;
 
     //主键
-    private Integer msg_id;
+    private Integer msgId;
     //父节点
-    private Integer parent_id;
+//    private Integer parentId;
     //会员Id
-    private Long user_id;
+    private Integer userId;
     //会员名称
-    private String user_name;
+    private String userName;
+
+    //移动电话
+    private String mobile;
     //邮件
-    private String user_email;
+//    private String userEmail;
     //标题
-    private String msg_title;
+//    private String msgTitle;
     //类型
-    private Integer msg_type;
+    private Integer feedType;
     //状态
-    private Integer msg_status;
+    private Integer status;
     //详细内容
-    private String msg_content;
+    private String content;
     //反馈时间
-    private Long msg_time;
+    private Date addTime;
     //图片
-    private String message_img;
+//    private String messageImg;
     //订单Id
-    private Integer order_id;
+//    private Integer orderId;
     //
-    private Integer msg_area;
+//    private Integer msgArea;
 
-    public Integer getMsg_id() {
-        return msg_id;
+    /**
+     * 设置：主键
+     */
+    public void setMsgId(Integer msgId) {
+        this.msgId = msgId;
     }
 
-    public void setMsg_id(Integer msg_id) {
-        this.msg_id = msg_id;
+    /**
+     * 获取：主键
+     */
+    public Integer getMsgId() {
+        return msgId;
     }
 
-    public Integer getParent_id() {
-        return parent_id;
+
+    /**
+     * 设置：会员Id
+     */
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
-    public void setParent_id(Integer parent_id) {
-        this.parent_id = parent_id;
+    /**
+     * 获取：会员Id
+     */
+    public Integer getUserId() {
+        return userId;
     }
 
-    public Long getUser_id() {
-        return user_id;
+    /**
+     * 设置：会员名称
+     */
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public void setUser_id(Long user_id) {
-        this.user_id = user_id;
+    /**
+     * 获取：会员名称
+     */
+    public String getUserName() {
+        return userName;
     }
 
-    public String getUser_name() {
-        return user_name;
+
+    public Date getAddTime() {
+        return addTime;
     }
 
-    public void setUser_name(String user_name) {
-        this.user_name = user_name;
+    public void setAddTime(Date addTime) {
+        this.addTime = addTime;
     }
 
-    public String getUser_email() {
-        return user_email;
+    public String getContent() {
+        return content;
     }
 
-    public void setUser_email(String user_email) {
-        this.user_email = user_email;
+    public void setContent(String content) {
+        this.content = content;
     }
 
-    public String getMsg_title() {
-        return msg_title;
+    public String getMobile() {
+        return mobile;
     }
 
-    public void setMsg_title(String msg_title) {
-        this.msg_title = msg_title;
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 
-    public Integer getMsg_type() {
-        return msg_type;
+    public Integer getFeedType() {
+        return feedType;
     }
 
-    public void setMsg_type(Integer msg_type) {
-        this.msg_type = msg_type;
+    public void setFeedType(Integer feedType) {
+        this.feedType = feedType;
     }
 
-    public Integer getMsg_status() {
-        return msg_status;
+    public Integer getStatus() {
+        return status;
     }
 
-    public void setMsg_status(Integer msg_status) {
-        this.msg_status = msg_status;
-    }
-
-    public String getMsg_content() {
-        return msg_content;
-    }
-
-    public void setMsg_content(String msg_content) {
-        this.msg_content = msg_content;
-    }
-
-    public Long getMsg_time() {
-        return msg_time;
-    }
-
-    public void setMsg_time(Long msg_time) {
-        this.msg_time = msg_time;
-    }
-
-    public String getMessage_img() {
-        return message_img;
-    }
-
-    public void setMessage_img(String message_img) {
-        this.message_img = message_img;
-    }
-
-    public Integer getOrder_id() {
-        return order_id;
-    }
-
-    public void setOrder_id(Integer order_id) {
-        this.order_id = order_id;
-    }
-
-    public Integer getMsg_area() {
-        return msg_area;
-    }
-
-    public void setMsg_area(Integer msg_area) {
-        this.msg_area = msg_area;
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }
