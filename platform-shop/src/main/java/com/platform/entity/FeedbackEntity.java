@@ -1,6 +1,7 @@
 package com.platform.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 
 /**
@@ -17,29 +18,32 @@ public class FeedbackEntity implements Serializable {
     //主键
     private Integer msgId;
     //父节点
-    private Integer parentId;
+//    private Integer parentId;
     //会员Id
     private Integer userId;
     //会员名称
     private String userName;
+
+    //移动电话
+    private String mobile;
     //邮件
-    private String userEmail;
+//    private String userEmail;
     //标题
-    private String msgTitle;
+//    private String msgTitle;
     //类型
-    private Integer msgType;
+    private Integer feedType;
     //状态
-    private Integer msgStatus;
+    private Integer status;
     //详细内容
-    private String msgContent;
+    private String content;
     //反馈时间
-    private Integer msgTime;
+    private Date addTime;
     //图片
-    private String messageImg;
+//    private String messageImg;
     //订单Id
-    private Integer orderId;
+//    private Integer orderId;
     //
-    private Integer msgArea;
+//    private Integer msgArea;
 
     /**
      * 设置：主键
@@ -55,19 +59,6 @@ public class FeedbackEntity implements Serializable {
         return msgId;
     }
 
-    /**
-     * 设置：父节点
-     */
-    public void setParentId(Integer parentId) {
-        this.parentId = parentId;
-    }
-
-    /**
-     * 获取：父节点
-     */
-    public Integer getParentId() {
-        return parentId;
-    }
 
     /**
      * 设置：会员Id
@@ -97,129 +88,44 @@ public class FeedbackEntity implements Serializable {
         return userName;
     }
 
-    /**
-     * 设置：邮件
-     */
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
+
+    public Date getAddTime() {
+        return addTime;
     }
 
-    /**
-     * 获取：邮件
-     */
-    public String getUserEmail() {
-        return userEmail;
+    public void setAddTime(Date addTime) {
+        this.addTime = addTime;
     }
 
-    /**
-     * 设置：标题
-     */
-    public void setMsgTitle(String msgTitle) {
-        this.msgTitle = msgTitle;
+    public String getContent() {
+        return content;
     }
 
-    /**
-     * 获取：标题
-     */
-    public String getMsgTitle() {
-        return msgTitle;
+    public void setContent(String content) {
+        this.content = content;
     }
 
-    /**
-     * 设置：类型
-     */
-    public void setMsgType(Integer msgType) {
-        this.msgType = msgType;
+    public String getMobile() {
+        return mobile;
     }
 
-    /**
-     * 获取：类型
-     */
-    public Integer getMsgType() {
-        return msgType;
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 
-    /**
-     * 设置：状态
-     */
-    public void setMsgStatus(Integer msgStatus) {
-        this.msgStatus = msgStatus;
+    public Integer getFeedType() {
+        return feedType;
     }
 
-    /**
-     * 获取：状态
-     */
-    public Integer getMsgStatus() {
-        return msgStatus;
+    public void setFeedType(Integer feedType) {
+        this.feedType = feedType;
     }
 
-    /**
-     * 设置：详细内容
-     */
-    public void setMsgContent(String msgContent) {
-        this.msgContent = msgContent;
+    public Integer getStatus() {
+        return status;
     }
 
-    /**
-     * 获取：详细内容
-     */
-    public String getMsgContent() {
-        return msgContent;
-    }
-
-    /**
-     * 设置：反馈时间
-     */
-    public void setMsgTime(Integer msgTime) {
-        this.msgTime = msgTime;
-    }
-
-    /**
-     * 获取：反馈时间
-     */
-    public Integer getMsgTime() {
-        return msgTime;
-    }
-
-    /**
-     * 设置：图片
-     */
-    public void setMessageImg(String messageImg) {
-        this.messageImg = messageImg;
-    }
-
-    /**
-     * 获取：图片
-     */
-    public String getMessageImg() {
-        return messageImg;
-    }
-
-    /**
-     * 设置：订单Id
-     */
-    public void setOrderId(Integer orderId) {
-        this.orderId = orderId;
-    }
-
-    /**
-     * 获取：订单Id
-     */
-    public Integer getOrderId() {
-        return orderId;
-    }
-
-    /**
-     * 设置：
-     */
-    public void setMsgArea(Integer msgArea) {
-        this.msgArea = msgArea;
-    }
-
-    /**
-     * 获取：
-     */
-    public Integer getMsgArea() {
-        return msgArea;
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }
