@@ -81,6 +81,7 @@ export default {
       i{
         flex-basis:30px;
         line-height: 30px;
+        font-size: 20px;
       }
       p{
         flex-basis: 30px;
