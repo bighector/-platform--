@@ -1,4 +1,4 @@
 <template>
-  <div class="activity">
+  <div class="special">
   </div>
 </template>

@@ -27,15 +27,15 @@ let routes = [
     }
   },
   {
-    name: 'activity',
-    path: '/activity',
+    name: 'special',
+    path: '/special',
     meta: {
       requiresAuth: false,
-      title: '活动',
+      title: '专题',
       level:2
     },
     component: (resolve) => {
-      require(['../view/activity/index'], resolve)
+      require(['../view/special/index'], resolve)
     }
   },
   {

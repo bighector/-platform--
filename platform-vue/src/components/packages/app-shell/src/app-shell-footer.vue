@@ -5,9 +5,9 @@
                 <i class="iconfont" slot="icon">&#xe601;</i>
                 <span slot="label">首页</span>
             </tabbar-item>
-            <tabbar-item link="/activity" :selected="this.$route.path === '/activity'">
+            <tabbar-item link="/special" :selected="this.$route.path === '/special'">
                 <i class="iconfont" slot="icon">&#xe88d;</i>
-                <span slot="label">活动</span>
+                <span slot="label">专题</span>
             </tabbar-item>
             <tabbar-item link="/category" :selected="this.$route.path === '/category'">
                 <i class="iconfont" slot="icon">&#xe609;</i>
