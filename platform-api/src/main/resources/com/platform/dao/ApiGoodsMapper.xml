@@ -207,6 +207,13 @@
     </select>
 
     <select id="queryTotal" resultType="int">
-		select count(*) from nideshop_goods 
+		select count(*) from nideshop_goods
+		where 1 = 1
+        <if test="is_delete != null">
+            and is_delete = #{is_delete}
+        </if>
+        <if test="is_on_sale != null and is_on_sale != ''">
+            and is_on_sale = #{is_on_sale}
+        </if>
 	</select>
 </mapper>
