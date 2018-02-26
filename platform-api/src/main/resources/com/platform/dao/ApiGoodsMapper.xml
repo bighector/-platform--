@@ -74,6 +74,9 @@
         <if test="is_delete != null">
             and is_delete = #{is_delete}
         </if>
+        <if test="is_on_sale != null and is_on_sale != ''">
+            and is_on_sale = #{is_on_sale}
+        </if>
         <if test="categoryIds != null">
             and category_id in
             <foreach item="item" collection="categoryIds" open="(" separator="," close=")">
