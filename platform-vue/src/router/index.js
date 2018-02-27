@@ -97,6 +97,18 @@ let routes = [
     component: (resolve) => {
       require(['../view/order/order-confirm'], resolve)
     }
+  },
+  {
+    name: 'goods',
+    path: '/goods/:id',
+    meta: {
+      requiresAuth: false,
+      title: '商品详情',
+      level:0
+    },
+    component: (resolve) => {
+      require(['../view/goods/index'], resolve)
+    }
   }
 ]
 
