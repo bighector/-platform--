@@ -3,7 +3,7 @@
       <header v-if="this.$route.meta.level !== 0">
           <app-shell-header></app-shell-header>
       </header>
-      <section class="app-shell-with-header app-shell-with-footer">
+      <section :class="sectionClass">
           <router-view></router-view>
       </section>
       <footer v-if="this.$route.meta.level === 2">
@@ -20,6 +20,17 @@ export default {
   components:{
       appShellHeader,
       appShellFooter
+  },
+  computed:{
+      sectionClass(){
+          const arrClass = [
+              '',
+              'app-shell-with-header',
+              'app-shell-with-header app-shell-with-footer'
+          ];
+          const routeIndex = this.$route.meta.level;
+          return arrClass[routeIndex];
+      }
   }
 }
 </script>
