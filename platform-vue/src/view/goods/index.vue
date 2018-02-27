@@ -237,12 +237,6 @@ export default {
     overflow-x: hidden;
     overflow-y: auto;
     .goods-slider-item {
-      position: absolute;
-      top: 54px;
-      bottom: 0px;
-      width: 100%;
-      overflow-x: hidden;
-      overflow-y: auto;
     }
   }
   .shopping-concern {
