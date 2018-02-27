@@ -104,7 +104,7 @@ export default {
 <style lang="less" scoped>
 @import "../../assets/css/var.less";
 .goods {
-  position: fixed;
+  position: absolute;
   display: flex;
   top: 0px;
   right: 0px;
@@ -112,7 +112,7 @@ export default {
   left: 0px;
   flex-direction: column;
   .goods-header {
-    position: fixed;
+    position: absolute;
     top: 0px;
     right: 0px;
     left: 0px;
@@ -233,6 +233,9 @@ export default {
   .goods-slider {
     position: relative;
     flex: 1;
+    padding:54px 0px;
+    overflow-x: hidden;
+    overflow-y: auto;
     .goods-slider-item {
       position: absolute;
       top: 54px;
@@ -243,7 +246,7 @@ export default {
     }
   }
   .shopping-concern {
-    position: fixed;
+    position: absolute;
     bottom: 0px;
     left: 0px;
     right: 0px;
