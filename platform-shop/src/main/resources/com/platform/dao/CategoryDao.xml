@@ -157,4 +157,10 @@
 		</foreach>
 	</delete>
 
+	<delete id="deleteByParentBatch">
+		delete from nideshop_category where parent_id in
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
 </mapper>

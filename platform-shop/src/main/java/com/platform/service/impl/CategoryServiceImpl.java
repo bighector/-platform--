@@ -5,6 +5,7 @@ import com.platform.entity.CategoryEntity;
 import com.platform.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -52,7 +53,9 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    @Transactional
     public int deleteBatch(Integer[]ids) {
+        categoryDao.deleteByParentBatch(ids);
         return categoryDao.deleteBatch(ids);
     }
 }
