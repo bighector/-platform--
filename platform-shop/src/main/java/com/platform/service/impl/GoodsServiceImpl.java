@@ -99,6 +99,8 @@ public class GoodsServiceImpl implements GoodsService {
             }
         }
 
+				goods.setIsDelete(0);
+        goods.setCreateUserDeptId(user.getDeptId());
         goods.setCreateUserId(user.getUserId());
         goods.setUpdateUserId(user.getUserId());
         goods.setUpdateTime(new Date());

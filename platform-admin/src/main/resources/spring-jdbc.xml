@@ -36,6 +36,7 @@
         <property name="proxyFilters">
             <list>
                 <ref bean="stat-filter"/>
+                <!--过滤永真条件 防止注入-->
                 <ref bean="wall-filter"/>
             </list>
         </property>

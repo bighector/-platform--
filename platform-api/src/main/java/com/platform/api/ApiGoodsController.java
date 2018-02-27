@@ -70,6 +70,8 @@ public class ApiGoodsController extends ApiBaseAction {
     public Object index(@LoginUser UserVo loginUser) {
         //
         Map param = new HashMap();
+        param.put("is_delete", 0);
+        param.put("is_on_sale", 1);
         List<GoodsVo> goodsList = goodsService.queryList(param);
         //
         return toResponsSuccess(goodsList);
@@ -286,6 +288,8 @@ public class ApiGoodsController extends ApiBaseAction {
                        @RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "size", defaultValue = "10") Integer size,
                        String sort, String order) {
         Map params = new HashMap();
+        params.put("is_delete", 0);
+        params.put("is_on_sale", 1);
         params.put("brand_id", brandId);
         params.put("keyword", keyword);
         params.put("is_new", isNew);
@@ -389,6 +393,8 @@ public class ApiGoodsController extends ApiBaseAction {
     public Object filter(@LoginUser UserVo loginUser, Integer categoryId,
                          String keyword, Integer isNew, Integer isHot) {
         Map params = new HashMap();
+        params.put("is_delete", 0);
+        params.put("is_on_sale", 1);
         params.put("categoryId", categoryId);
         params.put("keyword", keyword);
         params.put("isNew", isNew);
@@ -480,7 +486,9 @@ public class ApiGoodsController extends ApiBaseAction {
         for (RelatedGoodsVo relatedGoodsEntity : relatedGoodsEntityList) {
             relatedGoodsIds.add(relatedGoodsEntity.getRelated_goods_id());
         }
-        List<GoodsVo> relatedGoods = new ArrayList<>();
+
+        List<GoodsVo> relatedGoods = new ArrayList<GoodsVo>();
+
         if (null == relatedGoodsIds || relatedGoods.size() < 1) {
             //查找同分类下的商品
             GoodsVo goodsCategory = goodsService.queryObject(id);
