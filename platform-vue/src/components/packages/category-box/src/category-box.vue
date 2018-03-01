@@ -5,7 +5,11 @@
               <span class="line-text">{{title}}</span>
           </div>
       </div>
-      <div class="category-box-view"></div>
+      <div class="category-box-view">
+          <div class="view-wrap">
+                <slot></slot>
+          </div>
+      </div>
   </div>
 </template>
 
@@ -53,6 +57,11 @@ export default {
     }
     .category-box-view{
         padding:0px 10px;
+        background: white;
+        .view-wrap{
+            display: flex;
+            flex-wrap: wrap;
+        }
     }
 }
 </style>

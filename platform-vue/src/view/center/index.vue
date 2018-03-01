@@ -76,10 +76,49 @@
             </div>
         </div>
         <div class="center-promote">
-            <category-box title="为您推荐"></category-box>
+            <category-box title="商城热卖">
+                <goods-box
+                :data="v"
+                :key="k"
+                v-for="(v,k) in hotGoods"
+                ></goods-box>
+            </category-box>
         </div>
     </div>
 </template>
+
+<script>
+export default {
+  data(){
+      return{
+          hotGoods:[
+              {
+                  id:1,
+                  imgUrl:'//m.360buyimg.com/mobilecms/s220x220_jfs/t4063/252/2569617591/621169/2a1735b5/58d20d5eN4de2034c.jpg!q70.jpg',
+                  brief:'Apple iPad 平板电脑 9.7英寸（32G WLAN版/A9 芯片/Retina显示屏/Touch ID技术 MPGT2CH/A）金色',
+                  price:'2388',
+                  evaluate:'92%'
+              },
+              {
+                  id:2,
+                  imgUrl:'//m.360buyimg.com/mobilecms/s220x220_jfs/t4063/252/2569617591/621169/2a1735b5/58d20d5eN4de2034c.jpg!q70.jpg',
+                  brief:'Apple iPad 平板电脑 9.7英寸（32G WLAN版/A9 芯片/Retina显示屏/Touch ID技术 MPGT2CH/A）金色',
+                  price:'2388',
+                  evaluate:'92%'
+              },
+              {
+                  id:3,
+                  imgUrl:'//m.360buyimg.com/mobilecms/s220x220_jfs/t4063/252/2569617591/621169/2a1735b5/58d20d5eN4de2034c.jpg!q70.jpg',
+                  brief:'Apple iPad 平板电脑 9.7英寸（32G WLAN版/A9 芯片/Retina显示屏/Touch ID技术 MPGT2CH/A）金色',
+                  price:'2388',
+                  evaluate:'92%'
+              }
+          ]
+      }
+  }
+}
+</script>
+
 
 <style lang="less" scoped>
     @import '../../assets/css/var.less';
