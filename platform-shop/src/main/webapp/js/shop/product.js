@@ -100,6 +100,7 @@ let vm = new Vue({
                     vm.product.goodsSn = r.goods.goodsSn;
                     vm.product.goodsNumber = r.goods.goodsNumber;
                     vm.product.retailPrice = r.goods.retailPrice;
+                    vm.product.marketPrice = r.goods.marketPrice;
                 }
                 $.get("../goodsspecification/queryAll?goodsId=" + goodsId + "&specificationId=1", function (r) {
                     vm.colors = r.list;

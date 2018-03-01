@@ -79,6 +79,9 @@ public class ProductServiceImpl implements ProductService {
                 String[] twoId = goodsSpecificationIdArr[i + 1].split(",");
                 for (int j = 0; j < oneId.length; j++) {
                     for (int k = 0; k < twoId.length; k++) {
+                        if (StringUtils.isNullOrEmpty(oneId[j]) || StringUtils.isNullOrEmpty(twoId[k])){
+                            continue;
+                        }
                         String strGoodsSpecificationIds = oneId[j] + "_" + twoId[k];
                         product.setGoodsSpecificationIds(strGoodsSpecificationIds);
                         ProductEntity entity = new ProductEntity();
