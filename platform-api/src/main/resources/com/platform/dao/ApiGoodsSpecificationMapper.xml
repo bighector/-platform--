@@ -33,6 +33,12 @@
             <if test="goods_id != null">
                 and gs.goods_id = #{goods_id}
             </if>
+            <if test="ids != null">
+                 and  gs.id in
+                <foreach item="id" collection="ids" open="(" separator="," close=")">
+                    #{id}
+                </foreach>
+            </if>
         </where>
         <choose>
             <when test="sidx != null and sidx.trim() != ''">
