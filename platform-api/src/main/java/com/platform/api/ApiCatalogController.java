@@ -38,8 +38,8 @@ public class ApiCatalogController extends ApiBaseAction {
         Map params = new HashMap();
         params.put("page", page);
         params.put("limit", size);
-        params.put("sidx", "id");
-        params.put("order", "desc");
+        params.put("sidx", "sort_order");
+        params.put("order", "asc");
         params.put("parent_id", 0);
         //查询列表数据
         List<CategoryVo> data = categoryService.queryList(params);
