@@ -143,7 +143,7 @@ public class ApiCartController extends ApiBaseAction {
         Integer number = jsonParam.getInteger("number");
         //判断商品是否可以购买
         GoodsVo goodsInfo = goodsService.queryObject(goodsId);
-        if (null == goodsInfo || goodsInfo.getIs_delete() == 1) {
+        if (null == goodsInfo || goodsInfo.getIs_delete() == 1 || goodsInfo.getIs_on_sale() != 1) {
             return this.toResponsObject(400, "商品已下架", "");
         }
         //取得规格的信息,判断规格库存
