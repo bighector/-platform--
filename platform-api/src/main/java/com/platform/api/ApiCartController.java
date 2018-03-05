@@ -122,6 +122,16 @@ public class ApiCartController extends ApiBaseAction {
         return toResponsSuccess(getCart(loginUser));
     }
 
+    private String[] getSpecificationIdsArray(String ids){
+        String[] idsArray = null;
+        if (org.apache.commons.lang.StringUtils.isNotEmpty(ids)){
+            String[] tempArray = ids.split("_");
+            if (null != tempArray && tempArray.length > 0){
+                idsArray = tempArray;
+            }
+        }
+        return idsArray;
+    }
     /**
      * 添加商品到购物车
      */
@@ -133,7 +143,7 @@ public class ApiCartController extends ApiBaseAction {
         Integer number = jsonParam.getInteger("number");
         //判断商品是否可以购买
         GoodsVo goodsInfo = goodsService.queryObject(goodsId);
-        if (null == goodsInfo || goodsInfo.getIs_delete() == 1) {
+        if (null == goodsInfo || goodsInfo.getIs_delete() == 1 || goodsInfo.getIs_on_sale() != 1) {
             return this.toResponsObject(400, "商品已下架", "");
         }
         //取得规格的信息,判断规格库存
@@ -155,8 +165,9 @@ public class ApiCartController extends ApiBaseAction {
             String[] goodsSepcifitionValue = null;
             if (null != productInfo.getGoods_specification_ids() && productInfo.getGoods_specification_ids().length() > 0) {
                 Map specificationParam = new HashMap();
-                specificationParam.put("ids", productInfo.getGoods_specification_ids());
-                specificationParam.put("goodsId", goodsId);
+                String[] idsArray = getSpecificationIdsArray(productInfo.getGoods_specification_ids());
+                specificationParam.put("ids", idsArray);
+                specificationParam.put("goods_id", goodsId);
                 List<GoodsSpecificationVo> specificationEntities = goodsSpecificationService.queryList(specificationParam);
                 goodsSepcifitionValue = new String[specificationEntities.size()];
                 for (int i = 0; i < specificationEntities.size(); i++) {

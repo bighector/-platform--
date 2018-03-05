@@ -79,7 +79,11 @@ public class ProductServiceImpl implements ProductService {
                 String[] twoId = goodsSpecificationIdArr[i + 1].split(",");
                 for (int j = 0; j < oneId.length; j++) {
                     for (int k = 0; k < twoId.length; k++) {
-                        String strGoodsSpecificationIds = oneId[j] + "_" + twoId[k];
+                        String strGoodsSpecificationIds = null;
+                        if (StringUtils.isNullOrEmpty(oneId[j]) || StringUtils.isNullOrEmpty(twoId[k])){
+                            continue;
+                        }
+                        strGoodsSpecificationIds = oneId[j] + "_" + twoId[k];
                         product.setGoodsSpecificationIds(strGoodsSpecificationIds);
                         ProductEntity entity = new ProductEntity();
                         BeanUtils.copyProperties(product, entity);
@@ -93,7 +97,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public int update(ProductEntity product) {
-        product.setGoodsSpecificationIds(null);
+        if (StringUtils.isNullOrEmpty(product.getGoodsSpecificationIds())){
+            product.setGoodsSpecificationIds("");
+        }
         return productDao.update(product);
     }
 
