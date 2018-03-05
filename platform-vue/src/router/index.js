@@ -87,6 +87,18 @@ let routes = [
     }
   },
   {
+    name: 'order',
+    path: '/order',
+    meta: {
+      requiresAuth: true,
+      title: '我的订单',
+      level:1
+    },
+    component: (resolve) => {
+      require(['../view/order/index'], resolve)
+    }
+  },
+  {
     name: 'order-confirm',
     path: '/order/confirm',
     meta: {

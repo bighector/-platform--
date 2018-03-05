@@ -28,15 +28,15 @@
         <div class="center-navicon">
             <div class="navicon-shopping">
                 <div class="shopping-icon">
-                    <div class="icon-item">
+                    <div class="icon-item" @click="goto('/order?status=1')">
                         <i class="iconfont">&#xe683;</i>
                         <span>待付款</span>
                     </div>
-                    <div class="icon-item">
+                    <div class="icon-item" @click="goto('/order?status=2')">
                         <i class="iconfont">&#xe60c;</i>
                         <span>待收货</span>
                     </div>
-                    <div class="icon-item">
+                    <div class="icon-item" @click="goto('/order?status=3')">
                         <i class="iconfont">&#xe665;</i>
                         <span>待评价</span>
                     </div>
@@ -45,7 +45,7 @@
                         <span>售后/客服</span>
                     </div>
                 </div>
-                <div class="shopping-entry">
+                <div class="shopping-entry" @click="goto('/order?status=0')">
                     <i class="iconfont">&#xe671;</i>
                     <span>订单</span>
                 </div>

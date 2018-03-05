@@ -64,7 +64,7 @@
 
     .order-pay-status {
         position: absolute;
-        top: 52px;
+        top: 46px;
         width: 100%;
         bottom: 0px;
         background: white;
