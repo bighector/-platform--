@@ -90,12 +90,24 @@ let routes = [
     name: 'order-confirm',
     path: '/order/confirm',
     meta: {
-      requiresAuth: false,
+      requiresAuth: true,
       title: '确认订单',
       level:1
     },
     component: (resolve) => {
       require(['../view/order/order-confirm'], resolve)
+    }
+  },
+  {
+    name: 'order-pay',
+    path: '/order/pay',
+    meta: {
+      requiresAuth: true,
+      title: '订单支付',
+      level:1
+    },
+    component: (resolve) => {
+      require(['../view/order/order-pay'], resolve)
     }
   },
   {
