@@ -1,7 +1,7 @@
 <template>
     <div class="order">
         <div class="order-tab">
-            <tab bar-active-color="#de181b" active-color="#de181b">
+            <tab bar-active-color="#04BE02" active-color="#04BE02">
                 <tab-item :selected="activeBar() === 0">全部</tab-item>
                 <tab-item :selected="activeBar() === 1">待付款</tab-item>
                 <tab-item :selected="activeBar() === 2">待收货</tab-item>
