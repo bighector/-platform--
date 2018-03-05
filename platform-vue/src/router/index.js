@@ -111,6 +111,18 @@ let routes = [
     }
   },
   {
+    name: 'order-pay-status',
+    path: '/order/pay/status',
+    meta: {
+      requiresAuth: true,
+      title: '支付完成',
+      level:1
+    },
+    component: (resolve) => {
+      require(['../view/order/order-pay-status'], resolve)
+    }
+  },
+  {
     name: 'goods',
     path: '/goods/:id',
     meta: {

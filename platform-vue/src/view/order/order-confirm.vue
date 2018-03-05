@@ -41,9 +41,9 @@
             <cell title="礼品卡" value="无可用" is-link></cell>
         </cell-group>
         <cell-group>
-            <cell title="商品金额" value="￥3280.00" valueStyle="color:#de181b"></cell>
-            <cell title="立减" value="￥0.00" valueStyle="color:#de181b"></cell>
-            <cell title="运费" value="￥0.00" valueStyle="color:#de181b"></cell>
+            <cell title="商品金额" value="￥3280.00" valueStyle="color:#04BE02"></cell>
+            <cell title="立减" value="￥0.00" valueStyle="color:#04BE02"></cell>
+            <cell title="运费" value="￥0.00" valueStyle="color:#04BE02"></cell>
         </cell-group>
         <div class="order-confirm-submit">
             <div class="submit-price">
@@ -175,7 +175,7 @@
             .submit-btn {
                 flex-basis: 110px;
                 display: flex;
-                background: #de181b;
+                background: #04BE02;
                 align-items: center;
                 justify-content: center;
                 span {
@@ -191,7 +191,7 @@
                 padding-right: 10px;
                 span {
                     font-size: 14px;
-                    color: #de181b;
+                    color: #04BE02;
                 }
             }
             &:after {

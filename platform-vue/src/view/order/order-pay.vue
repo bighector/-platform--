@@ -12,7 +12,7 @@
                 </div>
                 <div class="info-item">
                     <span>支付金额</span>
-                    <p style="color:#de181b;font-size: 16px;font-weight: 600">￥3476.00</p>
+                    <p style="color:#04BE02;font-size: 16px;font-weight: 600">￥3476.00</p>
                 </div>
             </div>
         </div>
@@ -194,7 +194,7 @@
             .submit-btn {
                 flex-basis: 110px;
                 display: flex;
-                background: #de181b;
+                background: #04BE02;
                 align-items: center;
                 justify-content: center;
                 span {
@@ -210,7 +210,7 @@
                 padding-right: 10px;
                 span {
                     font-size: 14px;
-                    color: #de181b;
+                    color: #04BE02;
                 }
             }
             &:after {
