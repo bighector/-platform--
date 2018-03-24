@@ -308,7 +308,7 @@
                     line-height: 20px;
                     font-size: 12px;
                     border-radius: 20px;
-                    background: #f23030;
+                    background: #09BB07;
                     color:white;
                     transform: scale(.8);
                 }

@@ -75,7 +75,7 @@ export default {
       -webkit-box-orient: vertical;
       word-break: break-word;
       img {
-        background-color: #f23030;
+        background-color: #09BB07;
         color: white;
         height: 15px;
         display: inline-block;
@@ -112,7 +112,7 @@ export default {
         display: flex;
         flex-grow: 0;
         align-items: flex-end;
-        color: #f23030;
+        color: #09BB07;
         label {
           font-size: 14px;
         }
@@ -131,9 +131,9 @@ export default {
       font-size: 12px;
       .info-self {
         padding: 0 3px;
-        border: 1px solid #f23030;
+        border: 1px solid #09BB07;
         border-radius: 2px;
-        color: #f23030;
+        color: #09BB07;
         transform: scale(0.8);
       }
       .info-evaluate {
@@ -152,7 +152,7 @@ export default {
         text-align: center;
         line-height: 40px;
         font-size: 20px;
-        color: #f23030;
+        color: #09BB07;
       }
     }
     &::after {
