@@ -83,7 +83,19 @@ let routes = [
       level:0
     },
     component: (resolve) => {
-      require(['../view/search'], resolve)
+      require(['../view/search/index'], resolve)
+    }
+  },
+  {
+    name: 'search-list',
+    path: '/search/list',
+    meta: {
+      requiresAuth: false,
+      title: '搜索结果',
+      level:0
+    },
+    component: (resolve) => {
+      require(['../view/search/search-list'], resolve)
     }
   },
   {

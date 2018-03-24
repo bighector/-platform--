@@ -8,6 +8,7 @@ import specialCell from './packages/special-cell/index.js'
 import goodsBox from './packages/goods-box/index.js'
 import cell from './packages/cell/index.js'
 import cellGroup from './packages/cell-group/index.js'
+import goodsCell from './packages/goods-cell/index.js'
 
 const version = '1.0.0'
 
@@ -23,6 +24,7 @@ const install = function (Vue, config = {}) {
     Vue.component(goodsBox.name, goodsBox)
     Vue.component(cell.name, cell)
     Vue.component(cellGroup.name, cellGroup)
+    Vue.component(goodsCell.name, goodsCell)
 };
 
 export default {
