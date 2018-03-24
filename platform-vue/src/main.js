@@ -10,6 +10,7 @@ import {router} from './router'
 import './assets/icon/index.css';
 import './assets/css/reset.css';
 import  { ToastPlugin } from 'vux'
+import './service/mock'
 
 Vue.use(components);
 Vue.use(plugin);
